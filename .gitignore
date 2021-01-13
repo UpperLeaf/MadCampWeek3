@@ -25,7 +25,9 @@ ExportedObj/
 *.svd
  
 *.userprefs
- 
+
+*.meta
+
 *.csproj
  
 *.pidb
