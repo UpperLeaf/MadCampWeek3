@@ -30,10 +30,13 @@ public class PlayerController : MonoBehaviour, IAttackable
     private float acceleration;
     private float deceleration;
 
+  
+    public PlayerState playerState;
     private void Awake()
     {
+        playerState = new PlayerState();
         boxCollider = GetComponent<BoxCollider2D>();
-        
+
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
     }
@@ -47,17 +50,23 @@ public class PlayerController : MonoBehaviour, IAttackable
         Gravity();
     }
 
-    public void MoveHorizontal()
+    private void MoveHorizontal()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         if (moveInput != 0)
+        {
+            transform.localScale = new Vector3(1 * moveInput, 1, 1);
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+            playerState.isWalking = true;
+        }
         else
+        {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+            playerState.isWalking = false;
+        }
     }
-
-    public void CollisionCheck()
+    private void CollisionCheck()
     {
         grounded = false;
 
@@ -76,12 +85,14 @@ public class PlayerController : MonoBehaviour, IAttackable
                 if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                 {
                     grounded = true;
+                    playerState.isJumping = false;
                 }
             }
+
         }
     }
-    
-    public void Jump()
+
+    private void Jump()
     {
         if (grounded)
         {
@@ -89,6 +100,7 @@ public class PlayerController : MonoBehaviour, IAttackable
             if (Input.GetButton("Jump"))
             {
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                playerState.isJumping = true;
             }
         }
     }
@@ -105,4 +117,45 @@ public class PlayerController : MonoBehaviour, IAttackable
 
         }
     }
+}
+
+
+public class PlayerState
+{
+    private bool _isWalking = false;
+    private bool _isIdling = true;
+    private bool _isJumping = false;
+    private bool _isAttacking = false;
+
+
+    public bool isWalking
+    {
+        get => _isWalking;
+        set 
+        {
+            _isWalking = value;
+            _isIdling = !value;
+        }
+    }
+    public bool isIdling
+    {
+        get => _isIdling;
+        set
+        {
+            _isWalking = !value;
+            _isIdling = value;
+        }
+    }
+    public bool isJumping
+    {
+        get => _isJumping;
+        set => _isJumping = value;
+    }
+    public bool isAttacking
+    {
+        get => _isAttacking;
+        set => _isAttacking = value;
+    }
+
+  
 }
