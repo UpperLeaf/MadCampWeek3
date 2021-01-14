@@ -4,19 +4,22 @@
 public class PlayerController : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 9;
+    float speed = 4;
 
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
 
     [SerializeField, Tooltip("Acceleration while in the air.")]
-    float airAcceleration = 30;
+    float airAcceleration = 20;
+
+    [SerializeField, Tooltip("Deceleration while in the air.")]
+    float airDeceleration = 30;
 
     [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
     float groundDeceleration = 70;
 
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-    float jumpHeight = 4;
+    float jumpHeight = 3;
 
     private BoxCollider2D boxCollider;
 
@@ -31,19 +34,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        float acceleration = grounded ? walkAcceleration : airAcceleration;
+        float deceleration = grounded ? groundDeceleration : airDeceleration;
+
         float moveInput = Input.GetAxisRaw("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
         transform.Translate(velocity * Time.deltaTime);
 
-
-        float acceleration = grounded ? walkAcceleration : airAcceleration;
-        float deceleration = grounded ? groundDeceleration : 0;
-
-
         if (moveInput != 0)
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
         else
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
@@ -75,8 +75,7 @@ public class PlayerController : MonoBehaviour
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
             }
         }
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
 
-        
+        velocity.y += Physics2D.gravity.y * Time.deltaTime;
     }
 }
