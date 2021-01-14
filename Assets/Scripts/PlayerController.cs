@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour, IAttackable
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
             playerState.isWalking = false;
         }
+        transform.Translate(velocity * Time.deltaTime);
     }
     private void CollisionCheck()
     {
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour, IAttackable
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-
+            playerState.isAttacking = true;
         }
     }
 }
