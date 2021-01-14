@@ -13,6 +13,8 @@ public class MonsterController : MonoBehaviour
 
     private bool grounded;
 
+    Animator anim;
+
     // 이동 방향
     bool movingRight = true;
 
@@ -45,6 +47,7 @@ public class MonsterController : MonoBehaviour
     private void Start()
     {
         Debug.Log("몬스터 등장!");
+        anim = GetComponent<Animator>();
         hp = maxHp;
         str = maxStr;
         speed = maxSpeed;
@@ -61,9 +64,9 @@ public class MonsterController : MonoBehaviour
 
     private void Update()
     {
-
-        if (movingRight)
+        if (anim.GetBool("isRightMoving"))
         {
+            Debug.Log("isRightMoving");
             velocity.x = Mathf.MoveTowards(velocity.x, speed, walkAcceleration * Time.deltaTime);
         }
         else
@@ -91,15 +94,13 @@ public class MonsterController : MonoBehaviour
                 continue;
             }
 
-
-            // 플레이어와 충돌 시 데미지 입힘 -> 추후 플레이어 코드로 이동시키기
+            // 플레이어와의 충돌을 제외
             if (hit.gameObject.tag == "Player")
             {
-                // player.changeHp = -str;
                 continue;
             }
 
-            // 플레이어의 무기/스킬/마법 등과 충돌 시 데미지 입음
+            // TODO 플레이어의 무기/스킬/마법 등과 충돌 시 데미지 입음
             if (hit.gameObject.tag == "Weapon")
             {
                 // health -= hit.gameObject.str = 
@@ -120,20 +121,20 @@ public class MonsterController : MonoBehaviour
             }
 
 
-            if (hit.gameObject.tag == "Wall")
-            {
-                Debug.Log("Point A: " + colliderDistance.pointA);
-                Debug.Log("Point B: " + colliderDistance.pointB);
+            //if (hit.gameObject.tag == "Wall")
+            //{
+            //    Debug.Log("Point A: " + colliderDistance.pointA);
+            //    Debug.Log("Point B: " + colliderDistance.pointB);
 
 
-                Vector2 vec = movingRight ? new Vector2(-0.5f, 0) : new Vector2(0.5f, 0);
-                //Vector3 vec = movingRight ? new Vector3(-0.5f, 0, 0) : new Vector3(0.5f, 0, 0);
-                movingRight = !movingRight;
+            //    Vector2 vec = movingRight ? new Vector2(-0.5f, 0) : new Vector2(0.5f, 0);
+            //    //Vector3 vec = movingRight ? new Vector3(-0.5f, 0, 0) : new Vector3(0.5f, 0, 0);
+            //    movingRight = !movingRight;
 
-                //transform.position += vec;
-                transform.Translate(vec);
-                continue;
-            }
+            //    //transform.position += vec;
+            //    transform.Translate(vec);
+            //    continue;
+            //}
 
             Debug.Log("충돌함: " + hit.gameObject.name);
 
@@ -143,26 +144,25 @@ public class MonsterController : MonoBehaviour
                 grounded = true;
             }
 
+            // 지형 체크 
+            Vector2 position = transform.position;
+            Vector2 frontVec = anim.GetBool("isRightMoving") ? position + Vector2.right : position + Vector2.left;
 
-            //if (hit.gameObject.tag == "Wall")
-            //{
-            //    movingRight = !movingRight;
-            //    if (movingRight == true)
-            //    {
-            //        Vector3 origin = wallDetection.position;
-            //        Vector3 dir = Vector2.right;
-            //        Debug.DrawLine(origin, origin + dir * hit.Distance(boxCollider), Color.white, 0.01f);
-            //    }
-            //    else
-            //    {
-            //        Vector3 origin = wallDetection.position;
-            //        Vector3 dir = -Vector2.right;
-            //        Debug.DrawLine(origin, origin + dir * hit.Distance(boxCollider), Color.white, 0.01f);
-            //    }
+            if (velocity.y < 0)
+            {
+                Debug.DrawRay(frontVec, Vector3.down, new Color(0, 0.5f, 0));
+                RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down);
 
-            //    continue;
-            //    //continue;
-            //}
+                if (rayHit.collider == null)
+                {
+                    Debug.Log("낭떠러지");
+                    movingRight = !movingRight;
+                    anim.SetBool("isRightMoving", movingRight);
+                }
+            }
+
+            // TODO 만약 플레이어가 공격권 안에 있다면 공격하기
+            anim.SetBool("isWalking", true);
 
         }
 
