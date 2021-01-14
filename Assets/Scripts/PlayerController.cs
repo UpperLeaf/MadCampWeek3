@@ -28,8 +28,11 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
 
     private Animator _animator;
+
+    public PlayerState playerState;
     private void Awake()
     {
+        playerState = new PlayerState();
         boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
     }
@@ -43,9 +46,16 @@ public class PlayerController : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
 
         if (moveInput != 0)
+        {
+            transform.localScale = new Vector3(1 * moveInput, 1, 1);
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+            playerState.isWalking = true;
+        }
         else
+        {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+            playerState.isWalking = false;
+        }
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
@@ -66,6 +76,7 @@ public class PlayerController : MonoBehaviour
             if(Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
             {
                 grounded = true;
+                playerState.isJumping = false;
             }
         }
 
@@ -75,9 +86,51 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                playerState.isJumping = true;
             }
         }
 
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
     }
+}
+
+
+public class PlayerState
+{
+    private bool _isWalking = false;
+    private bool _isIdling = true;
+    private bool _isJumping = false;
+    private bool _isAttacking = false;
+
+
+    public bool isWalking
+    {
+        get => _isWalking;
+        set 
+        {
+            _isWalking = value;
+            _isIdling = !value;
+        }
+    }
+    public bool isIdling
+    {
+        get => _isIdling;
+        set
+        {
+            _isWalking = !value;
+            _isIdling = value;
+        }
+    }
+    public bool isJumping
+    {
+        get => _isJumping;
+        set => _isJumping = value;
+    }
+    public bool isAttacking
+    {
+        get => _isAttacking;
+        set => _isAttacking = value;
+    }
+
+  
 }

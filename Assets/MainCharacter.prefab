@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 544408293111263713}
   - component: {fileID: 544408293111263726}
   - component: {fileID: 544408293111263727}
+  - component: {fileID: -7122972044328463422}
   - component: {fileID: 544408293111263725}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: MainCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +129,18 @@ MonoBehaviour:
   airDeceleration: 30
   groundDeceleration: 70
   jumpHeight: 3
+--- !u!114 &-7122972044328463422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544408293111263714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6eb1a00b725d34439162c7b5de8a846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &544408293111263725
 Animator:
   serializedVersion: 3
