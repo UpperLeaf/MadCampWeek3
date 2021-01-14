@@ -43,20 +43,26 @@ public class PlayerController : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        MoveHorizontal();
+        float moveInput = MoveHorizontal();
         CollisionCheck();
         Jump();
-        Attack();
+        Attack((int)moveInput);
         Gravity();
     }
 
-    private void MoveHorizontal()
+    private float MoveHorizontal()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (moveInput != 0)
+        if ((moveInput != 0 && !playerState.isAttacking))
         {
             transform.localScale = new Vector3(1 * moveInput, 1, 1);
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+            playerState.isWalking = true;
+        }
+        else if(moveInput != 0 && (playerState.isJumping && playerState.isAttacking) == true)
+        {
+            transform.localScale = new Vector3(playerState.attackDirection, 1, 1);
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
             playerState.isWalking = true;
         }
@@ -65,7 +71,9 @@ public class PlayerController : MonoBehaviour, IAttackable
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
             playerState.isWalking = false;
         }
+
         transform.Translate(velocity * Time.deltaTime);
+        return moveInput;
     }
     private void CollisionCheck()
     {
@@ -95,7 +103,7 @@ public class PlayerController : MonoBehaviour, IAttackable
 
     private void Jump()
     {
-        if (grounded)
+        if (grounded && !playerState.isAttacking)
         {
             velocity.y = 0;
             if (Input.GetButton("Jump"))
@@ -111,11 +119,13 @@ public class PlayerController : MonoBehaviour, IAttackable
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
     }
 
-    public void Attack()
+    public void Attack(int direction)
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
+            Debug.Log("Attack!");
             playerState.isAttacking = true;
+            playerState.attackDirection = direction;
         }
     }
 }
@@ -127,7 +137,16 @@ public class PlayerState
     private bool _isIdling = true;
     private bool _isJumping = false;
     private bool _isAttacking = false;
+    private int _attackDirection;
 
+    public static int RIGHT_DIRECTION = 0;
+    public static int LEFT_DIRECTION = 1;
+
+    public int attackDirection
+    {
+        get => _attackDirection;
+        set => _attackDirection = value;
+    }
 
     public bool isWalking
     {
@@ -150,7 +169,10 @@ public class PlayerState
     public bool isJumping
     {
         get => _isJumping;
-        set => _isJumping = value;
+        set
+        {
+            _isJumping = value;
+        }
     }
     public bool isAttacking
     {
