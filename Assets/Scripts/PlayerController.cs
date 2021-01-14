@@ -27,9 +27,11 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded;
 
+    private Animator _animator;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
