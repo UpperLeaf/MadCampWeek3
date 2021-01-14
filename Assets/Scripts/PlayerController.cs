@@ -45,29 +45,9 @@ public class PlayerController : MonoBehaviour
         else
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+        CollisionCheck();
 
-        grounded = false;
-
-        foreach (Collider2D hit in hits)
-        {
-            if (hit == boxCollider)
-                continue;
-
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            if (colliderDistance.isOverlapped)
-            {
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-            }
-
-            if(Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-            {
-                grounded = true;
-            }
-        }
-
-        if(grounded)
+        if (grounded)
         {
             velocity.y = 0;
             if (Input.GetButton("Jump"))
@@ -76,6 +56,33 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
+    }
+
+    private void CollisionCheck()
+    {
+        grounded = false;
+        
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.Equals(boxCollider))
+                continue;
+
+            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
+
+            if (colliderDistance.isOverlapped)
+            {
+                Debug.Log(boxCollider.offset);
+                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
+                {
+                    grounded = true;
+                }
+            }
+        }
+
     }
 }
