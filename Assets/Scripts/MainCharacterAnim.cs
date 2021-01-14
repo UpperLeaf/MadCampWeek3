@@ -44,6 +44,5 @@ public class MainCharacterAnim : MonoBehaviour
         Debug.Log("Attcck Finished");
         _attacking = false;
         playerState.isAttacking = false;
-        playerState.isIdling = true;
     }
 }

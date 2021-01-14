@@ -62,7 +62,10 @@ public class PlayerController : MonoBehaviour, IAttackable
         }
         else if(moveInput != 0 && (playerState.isJumping && playerState.isAttacking) == true)
         {
-            transform.localScale = new Vector3(playerState.attackDirection, 1, 1);
+            Debug.Log(playerState.attackDirection);
+            if (playerState.attackDirection != 0)
+                transform.localScale = new Vector3(playerState.attackDirection, 1, 1);
+            
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
             playerState.isWalking = true;
         }
