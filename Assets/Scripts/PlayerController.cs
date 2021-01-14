@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IAttackable
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 4;
@@ -27,43 +27,40 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded;
 
+    private float acceleration;
+    private float deceleration;
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        
+        acceleration = grounded ? walkAcceleration : airAcceleration;
+        deceleration = grounded ? groundDeceleration : airDeceleration;
     }
 
     private void Update()
     {
-        float acceleration = grounded ? walkAcceleration : airAcceleration;
-        float deceleration = grounded ? groundDeceleration : airDeceleration;
+        MoveHorizontal();
+        CollisionCheck();
+        Jump();
+        Attack();
+        Gravity();
+    }
 
+    public void MoveHorizontal()
+    {
         float moveInput = Input.GetAxisRaw("Horizontal");
-        transform.Translate(velocity * Time.deltaTime);
 
         if (moveInput != 0)
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
         else
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-
-        CollisionCheck();
-
-        if (grounded)
-        {
-            velocity.y = 0;
-            if (Input.GetButton("Jump"))
-            {
-                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-            }
-        }
-
-
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
     }
 
-    private void CollisionCheck()
+    public void CollisionCheck()
     {
         grounded = false;
-        
+
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
         foreach (Collider2D hit in hits)
@@ -75,7 +72,6 @@ public class PlayerController : MonoBehaviour
 
             if (colliderDistance.isOverlapped)
             {
-                Debug.Log(boxCollider.offset);
                 transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
                 if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                 {
@@ -83,6 +79,30 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public void Jump()
+    {
+        if (grounded)
+        {
+            velocity.y = 0;
+            if (Input.GetButton("Jump"))
+            {
+                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+            }
+        }
+    }
 
+    public void Gravity()
+    {
+        velocity.y += Physics2D.gravity.y * Time.deltaTime;
+    }
+
+    public void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+
+        }
     }
 }
