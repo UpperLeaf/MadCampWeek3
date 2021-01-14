@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class PlayerController : MonoBehaviour, IAttackable
+public class PlayerController : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 4;
@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour, IAttackable
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 3;
 
+
+    private AbstractAttack _defaultAttack;
+
     private BoxCollider2D boxCollider;
 
     private Vector2 velocity;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour, IAttackable
 
     private float acceleration;
     private float deceleration;
+    private int _damage;
 
   
     public PlayerState playerState;
@@ -36,9 +40,10 @@ public class PlayerController : MonoBehaviour, IAttackable
     {
         playerState = new PlayerState();
         boxCollider = GetComponent<BoxCollider2D>();
-
+        _defaultAttack = GetComponent<AbstractAttack>();
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
+        _damage = 10;
     }
 
     private void Update()
@@ -62,7 +67,6 @@ public class PlayerController : MonoBehaviour, IAttackable
         }
         else if(moveInput != 0 && (playerState.isJumping && playerState.isAttacking) == true)
         {
-            Debug.Log(playerState.attackDirection);
             if (playerState.attackDirection != 0)
                 transform.localScale = new Vector3(playerState.attackDirection, 1, 1);
             
@@ -126,7 +130,8 @@ public class PlayerController : MonoBehaviour, IAttackable
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log("Attack!");
+            Debug.Log(_defaultAttack);
+            _defaultAttack.Attack(_damage);
             playerState.isAttacking = true;
             playerState.attackDirection = direction;
         }

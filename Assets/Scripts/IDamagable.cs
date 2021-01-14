@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAttackable
+public interface IDamagable 
 {
-    void Attack(int damage);
+    void TakeDamage(int damage);
 }

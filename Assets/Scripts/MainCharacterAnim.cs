@@ -8,8 +8,6 @@ public class MainCharacterAnim : MonoBehaviour
     private Animator _animator;
     private bool _attacking;
     
-    System.Action _attackFinishCallback = null;
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -19,7 +17,6 @@ public class MainCharacterAnim : MonoBehaviour
     private void Start()
     {
         playerState = GetComponent<PlayerController>().playerState;
-        _attackFinishCallback = AttackFinish;
     }
 
     // Update is called once per frame
@@ -41,7 +38,6 @@ public class MainCharacterAnim : MonoBehaviour
 
     public void AttackFinish()
     {
-        Debug.Log("Attcck Finished");
         _attacking = false;
         playerState.isAttacking = false;
     }
