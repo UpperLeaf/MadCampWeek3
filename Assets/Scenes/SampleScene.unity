@@ -154,12 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efca4d6d542eb048a1ff7bba2fb461f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPos: {fileID: 0}
-  attackRange: 0
-  coolTime: 0
-  enemies:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!61 &440808834
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -570,6 +564,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1823654308 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2438457763262658785, guid: 0c8520c9ee49155449fb61ae54166c62,
+    type: 3}
+  m_PrefabInstance: {fileID: 4259233537889175281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2033573212
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,75 +681,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1782324198407542739
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.52395207
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.24014585
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.634495
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1221949758014567841, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113090997457507348, guid: 668194fe07a9334479c7e874182210d7,
-        type: 3}
-      propertyPath: m_Name
-      value: SlashAttack
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 668194fe07a9334479c7e874182210d7, type: 3}
 --- !u!1001 &4118112774835561941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -910,6 +841,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4259233537889175281}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5588414393091431520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588414393091431517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d1ab676dc4bba4a9cc5d161450b7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aAttack: {fileID: 0}
+  xAttackPos: {fileID: 1823654308}
+  aAttackPos: {fileID: 0}
 --- !u!114 &5588414393091431521
 MonoBehaviour:
   m_ObjectHideFlags: 0
