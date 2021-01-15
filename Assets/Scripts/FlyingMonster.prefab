@@ -154,9 +154,8 @@ MonoBehaviour:
   isFollowingPlayer: 0
   isPlayerRight: 0
   hpBar: {fileID: 0}
-  prefHpBar: {fileID: 848523839093866311, guid: dd310de3c6c0cf943a6fe9963416e665,
-    type: 3}
-  canvas: {fileID: 1935271897793176174, guid: 48ba83e4d258733428efb604c972c238, type: 3}
+  prefHpBar: {fileID: 0}
+  canvas: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0

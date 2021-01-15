@@ -63,9 +63,7 @@ public class MonsterController : MonoBehaviour
     float height = 1.0f;
 
     Vector2 playerPosition;
-    
 
-    // TODO 플레이어 따라다니도록 하기
     private void Start()
     {
         Debug.Log("몬스터 등장!");
