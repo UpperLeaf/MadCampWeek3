@@ -51,9 +51,16 @@ public class MonsterController : MonoBehaviour
     [SerializeField, Tooltip("플레이어가 오른쪽에 있는지 여부")]
     bool isPlayerRight;
 
+    [SerializeField]
+    protected RectTransform hpBar;
+
+    public GameObject prefHpBar;
+    public GameObject canvas;
+
 
     [SerializeField] LayerMask playerLayerMask;
 
+    float height = 1.0f;
 
     Vector2 playerPosition;
     
@@ -116,12 +123,11 @@ public class MonsterController : MonoBehaviour
         Vector2 position = transform.position;
         Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
 
-
-        if (anim.GetBool("isAttacking") && grounded)
+        if (anim.GetBool("isAttacking"))
         {
             Stop();
         }
-        else if (isFollowingPlayer && grounded)
+        else if (isFollowingPlayer)
         {
             Debug.Log("플레이어를 따라가는중");
 
@@ -146,7 +152,7 @@ public class MonsterController : MonoBehaviour
         }
 
         // 땅과 닿아있지 않으면 떨어지게 하기
-        if (grounded) StopToFall(); else Fall();
+        //if (grounded) StopToFall(); else Fall();
 
 
 
@@ -174,7 +180,7 @@ public class MonsterController : MonoBehaviour
 
                 // TODO 몬스터 바운스(밀려남)/프리즈(경직) 효과
 
-                if (hp <= 0)
+                if (hp < 1)
                 {
                     // TODO 몬스터 죽음
                 }
@@ -207,7 +213,7 @@ public class MonsterController : MonoBehaviour
 
 
         Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-        if (attackHits.Length > 0 && attackHits[0] != null)
+        if (attackHits.Length > 0 && attackHits[0] != null )
         {
             Debug.Log("플레이어가 공격권에 있다!");
             anim.SetBool("isAttacking", true);
@@ -223,6 +229,8 @@ public class MonsterController : MonoBehaviour
         }
 
         Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
+
+        Debug.Log(playerLayerMask.value);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
             Debug.Log("플레이어가 시야에 있다!");
