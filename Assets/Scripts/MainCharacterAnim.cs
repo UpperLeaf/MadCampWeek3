@@ -74,8 +74,16 @@ public class MainCharacterAnim : MonoBehaviour
     public void DamagedStart()
     {
         float direction = transform.localScale.x;
-        Debug.Log("Start");
-        transform.Translate(new Vector2((int)direction * - 1, 0));
+        StartCoroutine("HitCoroutine", direction * -1);
+    }
+
+    IEnumerator HitCoroutine(float direction)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            transform.Translate(new Vector2(direction / 30, 0));
+            yield return null;
+        }
     }
 
     public void DamagedFinish()

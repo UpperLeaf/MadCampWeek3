@@ -27,9 +27,10 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState _playerState;
 
-    private AbstractAttack _defaultAttack;
-
     private BoxCollider2D boxCollider;
+
+    
+    private AttackManager attackManager;
     
     private Vector2 velocity;
 
@@ -43,11 +44,18 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        _defaultAttack = GetComponent<AbstractAttack>();
         _playerState = GetComponent<PlayerState>();
+        attackManager = GetComponent<AttackManager>();
 
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
+
+        attackManager.gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void Update()
@@ -151,9 +159,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.X))
         {
-            _defaultAttack.Attack(15);
-            _playerState.isAttacking = true;
-            _playerState.attackDirection = direction;
+            attackManager.AttackByInputX(10);
         }
     }
 }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractAttack : MonoBehaviour, IAttackable
+public abstract class AbstractAttack : MonoBehaviour
 {
-    protected Transform attackPos;
-    protected float attackRange;
+    [SerializeField]
+    protected float coolTime;
     
-    public LayerMask enemies;
+    [SerializeField]
+    protected bool isAttackable;
 
-
-    public abstract void Attack(int damage);
+    public abstract void Attack(int damage, Transform attackPosition, PlayerState playerState);
 }

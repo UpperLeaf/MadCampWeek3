@@ -39,6 +39,18 @@ public class Player : AbstractDamagable
         if (!playerState.isDamaged)
         {
             setHp(damage);
+            StartCoroutine("HitCoroutine", attacker);
+        }
+    }
+
+    IEnumerator HitCoroutine(GameObject attacker)
+    {
+        float direction = transform.position.x - attacker.transform.position.x > 0 ? 1 : -1;
+        Vector2 dir = new Vector2(direction / 15, 0);
+        for (int i = 0; i < 20; i++)
+        {
+            transform.Translate(dir);
+            yield return null;
         }
     }
 }
