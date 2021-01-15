@@ -40,21 +40,10 @@ public class PlayerController : MonoBehaviour
     private float deceleration;
 
   
-    public HitPoints hitPoints;
-    public HealthBar healthBarPrefab;
-    public float maxHitPoints;
-    public float startingHitPoints;
-
-    HealthBar healthBar;
 
     private void Start()
     {
-        hitPoints.value = startingHitPoints;
 
-        // 프리팹 초기화 및 healthBar에 healthBarPrefab 주소 값(참조) 저장
-        // TODO Update에서 healthBar 이용해서 HP 와 UI 연동되도록 하기 
-        healthBar = Instantiate(healthBarPrefab);
-        healthBar.player = this;
 
     }
 
@@ -132,9 +121,6 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-
-
-
             ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
@@ -184,15 +170,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AdjustHitPoints(int amount)
-    {
-
-        float newValue = hitPoints.value + amount;
-
-        if (newValue <= maxHitPoints && newValue >= 1.0f) hitPoints.value = newValue;
-
-        if (newValue < 1.0f) Debug.Log("플레이어가 죽어야 함");
-
-        Debug.Log("Adjusted hitpoints by: " + amount + ". New Value: " + hitPoints.value);
-    }
 }

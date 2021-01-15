@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class DefaultMonsterAttack : AbstractMonsterAttack
 {
+    private Animator _anim;
+
     private void Start()
     {
-        cooltime = 0.2f;
+        idleTime = 1f;
+        cooltime = 3f;
         damage = 10;
         enemies = LayerMask.NameToLayer("Player");
-        StartCoroutine("AttackCoroutine");
+        _anim = GetComponent<Animator>();
+        isAttackable = true;
     }
 
-    IEnumerator AttackCoroutine()
+    public override void Attack()
     {
-        while (true)
+        if (isAttackable)
         {
+            isAttackable = false;
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, 1f, 1 << enemies);
+            _anim.SetTrigger("Attack");
+            _anim.SetBool("isStop", true);
             for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
                 enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
-            }
-            yield return new WaitForSeconds(cooltime);
+            StartCoroutine("CoolTime");
+            StartCoroutine("IdleTime");
         }
+    }
+
+    IEnumerator IdleTime()
+    {
+        yield return new WaitForSeconds(idleTime);
+        _anim.SetBool("isStop", false);
+    }
+
+    IEnumerator CoolTime()
+    {
+        yield return new WaitForSeconds(cooltime);
+        isAttackable = true;
     }
 }

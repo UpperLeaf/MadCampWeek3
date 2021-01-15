@@ -21,7 +21,6 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player Manager Destroyed");
             Destroy(this.gameObject);
         }
     }

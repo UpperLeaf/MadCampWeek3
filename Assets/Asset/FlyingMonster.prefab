@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1025973474657527864}
   - component: {fileID: 3821001656062228366}
   - component: {fileID: 2574404239809080356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlyingMonster
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,8 +152,6 @@ MonoBehaviour:
   sight: 0
   attackField: 0
   isFollowingPlayer: 0
-  isPlayerRight: 0
-  hpBar: {fileID: 0}
   prefHpBar: {fileID: 0}
   canvas: {fileID: 0}
   playerLayerMask:

@@ -48,26 +48,22 @@ public class MonsterController : MonoBehaviour
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
 
-    [SerializeField, Tooltip("플레이어가 오른쪽에 있는지 여부")]
-    bool isPlayerRight;
 
-    [SerializeField]
-    protected RectTransform hpBar;
+    private AbstractMonsterAttack _attackStrategy;
 
     public GameObject prefHpBar;
     public GameObject canvas;
-
+   
 
     [SerializeField] LayerMask playerLayerMask;
 
-    float height = 1.0f;
 
     Vector2 playerPosition;
 
     private void Start()
     {
-        Debug.Log("몬스터 등장!");
         anim = GetComponent<Animator>();
+        _attackStrategy = GetComponent<DefaultMonsterAttack>();
         hp = maxHp;
         str = maxStr;
         speed = maxSpeed;
@@ -76,8 +72,8 @@ public class MonsterController : MonoBehaviour
         sight = 3.0f;
         attackField = 0.5f;
         isFollowingPlayer = false;
-        isPlayerRight = true;
         grounded = false;
+        anim.SetBool("isStop", false);
 
     }
     private void Awake()
@@ -120,31 +116,26 @@ public class MonsterController : MonoBehaviour
     {
         Vector2 position = transform.position;
         Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
+        bool isStop = anim.GetBool("isStop");
 
-        if (anim.GetBool("isAttacking"))
+        if (isStop)
         {
             Stop();
         }
         else if (isFollowingPlayer)
         {
-            Debug.Log("플레이어를 따라가는중");
-
             if (playerPosition.x < position.x)
                 GoLeft();
             else GoRight();
 
         }
-        else if (anim.GetBool("isRightMoving") && anim.GetBool("isWalking"))
+        else if (anim.GetBool("isRightMoving"))
         {
             GoRight();       
         }
-        else if (anim.GetBool("isWalking"))
+        else if (!anim.GetBool("isRightMoving"))
         {
             GoLeft();
-        }
-        else
-        {
-            Stop();
         }
 
         if (grounded) StopToFall(); else Fall();
@@ -164,21 +155,7 @@ public class MonsterController : MonoBehaviour
             // 플레이어와의 충돌을 제외
             if (hit.gameObject.tag == "Player")
                 continue;
-            
-
-            // TODO 플레이어의 무기/스킬/마법 등과 충돌 시 데미지 입음
-            if (hit.gameObject.tag == "Weapon")
-            {
-                // health -= hit.gameObject.str = 
-
-                // TODO 몬스터 바운스(밀려남)/프리즈(경직) 효과
-
-                if (hp < 1)
-                {
-                    // TODO 몬스터 죽음
-                }
-            }
-
+           
             ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
@@ -206,27 +183,15 @@ public class MonsterController : MonoBehaviour
 
 
         Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-        if (attackHits.Length > 0 && attackHits[0] != null )
-        {
-            Debug.Log("플레이어가 공격권에 있다!");
-            anim.SetBool("isAttacking", true);
-            anim.SetBool("isWalking", false);
-            //playerPosition = attackHits[0].transform.position;   
-        }
-        else
-        {
-            anim.SetBool("isAttacking", false);
-            anim.SetBool("isWalking", true);
+        if (attackHits.Length > 0 && attackHits[0] != null)
+            _attackStrategy.Attack();
 
-
-        }
 
         Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
 
         Debug.Log(playerLayerMask.value);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
-            Debug.Log("플레이어가 시야에 있다!");
             isFollowingPlayer = true;
             playerPosition = sightHits[0].transform.position;
         }
@@ -234,65 +199,4 @@ public class MonsterController : MonoBehaviour
 
     }
 
-
-
-    // 상태 전환 함수 및 상태 클래스 짜기
-
-
-}
-
-
-public class MonsterState
-{
-    private bool _isRightMoving = true;
-    private bool _isWalking = true;
-    private bool _isHit = false;
-    private bool _isAttacking = false;
-    private bool _isDead = false;
-
-    public bool isRightMoving
-    {
-        get => _isRightMoving;
-        set
-        {
-            _isRightMoving = value;
-        }
-    }
-    public bool isWalking
-    {
-        get => _isWalking;
-        set
-        {
-            _isWalking = value;
-        }
-    }
-    public bool isHit
-    {
-        get => _isHit;
-        set
-        {
-            _isWalking = !value;
-            _isHit = value;
-        }
-    }
-
-    public bool isAttacking
-    {
-        get => _isAttacking;
-        set 
-        {
-            _isWalking = !value;
-            _isAttacking = value;
-        }
-
-    }
-
-    public bool isDead
-    {
-        get => _isDead;
-        set
-        {
-            _isDead = value;
-        }
-    }
 }

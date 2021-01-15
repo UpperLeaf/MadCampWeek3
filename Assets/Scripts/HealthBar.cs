@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     // Player의 maxHitPoints 값을 얻기 위해 현재 Player 오브젝트 필요
     // 현재 Player 오브젝트의 주소를 저장하는 변수
     [HideInInspector]
-    public PlayerController player; // TODO PlayerController -> Player 관련 멤버 분리하기
+    public Player player; // 
 
     public Image meterImage;
 
@@ -28,11 +28,19 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        StartCoroutine("HpBarUpdate");
+    }
+
+
+    IEnumerator HpBarUpdate()
+    {
+        while (true)
         {
-            meterImage.fillAmount = hitPoints.value / maxHitPoints;
-            
+            if (player != null)
+            {
+                meterImage.fillAmount = (float)hitPoints.HP / maxHitPoints;
+            }
+            yield return new WaitForSeconds(0.5f);
         }
-        
     }
 }

@@ -15,9 +15,11 @@ GameObject:
   - component: {fileID: 8544981188965931602}
   - component: {fileID: 8544981188965931603}
   - component: {fileID: 8337919845254370282}
-  m_Layer: 0
+  - component: {fileID: 5588414393091431520}
+  - component: {fileID: 5588414393091431521}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,13 +128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  dashSpeed: 6
+  dashSpeed: 7
   walkAcceleration: 75
   airAcceleration: 20
   airDeceleration: 30
   groundDeceleration: 70
   jumpHeight: 3
-  attackManager: {fileID: 0}
 --- !u!114 &8544981188965931602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +188,39 @@ MonoBehaviour:
   _isDamaged: 0
   _isDied: 0
   _isDashing: 0
+--- !u!114 &5588414393091431520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8544981188965931692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d1ab676dc4bba4a9cc5d161450b7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aAttack: {fileID: 0}
+  xAttackPos: {fileID: 2438457763262658785}
+  aAttackPos: {fileID: 0}
+--- !u!114 &5588414393091431521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8544981188965931692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7916d7068e34c2b4a8b23d1fae20e538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 100
+  hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
+  healthBarPrefab: {fileID: 273159066472720565, guid: 2162f252baa5f1b4a853326f4edb11b3,
+    type: 3}
+  maxHitPoints: 100
+  startingHitPoints: 0
 --- !u!1001 &4889721118170433350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,6 +287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slashAttackPos
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651908737083948230, guid: ff253b72474472b47b57dc2d6f6a034a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff253b72474472b47b57dc2d6f6a034a, type: 3}

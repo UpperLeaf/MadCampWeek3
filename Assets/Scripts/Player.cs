@@ -6,29 +6,43 @@ public class Player : AbstractDamagable
 {
     private PlayerState playerState;
 
+    //[SerializeField]
+    //private int _hp;
+
+    // 체력바
+    public HitPoints hitPoints;
+    public HealthBar healthBarPrefab;
+    public float maxHitPoints;
+    
     [SerializeField]
-    private int _hp;
+    private float startingHitPoints;
+    
+    HealthBar healthBar;
+
 
     private void Awake()
     {
         playerState = GetComponent<PlayerState>();
     }
 
-    public int HP
+    private void Start()
     {
-        get => _hp;
+        hitPoints.HP = startingHitPoints;
+        healthBar = Instantiate(healthBarPrefab);
+        healthBar.player = this;
     }
 
-    private void setHp(int value)
+    private void setHp(int damaged)
     {
-        if (_hp - value > 0)
+        Debug.Log(hitPoints.HP);
+        if (hitPoints.HP - damaged >  0)
         {
-            _hp -= value;
+            hitPoints.HP -= damaged;
             playerState.isDamaged = true;
         }
         else
         {
-            _hp = 0;
+            hitPoints.HP = 0f;
             playerState.isDied = true;
         }
     }
