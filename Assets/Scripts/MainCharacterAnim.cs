@@ -7,8 +7,11 @@ public class MainCharacterAnim : MonoBehaviour
     private PlayerState _playerState;
 
     private Animator _animator;
+    [SerializeField]
     private bool _attacking;
+    [SerializeField]
     private bool _damaged;
+    [SerializeField]
     private bool _died;
     
     private void Awake()
@@ -49,10 +52,22 @@ public class MainCharacterAnim : MonoBehaviour
         //TODO 죽었을때 처리
     }
 
+
     public void Damaged()
     {
         _damaged = true;
+        _attacking = false;
+        _playerState.isAttacking = false;
+        _playerState.isIdling = true;
+        _playerState.isJumping = false;
         _animator.SetTrigger("Damaged");
+    }
+
+    public void DamagedStart()
+    {
+        float direction = transform.localScale.x;
+        Debug.Log("Start");
+        transform.Translate(new Vector2((int)direction * - 1, 0));
     }
 
     public void DamagedFinish()

@@ -15,7 +15,7 @@ public class DefaultMonsterAttack : AbstractAttack
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             Debug.Log(enemiesToDamage[i]);
-            enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(10);
+            enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(10, gameObject);
         }
     }
 

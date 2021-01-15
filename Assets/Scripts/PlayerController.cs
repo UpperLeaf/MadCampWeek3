@@ -51,8 +51,11 @@ public class PlayerController : MonoBehaviour
     {
         float moveInput = MoveHorizontal();
         CollisionCheck();
-        Jump();
-        Attack((int)moveInput);
+        if (!_playerState.isDamaged)
+        {
+            Jump();
+            Attack((int)moveInput);
+        }       
         Gravity();
     }
 
@@ -60,17 +63,20 @@ public class PlayerController : MonoBehaviour
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
 
+        if (_playerState.isDamaged)
+            moveInput = 0;
+
         if ((moveInput != 0 && !_playerState.isAttacking))
         {
             transform.localScale = new Vector3(1 * moveInput, 1, 1);
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
             _playerState.isWalking = true;
         }
-        else if(moveInput != 0 && (_playerState.isJumping && _playerState.isAttacking) == true)
+        else if (moveInput != 0 && (_playerState.isJumping && _playerState.isAttacking) == true)
         {
             if (_playerState.attackDirection != 0)
                 transform.localScale = new Vector3(_playerState.attackDirection, 1, 1);
-            
+
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
             _playerState.isWalking = true;
         }
@@ -111,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (grounded && !_playerState.isAttacking)
+        if (grounded && !_playerState.isAttacking && !_playerState.isDamaged)
         {
             velocity.y = 0;
             if (Input.GetButton("Jump"))
@@ -129,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(int direction)
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.X))
         {
             _defaultAttack.Attack(15);
             _playerState.isAttacking = true;
