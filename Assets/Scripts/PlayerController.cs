@@ -22,28 +22,29 @@ public class PlayerController : MonoBehaviour
     float jumpHeight = 3;
 
 
+    private PlayerState _playerState;
+
     private AbstractAttack _defaultAttack;
 
     private BoxCollider2D boxCollider;
-
+    
     private Vector2 velocity;
 
     private bool grounded;
 
     private float acceleration;
     private float deceleration;
-    private int _damage;
 
   
-    public PlayerState playerState;
+    
     private void Awake()
     {
-        playerState = new PlayerState();
         boxCollider = GetComponent<BoxCollider2D>();
         _defaultAttack = GetComponent<AbstractAttack>();
+        _playerState = GetComponent<PlayerState>();
+
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
-        _damage = 10;
     }
 
     private void Update()
@@ -59,24 +60,24 @@ public class PlayerController : MonoBehaviour
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
 
-        if ((moveInput != 0 && !playerState.isAttacking))
+        if ((moveInput != 0 && !_playerState.isAttacking))
         {
             transform.localScale = new Vector3(1 * moveInput, 1, 1);
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
-            playerState.isWalking = true;
+            _playerState.isWalking = true;
         }
-        else if(moveInput != 0 && (playerState.isJumping && playerState.isAttacking) == true)
+        else if(moveInput != 0 && (_playerState.isJumping && _playerState.isAttacking) == true)
         {
-            if (playerState.attackDirection != 0)
-                transform.localScale = new Vector3(playerState.attackDirection, 1, 1);
+            if (_playerState.attackDirection != 0)
+                transform.localScale = new Vector3(_playerState.attackDirection, 1, 1);
             
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
-            playerState.isWalking = true;
+            _playerState.isWalking = true;
         }
         else
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-            playerState.isWalking = false;
+            _playerState.isWalking = false;
         }
 
         transform.Translate(velocity * Time.deltaTime);
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
                 if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                 {
                     grounded = true;
-                    playerState.isJumping = false;
+                    _playerState.isJumping = false;
                 }
             }
 
@@ -110,13 +111,13 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (grounded && !playerState.isAttacking)
+        if (grounded && !_playerState.isAttacking)
         {
             velocity.y = 0;
             if (Input.GetButton("Jump"))
             {
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-                playerState.isJumping = true;
+                _playerState.isJumping = true;
             }
         }
     }
@@ -130,63 +131,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log(_defaultAttack);
-            _defaultAttack.Attack(_damage);
-            playerState.isAttacking = true;
-            playerState.attackDirection = direction;
+            _defaultAttack.Attack(15);
+            _playerState.isAttacking = true;
+            _playerState.attackDirection = direction;
         }
     }
-}
-
-
-public class PlayerState
-{
-    private bool _isWalking = false;
-    private bool _isIdling = true;
-    private bool _isJumping = false;
-    private bool _isAttacking = false;
-    private int _attackDirection;
-
-    public static int RIGHT_DIRECTION = 0;
-    public static int LEFT_DIRECTION = 1;
-
-    public int attackDirection
-    {
-        get => _attackDirection;
-        set => _attackDirection = value;
-    }
-
-    public bool isWalking
-    {
-        get => _isWalking;
-        set 
-        {
-            _isWalking = value;
-            _isIdling = !value;
-        }
-    }
-    public bool isIdling
-    {
-        get => _isIdling;
-        set
-        {
-            _isWalking = !value;
-            _isIdling = value;
-        }
-    }
-    public bool isJumping
-    {
-        get => _isJumping;
-        set
-        {
-            _isJumping = value;
-        }
-    }
-    public bool isAttacking
-    {
-        get => _isAttacking;
-        set => _isAttacking = value;
-    }
-
-  
 }

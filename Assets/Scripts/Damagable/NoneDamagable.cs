@@ -9,3 +9,5 @@ public class NoneDamagable : AbstractDamagable
         Debug.Log(damage + " 의 피해를 입었습니다.");
     }
 }
+
+
