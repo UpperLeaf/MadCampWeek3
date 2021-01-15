@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2928112816117527105
+--- !u!1 &55860641154584612
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2933576771034191347}
-  - component: {fileID: 3050532000249201001}
-  - component: {fileID: 3023554957228409031}
-  - component: {fileID: 736606660928622898}
-  - component: {fileID: 4131605572735897694}
+  - component: {fileID: 55860641154584617}
+  - component: {fileID: 55860641154584616}
+  - component: {fileID: 55860641154584619}
+  - component: {fileID: 55860641154584618}
+  - component: {fileID: 55860641154584613}
   m_Layer: 0
   m_Name: FlyingMonster
   m_TagString: Monster
@@ -20,27 +20,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2933576771034191347
+--- !u!4 &55860641154584617
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928112816117527105}
+  m_GameObject: {fileID: 55860641154584612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.54, y: -2.87, z: 0}
+  m_LocalScale: {x: 0.45026922, y: 0.49374434, z: 0.90141594}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3050532000249201001
+--- !u!212 &55860641154584616
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928112816117527105}
+  m_GameObject: {fileID: 55860641154584612}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,14 +84,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3023554957228409031
+--- !u!95 &55860641154584619
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928112816117527105}
+  m_GameObject: {fileID: 55860641154584612}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8a28e83124cd6634f8b55c82e8eab607, type: 2}
@@ -103,20 +103,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &736606660928622898
+--- !u!61 &55860641154584618
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928112816117527105}
+  m_GameObject: {fileID: 55860641154584612}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1801672}
+  m_Offset: {x: 0, y: 0.032446355}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -127,30 +127,36 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.025, y: 1.4496655}
+  m_Size: {x: 2.025, y: 1.7451072}
   m_EdgeRadius: 0
---- !u!114 &4131605572735897694
+--- !u!114 &55860641154584613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928112816117527105}
+  m_GameObject: {fileID: 55860641154584612}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b19e110df926964cbf528e7bb795666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAcceleration: 50
+  walkAcceleration: 30
+  grounded: 0
   maxHp: 100
   maxStr: 10
-  maxSpeed: 7
+  maxSpeed: 5
   hp: 0
   str: 0
   speed: 0
   sight: 0
   attackField: 0
-  wallDetection: {fileID: 0}
+  isFollowingPlayer: 0
+  isPlayerRight: 0
+  hpBar: {fileID: 0}
+  prefHpBar: {fileID: 848523839093866311, guid: dd310de3c6c0cf943a6fe9963416e665,
+    type: 3}
+  canvas: {fileID: 1935271897793176174, guid: 48ba83e4d258733428efb604c972c238, type: 3}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
