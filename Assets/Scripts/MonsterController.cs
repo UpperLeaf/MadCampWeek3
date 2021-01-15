@@ -133,8 +133,6 @@ public class MonsterController : MonoBehaviour
                 GoLeft();
             else GoRight();
 
-            //transform.Translate((playerPosition - position) * Time.deltaTime);
-            //if (isPlayerRight) GoRight(); else GoLeft();
         }
         else if (anim.GetBool("isRightMoving") && anim.GetBool("isWalking"))
         {
@@ -149,10 +147,7 @@ public class MonsterController : MonoBehaviour
             Stop();
         }
 
-        // 땅과 닿아있지 않으면 떨어지게 하기
-        //if (grounded) StopToFall(); else Fall();
-
-
+        if (grounded) StopToFall(); else Fall();
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
