@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 4;
 
+    [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
+    float dashSpeed = 6;
+
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
 
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour
         if (!_playerState.isDamaged)
         {
             Jump();
+            Dash();
             Attack((int)moveInput);
         }       
         Gravity();
@@ -62,14 +66,16 @@ public class PlayerController : MonoBehaviour
     private float MoveHorizontal()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
+        float _speed = _playerState.isDashing ? dashSpeed : speed;
 
         if (_playerState.isDamaged)
             moveInput = 0;
+        
 
         if ((moveInput != 0 && !_playerState.isAttacking))
         {
             transform.localScale = new Vector3(1 * moveInput, 1, 1);
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, _speed * moveInput, acceleration * Time.deltaTime);
             _playerState.isWalking = true;
         }
         else if (moveInput != 0 && (_playerState.isJumping && _playerState.isAttacking) == true)
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
             if (_playerState.attackDirection != 0)
                 transform.localScale = new Vector3(_playerState.attackDirection, 1, 1);
 
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, _speed * moveInput, acceleration * Time.deltaTime);
             _playerState.isWalking = true;
         }
         else
@@ -125,6 +131,14 @@ public class PlayerController : MonoBehaviour
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
                 _playerState.isJumping = true;
             }
+        }
+    }
+
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.Z) && _playerState.isWalking && !_playerState.isAttacking && !_playerState.isJumping)
+        {
+            _playerState.isDashing = true;
         }
     }
 

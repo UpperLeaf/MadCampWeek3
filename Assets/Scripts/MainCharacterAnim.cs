@@ -7,12 +7,15 @@ public class MainCharacterAnim : MonoBehaviour
     private PlayerState _playerState;
 
     private Animator _animator;
+    
     [SerializeField]
     private bool _attacking;
     [SerializeField]
     private bool _damaged;
     [SerializeField]
     private bool _died;
+    [SerializeField]
+    private bool _dashed;
     
     private void Awake()
     {
@@ -38,6 +41,11 @@ public class MainCharacterAnim : MonoBehaviour
         if (_playerState.isDied && !_died)
         {
             Died();
+        }
+
+        if (_playerState.isDashing && !_dashed)
+        {
+            Dash();
         }
     }
 
@@ -86,5 +94,17 @@ public class MainCharacterAnim : MonoBehaviour
     {
         _attacking = false;
         _playerState.isAttacking = false;
+    }
+
+    public void Dash()
+    {
+        _dashed = true;
+        _animator.SetTrigger("Dash");
+    }
+
+    public void DashFinish()
+    {
+        _dashed = false;
+        _playerState.isDashing = false;
     }
 }

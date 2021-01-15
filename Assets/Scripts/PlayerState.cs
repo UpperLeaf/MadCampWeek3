@@ -16,6 +16,9 @@ public class PlayerState : MonoBehaviour
     private bool _isDamaged = false;
     [SerializeField]
     private bool _isDied = false;
+    [SerializeField]
+    private bool _isDashing =  false;
+
 
     private int _attackDirection;
 
@@ -77,5 +80,11 @@ public class PlayerState : MonoBehaviour
     {
         get => _isAttacking;
         set => _isAttacking = value;
+    }
+
+    public bool isDashing
+    {
+        get => _isDashing;
+        set => _isDashing = value;
     }
 }
