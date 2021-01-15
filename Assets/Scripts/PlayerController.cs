@@ -114,6 +114,15 @@ public class PlayerController : MonoBehaviour
             if (hit.Equals(boxCollider))
                 continue;
 
+            // TODO 몬스터와의 충돌 시 데미지 입음
+            if (hit.gameObject.tag == "Monster")
+            {
+                continue;
+            }
+
+
+
+
             ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
