@@ -32,7 +32,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2212008231547999823}
-  - {fileID: 7975027982257871215}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,36 +115,6 @@ MonoBehaviour:
   hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
   player: {fileID: 0}
   meterImage: {fileID: 2220221436476530231}
---- !u!1 &3177668698890622150
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7975027982257871215}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7975027982257871215
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177668698890622150}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 62.141632, y: -12.704773, z: -147.8125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 273159066472720566}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &176859433447245790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,6 +127,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundHpBar
       objectReference: {fileID: 0}
+    - target: {fileID: 2070418972305668177, guid: c2c67256901fa984d938cedd78358dac,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cff6cfd6116c234eb519fc5cb320fc4,
+        type: 3}
     - target: {fileID: 2073614556619624849, guid: c2c67256901fa984d938cedd78358dac,
         type: 3}
       propertyPath: m_Pivot.x
