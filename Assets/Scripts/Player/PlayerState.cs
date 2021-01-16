@@ -18,12 +18,23 @@ public class PlayerState : MonoBehaviour
     private bool _isDied = false;
     [SerializeField]
     private bool _isDashing =  false;
+    [SerializeField]
+    private bool _isCasting = false;
 
 
     private int _attackDirection;
 
     public static int RIGHT_DIRECTION = 0;
     public static int LEFT_DIRECTION = 1;
+
+    public bool isCast
+    {
+        get => _isCasting;
+        set
+        {
+            _isCasting = value;
+        }
+    }
 
     public bool isDied
     {

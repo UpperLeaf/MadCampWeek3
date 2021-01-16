@@ -23,6 +23,8 @@ public class MainCharacterAnim : MonoBehaviour
     private bool _died;
     [SerializeField]
     private bool _dashed;
+    [SerializeField]
+    private bool _cast;
 
     private void Start()
     {
@@ -48,6 +50,9 @@ public class MainCharacterAnim : MonoBehaviour
         
         if (_playerState.isAttacking && !_attacking)
             Attack();
+
+        if (_playerState.isCast && !_cast)
+            Cast();
 
         if (_playerState.isDamaged && !_damaged)
             Damaged();
@@ -76,7 +81,6 @@ public class MainCharacterAnim : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     public void Damaged()
     {
         _damaged = true;
@@ -100,6 +104,18 @@ public class MainCharacterAnim : MonoBehaviour
             transform.Translate(new Vector2(direction / 30, 0));
             yield return null;
         }
+    }
+
+    private void Cast()
+    {
+        _cast = true;
+        _animator.SetTrigger("Cast");
+    }
+
+    public void CastFinish()
+    {
+        _cast = false;
+        _playerState.isCast = false;
     }
 
     public void DamagedFinish()

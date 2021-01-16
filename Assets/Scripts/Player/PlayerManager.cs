@@ -36,6 +36,6 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject getPlayer()
     {
-        return this.player;
+        return player;
     }
 }

@@ -160,6 +160,10 @@ public class PlayerController : MonoBehaviour
         {
             attackManager.AttackByInputX(10);
         }
+        else if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.A))
+        {
+            attackManager.AttackByInputA(10);
+        }
     }
 
 }
