@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 3192173478503405045}
   - component: {fileID: 4246915457213173343}
   - component: {fileID: 1822282328549681550}
+  - component: {fileID: 4044783891164765566}
   m_Layer: 8
-  m_Name: FlyingMonster 1
+  m_Name: FlyingMonster
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,17 +145,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkAcceleration: 10
   grounded: 0
-  maxHp: 100
-  maxStr: 10
   maxSpeed: 1.5
-  hp: 0
-  str: 0
   speed: 0
   sight: 0
   attackField: 0
   isFollowingPlayer: 0
-  prefHpBar: {fileID: 0}
-  canvas: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -170,3 +165,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efca4d6d542eb048a1ff7bba2fb461f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooltime: 3
+  idleTime: 1
+  damage: 10
+--- !u!114 &4044783891164765566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594728702996461765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29182259ca14a864a84c65a33644c881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 50

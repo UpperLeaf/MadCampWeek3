@@ -22,10 +22,7 @@ public class MainCharacterAnim : MonoBehaviour
         _playerState = GetComponent<PlayerState>();
         _animator = GetComponent<Animator>();
     }
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
+    
     void Update()
     {
         _animator.SetBool("isWalking", _playerState.isWalking);
@@ -52,12 +49,14 @@ public class MainCharacterAnim : MonoBehaviour
     public void Died()
     {
         _died = true;
+        _playerState.isDied = true;
         _animator.SetTrigger("Died");
     }
 
     public void DiedFinish()
     {
-        //TODO 죽었을때 처리
+        //TODO DiedFinish
+        Destroy(gameObject);
     }
 
 

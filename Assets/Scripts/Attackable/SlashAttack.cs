@@ -6,13 +6,14 @@ public class SlashAttack : AbstractAttack
 {
     private LayerMask enemies;
     private float attackRange;
+   
 
     protected void Awake()
     {
         attackRange = 0.75f;
         enemies = LayerMask.NameToLayer("Enemy");
         isAttackable = true;
-        coolTime = 0.8f;
+        coolTime = 0.7f;
     }
 
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)

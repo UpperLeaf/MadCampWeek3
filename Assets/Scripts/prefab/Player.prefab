@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
+  _hitTime: 0
+  _isHit: 0
   hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
   healthBarPrefab: {fileID: 273159066472720565, guid: 2162f252baa5f1b4a853326f4edb11b3,
     type: 3}
@@ -236,12 +238,12 @@ PrefabInstance:
     - target: {fileID: 7065271614909595559, guid: ff253b72474472b47b57dc2d6f6a034a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 7065271614909595559, guid: ff253b72474472b47b57dc2d6f6a034a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.34
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 7065271614909595559, guid: ff253b72474472b47b57dc2d6f6a034a,
         type: 3}

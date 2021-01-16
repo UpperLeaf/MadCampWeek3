@@ -19,22 +19,8 @@ public class MonsterController : MonoBehaviour
     // 이동 방향
     bool movingRight;
 
-    // 몬스터의 스탯
-    [SerializeField, Tooltip("최대 체력")]
-    int maxHp = 100;
-
-    [SerializeField, Tooltip("최대 공격력")]
-    int maxStr = 10;
-
     [SerializeField, Tooltip("최대 속도")]
     float maxSpeed = 2f;
-
-    // 몬스터의 현재 스탯
-    [SerializeField, Tooltip("현재 체력")]
-    int hp;
-
-    [SerializeField, Tooltip("현재 공격력")]
-    int str;
 
     [SerializeField, Tooltip("현재 속도")]
     float speed;
@@ -51,10 +37,7 @@ public class MonsterController : MonoBehaviour
 
     private AbstractMonsterAttack _attackStrategy;
 
-    public GameObject prefHpBar;
-    public GameObject canvas;
-   
-
+ 
     [SerializeField] LayerMask playerLayerMask;
 
 
@@ -64,8 +47,6 @@ public class MonsterController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         _attackStrategy = GetComponent<DefaultMonsterAttack>();
-        hp = maxHp;
-        str = maxStr;
         speed = maxSpeed;
         movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
@@ -117,8 +98,10 @@ public class MonsterController : MonoBehaviour
         Vector2 position = transform.position;
         Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
         bool isStop = anim.GetBool("isStop");
-
-        if (isStop)
+        bool isDied = anim.GetBool("isDied");
+        bool isHit = anim.GetBool("isHit");
+       
+        if (isStop || isDied)
         {
             Stop();
         }
@@ -171,8 +154,6 @@ public class MonsterController : MonoBehaviour
 
         }
 
-        // 지형 체크 
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 0.5f, 0));
         RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector3.down);
 
         if (rayHitGround.collider == null)
@@ -182,14 +163,15 @@ public class MonsterController : MonoBehaviour
         }
 
 
-        Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-        if (attackHits.Length > 0 && attackHits[0] != null)
-            _attackStrategy.Attack();
+        if (!isHit)
+        {
+            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+            if (attackHits.Length > 0 && attackHits[0] != null)
+                _attackStrategy.Attack();
+        }
 
 
         Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
-
-        Debug.Log(playerLayerMask.value);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
             isFollowingPlayer = true;

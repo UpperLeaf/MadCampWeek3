@@ -4,10 +4,13 @@ using UnityEngine;
 
 public abstract class AbstractMonsterAttack : MonoBehaviour
 {
+    [SerializeField]
     protected float cooltime;
 
+    [SerializeField]
     protected float idleTime;
 
+    [SerializeField]
     protected int damage;
 
     protected LayerMask enemies;

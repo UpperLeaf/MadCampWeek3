@@ -39,14 +39,6 @@ public class PlayerController : MonoBehaviour
     private float acceleration;
     private float deceleration;
 
-  
-
-    private void Start()
-    {
-
-
-    }
-
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -61,9 +53,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        float moveInput = MoveHorizontal();
+        if(!_playerState.isDied)
+            MoveHorizontal();
         CollisionCheck();
-        if (!_playerState.isDamaged)
+        if (!_playerState.isDamaged && !_playerState.isDied)
         {
             Jump();
             Dash();
@@ -72,7 +65,7 @@ public class PlayerController : MonoBehaviour
         Gravity();
     }
 
-    private float MoveHorizontal()
+    private void MoveHorizontal()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
         float _speed = _playerState.isDashing ? dashSpeed : speed;
@@ -102,7 +95,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Translate(velocity * Time.deltaTime);
-        return moveInput;
     }
     private void CollisionCheck()
     {

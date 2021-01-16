@@ -6,9 +6,6 @@ public class Player : AbstractDamagable
 {
     private PlayerState playerState;
 
-    //[SerializeField]
-    //private int _hp;
-
     // 체력바
     public HitPoints hitPoints;
     public HealthBar healthBarPrefab;
@@ -27,24 +24,25 @@ public class Player : AbstractDamagable
 
     private void Start()
     {
-        hitPoints.HP = startingHitPoints;
         healthBar = Instantiate(healthBarPrefab);
+        hitPoints.HP = startingHitPoints;
+        _hp = startingHitPoints;
         healthBar.player = this;
     }
 
     private void setHp(int damaged)
     {
-        Debug.Log(hitPoints.HP);
-        if (hitPoints.HP - damaged >  0)
+        if (_hp - damaged >  0)
         {
-            hitPoints.HP -= damaged;
+            _hp -= damaged;
             playerState.isDamaged = true;
         }
         else
         {
-            hitPoints.HP = 0f;
+            _hp = 0;
             playerState.isDied = true;
         }
+        hitPoints.HP = _hp;
     }
 
     public override void TakeDamage(int damage, GameObject attacker)
