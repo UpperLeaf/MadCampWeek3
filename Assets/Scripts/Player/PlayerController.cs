@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
             // 점프 시 충돌 무시
             if (velocity.y < float.Epsilon)
             {
+                Debug.Log(hit.tag);
                 ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
@@ -174,6 +175,11 @@ public class PlayerController : MonoBehaviour
         {
             attackManager.AttackByInputX(10);
         }
+    }
+
+    public void Shake()
+    {
+
     }
 
 }
