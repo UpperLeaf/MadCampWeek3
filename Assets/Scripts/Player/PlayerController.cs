@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             Jump();
             Dash();
             Attack();
-        }       
+        }
         Gravity();
     }
 
@@ -121,7 +121,11 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
+
+            // 점프 시 충돌 무시
+            if (velocity.y < float.Epsilon)
+            {
+                ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
             {
@@ -132,11 +136,13 @@ public class PlayerController : MonoBehaviour
                     _playerState.isJumping = false;
                 }
             }
+            }
 
         }
+
     }
 
-    private void Jump()
+   private void Jump()
     {
         if (grounded && !_playerState.isAttacking && !_playerState.isDamaged)
         {

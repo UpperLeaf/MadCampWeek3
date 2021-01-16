@@ -171,6 +171,9 @@ public class MonsterController : MonoBehaviour
 
         }
 
+
+
+
         // 지형 체크 
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 0.5f, 0));
         RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector3.down);
