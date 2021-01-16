@@ -24,7 +24,7 @@ public class Fireball : MonoBehaviour
         _collider2D = GetComponent<CapsuleCollider2D>();
         _enemies = LayerMask.NameToLayer("Enemy");
         _dirc = (int)transform.localScale.x;
-        _speed = 20f;
+        _speed = 30f;
         _destoryTime = 2f;
         _moveVector = new Vector2(_dirc * _speed , 0);
         _damage = 30;

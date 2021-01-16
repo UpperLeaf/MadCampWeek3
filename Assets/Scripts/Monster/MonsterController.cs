@@ -138,6 +138,9 @@ public class MonsterController : MonoBehaviour
             // 플레이어와의 충돌을 제외
             if (hit.gameObject.tag == "Player")
                 continue;
+
+            if (hit.gameObject.tag == "Skill")
+                continue;
            
             ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
