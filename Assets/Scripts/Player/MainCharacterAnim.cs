@@ -7,7 +7,14 @@ public class MainCharacterAnim : MonoBehaviour
     private PlayerState _playerState;
 
     private Animator _animator;
-    
+
+
+    [SerializeField]
+    private GameObject dashEffect;
+    private Transform _dashPos;
+
+    private GameObject _instanceDashEffect;
+
     [SerializeField]
     private bool _attacking;
     [SerializeField]
@@ -16,13 +23,23 @@ public class MainCharacterAnim : MonoBehaviour
     private bool _died;
     [SerializeField]
     private bool _dashed;
-    
-    private void Awake()
+
+    private void Start()
     {
         _playerState = GetComponent<PlayerState>();
         _animator = GetComponent<Animator>();
+        Transform[] transforms = GetComponentsInChildren<Transform>();
+        foreach (Transform pos in transforms)
+        {
+            if (pos.name.Equals("dashEffectPos"))
+            {
+                _dashPos = pos;
+                break;
+            }
+        }
+
     }
-    
+
     void Update()
     {
         _animator.SetBool("isWalking", _playerState.isWalking);
@@ -107,11 +124,13 @@ public class MainCharacterAnim : MonoBehaviour
     {
         _dashed = true;
         _animator.SetTrigger("Dash");
+        _instanceDashEffect = Instantiate(dashEffect, _dashPos);
     }
 
     public void DashFinish()
     {
         _dashed = false;
         _playerState.isDashing = false;
+        Destroy(_instanceDashEffect);
     }
 }
