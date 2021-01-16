@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
             if (colliderDistance.isOverlapped)
             {
                 transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
+                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 60 && velocity.y < 0)
                 {
                     grounded = true;
                     _playerState.isJumping = false;
