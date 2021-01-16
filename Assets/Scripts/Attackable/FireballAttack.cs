@@ -12,7 +12,7 @@ public class FireballAttack : AbstractAttack
     private void Start()
     {
         isAttackable = true;
-        coolTime = 1;
+        coolTime = 5;
     }
 
     public void SetFireball(GameObject fireball)

@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D boxCollider;
 
+    private LayerMask floor;
     
     private AttackManager attackManager;
     
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
         attackManager.gameObject.SetActive(true);
     }
 
+    private void Start()
+    {
+        floor = LayerMask.NameToLayer("Floor");
+    }
     private void Update()
     {
         if(!_playerState.isDied)
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
         float _speed = _playerState.isDashing ? dashSpeed : speed;
 
-        if (_playerState.isDamaged)
+        if (_playerState.isDamaged || _playerState.isCast)
             moveInput = 0;
         
 
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         grounded = false;
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0, 1 << floor);
 
         foreach (Collider2D hit in hits)
         {
