@@ -10,7 +10,7 @@ public class SlashAttack : AbstractAttack
 
     protected void Awake()
     {
-        attackRange = 0.75f;
+        attackRange = 0.6f;
         enemies = LayerMask.NameToLayer("Enemy");
         isAttackable = true;
         coolTime = 0.7f;

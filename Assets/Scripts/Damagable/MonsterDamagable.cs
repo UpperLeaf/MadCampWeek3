@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MonsterDamagable : AbstractDamagable
 {
+    private Transform _player;
     private void Start()
     {
         _isDied = false;
         _anim = GetComponent<Animator>();
         _hitTime = 1;
+        _player = PlayerManager.Instance.getPlayer().transform;
     }
 
     public override void TakeDamage(int damage, GameObject attacker)
@@ -39,12 +41,13 @@ public class MonsterDamagable : AbstractDamagable
 
     public void HitStart(GameObject attacker)
     {
-        StartCoroutine("HitCoroutine", attacker);
+        StartCoroutine("HitCoroutine");
     }
 
-    IEnumerator HitCoroutine(GameObject attacker)
+    IEnumerator HitCoroutine()
     {
-        float direction = transform.position.x - attacker.transform.position.x > 0 ? 1 : -1;
+        float direction = transform.position.x - _player.position.x > 0 ? 1 : -1;
+        
         Vector2 dir = new Vector2(direction / 30, 0);
         for (int i = 0; i < 30; i++)
         {
