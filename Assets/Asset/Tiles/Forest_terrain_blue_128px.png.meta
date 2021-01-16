@@ -1,0 +1,392 @@
+fileFormatVersion: 2
+guid: 8334d7d622fa74e4ea40443edc085a2a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6143181007004670284
+    second: Forest_terrain_blue_128px_0
+  - first:
+      213: 6818180178763269260
+    second: Forest_terrain_blue_128px_1
+  - first:
+      213: 5804079005238821847
+    second: Forest_terrain_blue_128px_2
+  - first:
+      213: 6989287297466333817
+    second: Forest_terrain_blue_128px_3
+  - first:
+      213: -4130792690043967349
+    second: Forest_terrain_blue_128px_4
+  - first:
+      213: -1143468728471722626
+    second: Forest_terrain_blue_128px_5
+  - first:
+      213: -1522524329465191755
+    second: Forest_terrain_blue_128px_6
+  - first:
+      213: -1775943886250783107
+    second: Forest_terrain_blue_128px_7
+  - first:
+      213: 5655095738229414140
+    second: Forest_terrain_blue_128px_8
+  - first:
+      213: -7888931056793932724
+    second: Forest_terrain_blue_128px_9
+  - first:
+      213: -57621431391991544
+    second: Forest_terrain_blue_128px_10
+  - first:
+      213: 1715936922988388318
+    second: Forest_terrain_blue_128px_11
+  - first:
+      213: -5900167580128158685
+    second: Forest_terrain_blue_128px_12
+  - first:
+      213: 8621563971876677563
+    second: Forest_terrain_blue_128px_13
+  - first:
+      213: -6968178881458921953
+    second: Forest_terrain_blue_128px_14
+  - first:
+      213: -5407724539135370052
+    second: Forest_terrain_blue_128px_15
+  - first:
+      213: 8690869261632908353
+    second: Forest_terrain_blue_128px_16
+  - first:
+      213: 3298244064387596110
+    second: Forest_terrain_blue_128px_17
+  - first:
+      213: -8941306720761488148
+    second: Forest_terrain_blue_128px_18
+  - first:
+      213: 4452142616397218760
+    second: Forest_terrain_blue_128px_19
+  - first:
+      213: -1240194173685349821
+    second: Forest_terrain_blue_128px_20
+  - first:
+      213: 8691154231298144657
+    second: Forest_terrain_blue_128px_21
+  - first:
+      213: -7581023572833257116
+    second: Forest_terrain_blue_128px_22
+  - first:
+      213: -339801140522826133
+    second: Forest_terrain_blue_128px_23
+  - first:
+      213: -1713773254524625544
+    second: Forest_terrain_blue_128px_24
+  - first:
+      213: 7492595925933920846
+    second: Forest_terrain_blue_128px_25
+  - first:
+      213: -3071562306787696393
+    second: Forest_terrain_blue_128px_26
+  - first:
+      213: -6516887460199927244
+    second: Forest_terrain_blue_128px_27
+  - first:
+      213: -7848127863105065493
+    second: Forest_terrain_blue_128px_28
+  - first:
+      213: -3099104535193542226
+    second: Forest_terrain_blue_128px_29
+  - first:
+      213: -1181676156849829449
+    second: Forest_terrain_blue_128px_30
+  - first:
+      213: 4810551287500259919
+    second: Forest_terrain_blue_128px_31
+  - first:
+      213: 3169390617748818937
+    second: Forest_terrain_blue_128px_32
+  - first:
+      213: -7535920312454353405
+    second: Forest_terrain_blue_128px_33
+  - first:
+      213: -767347293050866839
+    second: Forest_terrain_blue_128px_34
+  - first:
+      213: -4868613349843442792
+    second: Forest_terrain_blue_128px_35
+  - first:
+      213: -5555460986945093972
+    second: Forest_terrain_blue_128px_36
+  - first:
+      213: 8440334251860110115
+    second: Forest_terrain_blue_128px_37
+  - first:
+      213: -1712220675150119498
+    second: Forest_terrain_blue_128px_38
+  - first:
+      213: -5177053333159833767
+    second: Forest_terrain_blue_128px_39
+  - first:
+      213: 5366168706305330391
+    second: Forest_terrain_blue_128px_40
+  - first:
+      213: -4400709150309284902
+    second: Forest_terrain_blue_128px_41
+  - first:
+      213: 9095195579772903841
+    second: Forest_terrain_blue_128px_42
+  - first:
+      213: 7629872127304907249
+    second: Forest_terrain_blue_128px_43
+  - first:
+      213: -3376895476555304134
+    second: Forest_terrain_blue_128px_44
+  - first:
+      213: -4285594130864672130
+    second: Forest_terrain_blue_128px_45
+  - first:
+      213: 49389053963258492
+    second: Forest_terrain_blue_128px_46
+  - first:
+      213: -1310214981345999670
+    second: Forest_terrain_blue_128px_47
+  - first:
+      213: 6045106085050257974
+    second: Forest_terrain_blue_128px_48
+  - first:
+      213: 5686768641158373257
+    second: Forest_terrain_blue_128px_49
+  - first:
+      213: 4605840942347182203
+    second: Forest_terrain_blue_128px_50
+  - first:
+      213: -5322314568471512312
+    second: Forest_terrain_blue_128px_51
+  - first:
+      213: 872898141131636159
+    second: Forest_terrain_blue_128px_52
+  - first:
+      213: 8689231336130617813
+    second: Forest_terrain_blue_128px_53
+  - first:
+      213: -4812889728793659948
+    second: Forest_terrain_blue_128px_54
+  - first:
+      213: -3456860882489228014
+    second: Forest_terrain_blue_128px_55
+  - first:
+      213: -5562805541674222469
+    second: Forest_terrain_blue_128px_56
+  - first:
+      213: 4637522458508137251
+    second: Forest_terrain_blue_128px_57
+  - first:
+      213: -4706030208319757748
+    second: Forest_terrain_blue_128px_58
+  - first:
+      213: 6287757468583259830
+    second: Forest_terrain_blue_128px_59
+  - first:
+      213: -8110472942898785231
+    second: Forest_terrain_blue_128px_60
+  - first:
+      213: 678814748440858254
+    second: Forest_terrain_blue_128px_61
+  - first:
+      213: 8176383562001764562
+    second: Forest_terrain_blue_128px_62
+  - first:
+      213: 7645631668825776754
+    second: Forest_terrain_blue_128px_63
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 386, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Forest_terrain_blue_128px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b66f8e0c690fbaa0800000000000000
+      internalID: -6143181007004670284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest_terrain_blue_128px_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c844bc19fba0f9e50800000000000000
+      internalID: 6818180178763269260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest_terrain_blue_128px_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d3009b9a1b3c8050800000000000000
+      internalID: 5804079005238821847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest_terrain_blue_128px_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a71a624cfeef060800000000000000
+      internalID: 6989287297466333817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
