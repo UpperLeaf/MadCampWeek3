@@ -24,7 +24,7 @@ public class ShockwaveListenerExample : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             // impulse 만드는 함수
-            Invoke("Shake", 10f); // 두번째 인자는 이벤트 발생 지연 시간
+            Invoke("Shake", 2f); // 두번째 인자는 이벤트 발생 지연 시간
         }
     }
 
