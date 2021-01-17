@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Fireball : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject hitEffect;
+
     private CapsuleCollider2D _collider2D;
 
     private float _speed;
@@ -56,6 +60,11 @@ public class Fireball : MonoBehaviour
             foreach(Collider2D hit in enemiesToDamage)
             {
                 hit.GetComponent<AbstractDamagable>().TakeDamage(_damage, gameObject);
+                Transform enemy = hit.GetComponent<Transform>();
+
+                hitEffect.transform.position = enemy.position;
+                GameObject effect = Instantiate(hitEffect);
+                Destroy(effect, effect.GetComponent<ParticleSystem>().main.duration + 1f);
                 Destroy(gameObject);
             }
             yield return new WaitForSeconds(_checkTime);

@@ -27,10 +27,12 @@ public class SlashAttack : AbstractAttack
             enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
             Transform enemies = enemiesToDamage[i].GetComponent<Transform>();
             slashEffect.transform.position = enemies.position;
-            Instantiate(slashEffect);
+            GameObject effect = Instantiate(slashEffect);
+            Destroy(effect, effect.GetComponent<ParticleSystem>().main.duration + 1f);
         }
         StartCoroutine("CoolTime");
     }
+
 
     IEnumerator CoolTime()
     {
