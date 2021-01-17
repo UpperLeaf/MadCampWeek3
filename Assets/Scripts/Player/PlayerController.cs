@@ -147,18 +147,23 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.X))
+        bool isAttackable = checkAttackable();
+        if (Input.GetKeyDown(KeyCode.X))
         {
             mainCharacterAnim.Attack(KeyCode.X);
         }
-        else if (!_playerState.isDamaged && !_playerState.isJumping && Input.GetKeyDown(KeyCode.A))
+        else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.A))
         {
             mainCharacterAnim.Attack(KeyCode.A);
         }
-        else if (!_playerState.isDamaged && !_playerState.isJumping && Input.GetKeyDown(KeyCode.S))
+        else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.S))
         {
             mainCharacterAnim.Attack(KeyCode.S);
         }
+    }
+    private bool checkAttackable()
+    {
+        return !(_playerState.isDamaged || _playerState.isAttacking || _playerState.isCast);
     }
 
     public void Shake()
