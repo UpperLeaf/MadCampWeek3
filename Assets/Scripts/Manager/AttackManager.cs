@@ -44,32 +44,21 @@ public class AttackManager : MonoBehaviour
         _playerState = GetComponent<PlayerState>();
     }
 
-    public bool isAttackAbleX()
+    public bool isAttackAble(KeyCode key)
     {
-        bool isAttackable = xAttack.GetComponent<AbstractAttack>().IsAttackable();
-        if(isAttackable)
-            xAttack.GetComponent<AbstractAttack>().SetAttackable(false);
-        return isAttackable;
-    }
-
-    public bool isAttackAbleA()
-    {
-        bool isAttackable = aAttack.GetComponent<AbstractAttack>().IsAttackable();
+        GameObject attack = findAttackByKeyCode(key);
+        bool isAttackable = attack.GetComponent<AbstractAttack>().IsAttackable();
         if (isAttackable)
-            aAttack.GetComponent<AbstractAttack>().SetAttackable(false);
+            attack.GetComponent<AbstractAttack>().SetAttackable(false);
         return isAttackable;
     }
 
-    public bool isAttackAbleS()
+    public AbstractAttack.AttackType getAttackType(KeyCode key)
     {
-        bool isAttackable = sAttack.GetComponent<AbstractAttack>().IsAttackable();
-        if (isAttackable)
-            sAttack.GetComponent<AbstractAttack>().SetAttackable(false);
-        return isAttackable;
+        return findAttackByKeyCode(key).GetComponent<AbstractAttack>().attackType;
     }
 
-
-    public void AttackByInput(KeyCode key)
+    private GameObject findAttackByKeyCode(KeyCode key)
     {
         GameObject attack = null;
         switch (key)
@@ -84,7 +73,13 @@ public class AttackManager : MonoBehaviour
                 attack = sAttack;
                 break;
         }
+        return attack;
+    }   
 
+    public void AttackByInput(KeyCode key)
+    {
+        GameObject attack = findAttackByKeyCode(key);
+      
         AbstractAttack.AttackType attackType = attack.GetComponent<AbstractAttack>().attackType;
         AbstractAttack.DistanceType distanceType = attack.GetComponent<AbstractAttack>().distanceType;
 

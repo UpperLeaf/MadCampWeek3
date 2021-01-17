@@ -110,34 +110,22 @@ public class MainCharacterAnim : MonoBehaviour
 
     public void Attack(KeyCode key)
     {
-        switch (key) {
-            case KeyCode.X:
-                if (_attackManager.isAttackAbleX())
-                {
+        if (_attackManager.isAttackAble(key))
+        {
+            AbstractAttack.AttackType attackType = _attackManager.getAttackType(key);
+            switch (attackType)
+            {
+                case AbstractAttack.AttackType.ATTACK:
                     _animator.SetTrigger("Attack");
                     _playerState.isAttacking = true;
-                    _playerState.attackDirection = (int)transform.localScale.x;
-                    nowKey = key;
-                }
-                break;
-            case KeyCode.A:
-                if (_attackManager.isAttackAbleA())
-                {
+                    break;
+                case AbstractAttack.AttackType.CAST:
                     _animator.SetTrigger("Cast");
                     _playerState.isCast = true;
-                    _playerState.attackDirection = (int)transform.localScale.x;
-                    nowKey = key;
-                }
-                break;
-            case KeyCode.S:
-                if (_attackManager.isAttackAbleS())
-                {
-                    _animator.SetTrigger("Cast");
-                    _playerState.isCast = true;
-                    _playerState.attackDirection = (int)transform.localScale.x;
-                    nowKey = key;
-                }
-                break;
+                    break;
+            }
+            _playerState.attackDirection = (int)transform.localScale.x;
+            nowKey = key;
         }
     }
 
