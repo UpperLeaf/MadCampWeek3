@@ -116,9 +116,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             }
-
         }
-
     }
 
    private void Jump()

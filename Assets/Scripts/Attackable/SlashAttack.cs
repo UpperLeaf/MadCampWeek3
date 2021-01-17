@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SlashAttack : AbstractAttack
 {
+    [SerializeField]
+    private GameObject slashEffect;
+
     private LayerMask enemies;
     private float attackRange;
    
-
     protected void Awake()
     {
         attackRange = 0.6f;
@@ -23,6 +25,9 @@ public class SlashAttack : AbstractAttack
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
+            Transform enemies = enemiesToDamage[i].GetComponent<Transform>();
+            slashEffect.transform.position = enemies.position;
+            Instantiate(slashEffect);
         }
         StartCoroutine("CoolTime");
     }

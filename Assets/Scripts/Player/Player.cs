@@ -31,8 +31,6 @@ public class Player : AbstractDamagable
     
     public float maxHitPoints;
     
-
-
     private void Awake()
     {
         playerState = GetComponent<PlayerState>();

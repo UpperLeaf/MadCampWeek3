@@ -43,5 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d1ab676dc4bba4a9cc5d161450b7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xAttack: {fileID: 6954924439064953236, guid: 327c0888a85a0334da8f25908793a3e2, type: 3}
+  xAttack: {fileID: 0}
   aAttack: {fileID: 0}
+  fireball: {fileID: 0}
+  defaultAttackPos: {fileID: 0}
+  attackPos: {fileID: 8575466576615794049, guid: f4d1830c9225a244286c8120ebea4cc7,
+    type: 3}
+  slashAttack: {fileID: 5980087110975862130, guid: 327c0888a85a0334da8f25908793a3e2,
+    type: 3}
+  fireballAttack: {fileID: 908792285884946487, guid: 9f55cf7b5e273a94faf8b8de3b1aeecc,
+    type: 3}

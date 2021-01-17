@@ -7,14 +7,16 @@ public class AttackManager : MonoBehaviour
     [SerializeField]
     private GameObject aAttack;
 
-
-    [SerializeField]
-    private GameObject fireball;
-
-    [SerializeField]
-    private Transform defaultAttackPos;
-
     private PlayerState _playerState;
+
+    [SerializeField]
+    private GameObject attackPos;
+
+    [SerializeField]
+    private GameObject slashAttack;
+
+    [SerializeField]
+    private GameObject fireballAttack;
 
     private Player _player;
 
@@ -27,6 +29,7 @@ public class AttackManager : MonoBehaviour
     {
         AttachSlashAttack(ref xAttack);
         AttachFireballAttack(ref aAttack);
+
         _player = GetComponent<Player>();
         _playerState = GetComponent<PlayerState>();
     }
@@ -49,36 +52,23 @@ public class AttackManager : MonoBehaviour
 
     public void AttackByInputX()
     {
-        xAttack.GetComponent<AbstractAttack>().Attack(_player.attackDamage, defaultAttackPos, _playerState);
+        xAttack.GetComponent<AbstractAttack>().Attack(_player.attackDamage, attackPos.transform, _playerState);
     }
 
 
     public void AttackByInputA()
     {
-        aAttack.GetComponent<AbstractAttack>().Attack(_player.magicDamage, defaultAttackPos, _playerState);
+        aAttack.GetComponent<AbstractAttack>().Attack(_player.magicDamage, attackPos.transform, _playerState);
     }
 
 
     private void AttachFireballAttack(ref GameObject attach)
     {
-        Destroy(attach);
-        
-        GameObject fireballObject = new GameObject("FireballAttack");
-        fireballObject.transform.SetParent(PlayerManager.Instance.getPlayer().transform);
-
-        FireballAttack fireballAttack = fireballObject.AddComponent<FireballAttack>();
-        fireballAttack.SetFireball(fireball);
-
-        attach = fireballObject;
+        attach = Instantiate(fireballAttack, gameObject.transform, true);
     }
 
     private void AttachSlashAttack(ref GameObject attach)
     {
-        Destroy(attach);
-        GameObject slash = new GameObject("SlashAttack");
-        slash.transform.SetParent(PlayerManager.Instance.getPlayer().transform);
-        slash.AddComponent<SlashAttack>();
-
-        attach = slash;
+        attach = Instantiate(slashAttack, gameObject.transform, true);
     }
 }

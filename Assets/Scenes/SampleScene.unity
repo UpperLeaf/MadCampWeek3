@@ -332,6 +332,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1550220688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 465541617589356691, guid: 0c8520c9ee49155449fb61ae54166c62,
+    type: 3}
+  m_PrefabInstance: {fileID: 2056998927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2056998927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,6 +345,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5588414393091431520, guid: 0c8520c9ee49155449fb61ae54166c62,
+        type: 3}
+      propertyPath: attackPos
+      value: 
+      objectReference: {fileID: 1550220688}
+    - target: {fileID: 5588414393091431520, guid: 0c8520c9ee49155449fb61ae54166c62,
+        type: 3}
+      propertyPath: slashAttack
+      value: 
+      objectReference: {fileID: 5980087110975862130, guid: 327c0888a85a0334da8f25908793a3e2,
+        type: 3}
+    - target: {fileID: 5588414393091431520, guid: 0c8520c9ee49155449fb61ae54166c62,
+        type: 3}
+      propertyPath: fireballAttack
+      value: 
+      objectReference: {fileID: 908792285884946487, guid: 9f55cf7b5e273a94faf8b8de3b1aeecc,
+        type: 3}
     - target: {fileID: 8544981188965931600, guid: 0c8520c9ee49155449fb61ae54166c62,
         type: 3}
       propertyPath: m_RootOrder

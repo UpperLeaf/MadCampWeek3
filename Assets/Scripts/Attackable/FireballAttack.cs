@@ -7,7 +7,6 @@ public class FireballAttack : AbstractAttack
     [SerializeField]
     private GameObject fireball;
 
-
     private void Start()
     {
         isAttackable = true;
