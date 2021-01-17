@@ -6,12 +6,11 @@ public class DarknessAttack : AbstractAttack
 {
     [SerializeField]
     private GameObject darkness;
-
   
     private void Start()
     {
         isAttackable = true;
-        coolTime = 10f;
+        coolTime = 1f;
     }
 
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)
@@ -19,7 +18,7 @@ public class DarknessAttack : AbstractAttack
         playerState.attackDirection = (int)transform.localScale.x;
         darkness.transform.position = attackPosition.position;
         GameObject darknessInstance = Instantiate(darkness);
-        darknessInstance.GetComponent<Darkness>().SetDamage(damage / 3);
+        darknessInstance.GetComponent<Darkness>().SetDamage(damage / 5);
         StartCoroutine("CoolTime");
     }
 

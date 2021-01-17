@@ -13,8 +13,8 @@ public class Darkness : MonoBehaviour
     
     void Start()
     {
-        _destroyTime = 3f;
-        _checkTime = 0.5f;
+        _destroyTime = 2.5f;
+        _checkTime = 0.1f;
         _collider2D = GetComponent<CircleCollider2D>();
         enemies = LayerMask.NameToLayer("Enemy");
         StartCoroutine("CollisionCheck");
@@ -37,9 +37,7 @@ public class Darkness : MonoBehaviour
         {
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(_collider2D.transform.position, _collider2D.radius, 1 << enemies);
             foreach (Collider2D hit in enemiesToDamage)
-            {
                 hit.GetComponent<AbstractDamagable>().TakeDamage(_damage, gameObject);
-            }
             yield return new WaitForSeconds(_checkTime);
         }
     }

@@ -19,9 +19,8 @@ public class MonsterDamagable : AbstractDamagable
         {
             SetHp(damage);
             HitStart(attacker);
-
+            Debug.Log(damage);
             bool isRight = _anim.GetBool("isRightMoving");
-            _anim.SetBool("isHit", true);
 
             if (isRight)
                 _anim.SetTrigger("RightHit");
@@ -36,7 +35,7 @@ public class MonsterDamagable : AbstractDamagable
 
     public void DeathEvent()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void HitStart(GameObject attacker)
@@ -72,6 +71,5 @@ public class MonsterDamagable : AbstractDamagable
     {
         yield return new WaitForSeconds(_hitTime);
         _anim.SetBool("isStop", false);
-        _anim.SetBool("isHit", false);
     }
 }
