@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballAttack : AbstractAttack
+public class DarknessAttack : AbstractAttack
 {
     [SerializeField]
-    private GameObject fireball;
+    private GameObject darkness;
 
+  
     private void Start()
     {
         isAttackable = true;
@@ -16,9 +17,9 @@ public class FireballAttack : AbstractAttack
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)
     {
         playerState.attackDirection = (int)transform.localScale.x;
-        fireball.transform.position = attackPosition.position;
-        fireball.transform.localScale = PlayerManager.Instance.getPlayer().transform.localScale;
-        Instantiate(fireball);
+        darkness.transform.position = attackPosition.position;
+        GameObject darknessInstance = Instantiate(darkness);
+        darknessInstance.GetComponent<Darkness>().SetDamage(damage);
         StartCoroutine("CoolTime");
     }
 

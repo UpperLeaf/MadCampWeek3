@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour
         {
             mainCharacterAnim.Attack(KeyCode.A);
         }
+        else if (!_playerState.isDamaged && !_playerState.isJumping && Input.GetKeyDown(KeyCode.S))
+        {
+            mainCharacterAnim.Attack(KeyCode.S);
+        }
     }
 
     public void Shake()

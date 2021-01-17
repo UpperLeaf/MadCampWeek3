@@ -16,8 +16,6 @@ public class MainCharacterAnim : MonoBehaviour
     private GameObject _instanceDashEffect;
 
     [SerializeField]
-    private bool _attacking;
-    [SerializeField]
     private bool _damaged;
     [SerializeField]
     private bool _died;
@@ -25,6 +23,8 @@ public class MainCharacterAnim : MonoBehaviour
     private bool _dashed;
     [SerializeField]
     private bool _cast;
+
+    private KeyCode nowKey;
 
     private void Start()
     {
@@ -81,7 +81,6 @@ public class MainCharacterAnim : MonoBehaviour
     public void Damaged()
     {
         _damaged = true;
-        _attacking = false;
         _playerState.isAttacking = false;
         _playerState.isIdling = true;
         _playerState.isJumping = false;
@@ -118,6 +117,7 @@ public class MainCharacterAnim : MonoBehaviour
                     _animator.SetTrigger("Attack");
                     _playerState.isAttacking = true;
                     _playerState.attackDirection = (int)transform.localScale.x;
+                    nowKey = key;
                 }
                 break;
             case KeyCode.A:
@@ -126,6 +126,16 @@ public class MainCharacterAnim : MonoBehaviour
                     _animator.SetTrigger("Cast");
                     _playerState.isCast = true;
                     _playerState.attackDirection = (int)transform.localScale.x;
+                    nowKey = key;
+                }
+                break;
+            case KeyCode.S:
+                if (_attackManager.isAttackAbleS())
+                {
+                    _animator.SetTrigger("Cast");
+                    _playerState.isCast = true;
+                    _playerState.attackDirection = (int)transform.localScale.x;
+                    nowKey = key;
                 }
                 break;
         }
@@ -133,17 +143,23 @@ public class MainCharacterAnim : MonoBehaviour
 
     public void AttackEvent()
     {
-        _attackManager.AttackByInputX();
+        switch (nowKey)
+        {
+            case KeyCode.X:
+                _attackManager.AttackByInputX();
+                break;
+            case KeyCode.A:
+                _attackManager.AttackByInputA();
+                break;
+            case KeyCode.S:
+                _attackManager.AttackByInputS();
+                break;
+        }
     }
 
     public void AttackFinish()
     {
         _playerState.isAttacking = false;
-    }
-
-    public void CastEvent()
-    {
-        _attackManager.AttackByInputA();
     }
 
     public void CastFinish()
