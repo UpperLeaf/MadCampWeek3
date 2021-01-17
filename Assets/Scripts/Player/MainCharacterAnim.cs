@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MainCharacterAnim : MonoBehaviour
 {
-    private PlayerState _playerState;
 
+    private AttackManager _attackManager;
     private Animator _animator;
-
+    private PlayerState _playerState;
 
     [SerializeField]
     private GameObject dashEffect;
@@ -30,6 +30,8 @@ public class MainCharacterAnim : MonoBehaviour
     {
         _playerState = GetComponent<PlayerState>();
         _animator = GetComponent<Animator>();
+        _attackManager = GetComponent<AttackManager>();
+
         Transform[] transforms = GetComponentsInChildren<Transform>();
         foreach (Transform pos in transforms)
         {
@@ -48,12 +50,7 @@ public class MainCharacterAnim : MonoBehaviour
         _animator.SetBool("isIdling", _playerState.isIdling);        
         _animator.SetBool("isJumping", _playerState.isJumping);
         
-        if (_playerState.isAttacking && !_attacking)
-            Attack();
-
-        if (_playerState.isCast && !_cast)
-            Cast();
-
+    
         if (_playerState.isDamaged && !_damaged)
             Damaged();
 
@@ -106,35 +103,54 @@ public class MainCharacterAnim : MonoBehaviour
         }
     }
 
-    private void Cast()
-    {
-        _cast = true;
-        _animator.SetTrigger("Cast");
-    }
-
-    public void CastFinish()
-    {
-        _cast = false;
-        _playerState.isCast = false;
-    }
-
     public void DamagedFinish()
     {
         _damaged = false;
         _playerState.isDamaged = false;
     }
 
-    public void Attack()
+    public void Attack(KeyCode key)
     {
-        _attacking = true;
-        _animator.SetTrigger("Attack");
+        switch (key) {
+            case KeyCode.X:
+                if (_attackManager.isAttackAbleX())
+                {
+                    _animator.SetTrigger("Attack");
+                    _playerState.isAttacking = true;
+                    _playerState.attackDirection = (int)transform.localScale.x;
+                }
+                break;
+            case KeyCode.A:
+                if (_attackManager.isAttackAbleA())
+                {
+                    _animator.SetTrigger("Cast");
+                    _playerState.isCast = true;
+                    _playerState.attackDirection = (int)transform.localScale.x;
+                }
+                break;
+        }
+    }
+
+    public void AttackEvent()
+    {
+        _attackManager.AttackByInputX();
     }
 
     public void AttackFinish()
     {
-        _attacking = false;
         _playerState.isAttacking = false;
     }
+
+    public void CastEvent()
+    {
+        _attackManager.AttackByInputA();
+    }
+
+    public void CastFinish()
+    {
+        _playerState.isCast = false;
+    }
+
 
     public void Dash()
     {

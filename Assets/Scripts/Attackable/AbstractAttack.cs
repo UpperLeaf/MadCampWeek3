@@ -11,4 +11,14 @@ public abstract class AbstractAttack : MonoBehaviour
     protected bool isAttackable;
 
     public abstract void Attack(int damage, Transform attackPosition, PlayerState playerState);
+
+    public bool IsAttackable()
+    {
+        return isAttackable;
+    }
+
+    public void SetAttackable(bool attackable)
+    {
+        isAttackable = attackable;
+    }
 }

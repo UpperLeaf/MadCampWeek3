@@ -14,8 +14,9 @@ public class AttackManager : MonoBehaviour
     [SerializeField]
     private Transform defaultAttackPos;
 
-
     private PlayerState _playerState;
+
+    private Player _player;
 
     void Awake()
     {
@@ -26,19 +27,35 @@ public class AttackManager : MonoBehaviour
     {
         AttachSlashAttack(ref xAttack);
         AttachFireballAttack(ref aAttack);
-
+        _player = GetComponent<Player>();
         _playerState = GetComponent<PlayerState>();
     }
 
-    public void AttackByInputX(int damage)
+    public bool isAttackAbleX()
     {
-        xAttack.GetComponent<AbstractAttack>().Attack(damage, defaultAttackPos, _playerState);
+        bool isAttackable = xAttack.GetComponent<AbstractAttack>().IsAttackable();
+        if(isAttackable)
+            xAttack.GetComponent<AbstractAttack>().SetAttackable(false);
+        return isAttackable;
+    }
+
+    public bool isAttackAbleA()
+    {
+        bool isAttackable = aAttack.GetComponent<AbstractAttack>().IsAttackable();
+        if (isAttackable)
+            aAttack.GetComponent<AbstractAttack>().SetAttackable(false);
+        return isAttackable;
+    }
+
+    public void AttackByInputX()
+    {
+        xAttack.GetComponent<AbstractAttack>().Attack(_player.attackDamage, defaultAttackPos, _playerState);
     }
 
 
-    public void AttackByInputA(int damage)
+    public void AttackByInputA()
     {
-        aAttack.GetComponent<AbstractAttack>().Attack(damage, defaultAttackPos, _playerState);
+        aAttack.GetComponent<AbstractAttack>().Attack(_player.magicDamage, defaultAttackPos, _playerState);
     }
 
 

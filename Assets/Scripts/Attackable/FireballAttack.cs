@@ -7,12 +7,11 @@ public class FireballAttack : AbstractAttack
     [SerializeField]
     private GameObject fireball;
 
-    private GameObject _instanceFireball;
 
     private void Start()
     {
         isAttackable = true;
-        coolTime = 5;
+        coolTime = 1f;
     }
 
     public void SetFireball(GameObject fireball)
@@ -22,16 +21,11 @@ public class FireballAttack : AbstractAttack
 
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)
     {
-        if (isAttackable && !playerState.isAttacking && !playerState.isCast)
-        {
-            isAttackable = false;
-            playerState.isCast= true;
-            playerState.attackDirection = (int)transform.localScale.x;
-            fireball.transform.position = attackPosition.position;
-            fireball.transform.localScale = PlayerManager.Instance.getPlayer().transform.localScale;
-            _instanceFireball = Instantiate(fireball);
-            StartCoroutine("CoolTime");
-        }
+        playerState.attackDirection = (int)transform.localScale.x;
+        fireball.transform.position = attackPosition.position;
+        fireball.transform.localScale = PlayerManager.Instance.getPlayer().transform.localScale;
+        Instantiate(fireball);
+        StartCoroutine("CoolTime");
     }
 
     IEnumerator CoolTime()
@@ -39,6 +33,4 @@ public class FireballAttack : AbstractAttack
         yield return new WaitForSeconds(coolTime);
         isAttackable = true;
     }
-
-
 }

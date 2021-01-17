@@ -63,7 +63,6 @@ public class Player : AbstractDamagable
 
     public override void TakeDamage(int damage, GameObject attacker)
     {
-        //피격중인 상태가 아닐때만 데미지를 받을 수 있다.
         if (!playerState.isDamaged)
         {
             setHp(damage);

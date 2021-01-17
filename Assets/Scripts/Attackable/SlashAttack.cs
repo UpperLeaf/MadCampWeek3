@@ -13,23 +13,18 @@ public class SlashAttack : AbstractAttack
         attackRange = 0.6f;
         enemies = LayerMask.NameToLayer("Enemy");
         isAttackable = true;
-        coolTime = 0.7f;
+        coolTime = 0.8f;
     }
 
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)
     {
-        if (isAttackable)
+        playerState.attackDirection = (int)transform.localScale.x;
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, 1 << enemies);
+        for (int i = 0; i < enemiesToDamage.Length; i++)
         {
-            isAttackable = false;
-            playerState.isAttacking = true;
-            playerState.attackDirection = (int)transform.localScale.x;
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, 1 << enemies);
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
-            }
-            StartCoroutine("CoolTime");
+            enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
         }
+        StartCoroutine("CoolTime");
     }
 
     IEnumerator CoolTime()

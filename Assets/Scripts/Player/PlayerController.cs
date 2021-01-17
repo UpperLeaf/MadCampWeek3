@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D boxCollider;
 
+    private MainCharacterAnim mainCharacterAnim;
+
     private LayerMask floor;
-    
-    private AttackManager attackManager;
-    
+
     private Vector2 velocity;
 
     private bool grounded;
@@ -37,8 +37,7 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Player>();
         boxCollider = GetComponent<BoxCollider2D>();
         _playerState = GetComponent<PlayerState>();
-        attackManager = GetComponent<AttackManager>();
-        attackManager.gameObject.SetActive(true);
+        mainCharacterAnim = GetComponent<MainCharacterAnim>();
 
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
@@ -76,9 +75,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (moveInput != 0 && (_playerState.isJumping && _playerState.isAttacking) == true)
         {
-            if (_playerState.attackDirection != 0)
-                transform.localScale = new Vector3(_playerState.attackDirection, 1, 1);
-
             velocity.x = Mathf.MoveTowards(velocity.x, _speed * moveInput, acceleration * Time.deltaTime);
             _playerState.isWalking = true;
         }
@@ -101,17 +97,13 @@ public class PlayerController : MonoBehaviour
             if (hit.Equals(boxCollider))
                 continue;
 
-            // TODO 몬스터와의 충돌 시 데미지 입음
             if (hit.gameObject.tag == "Monster")
             {
                 continue;
             }
 
-
-            // 점프 시 충돌 무시
             if (velocity.y < float.Epsilon)
             {
-                Debug.Log(hit.tag);
                 ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
@@ -159,11 +151,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.X))
         {
-            attackManager.AttackByInputX(player.attackDamage);
+            mainCharacterAnim.Attack(KeyCode.X);
         }
-        else if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.A))
+        else if (!_playerState.isDamaged && !_playerState.isJumping && Input.GetKeyDown(KeyCode.A))
         {
-            attackManager.AttackByInputA(player.magicDamage);
+            mainCharacterAnim.Attack(KeyCode.A);
         }
     }
 

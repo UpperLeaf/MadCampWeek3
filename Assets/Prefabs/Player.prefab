@@ -162,7 +162,6 @@ MonoBehaviour:
   airAcceleration: 20
   airDeceleration: 30
   groundDeceleration: 70
-  jumpHeight: 3
 --- !u!114 &8544981188965931602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +259,7 @@ MonoBehaviour:
   isDashNoneDamagedTime: 0
   speed: 4
   dashSpeed: 6
-  jumpHeight: 5
+  jumpHeight: 3
   healthBarPrefab: {fileID: 273159066472720565, guid: 2162f252baa5f1b4a853326f4edb11b3,
     type: 3}
   hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
