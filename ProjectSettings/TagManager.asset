@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Monster
+  - Skill
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Floor
   - CameraBoundary
-  - 
+  - UI_front
   - 
   - 
   - 
@@ -41,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 806194973
+    locked: 0
+  - name: UI_Front
+    uniqueID: 3776597003
     locked: 0
