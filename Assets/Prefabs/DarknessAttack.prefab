@@ -45,4 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolTime: 10
   isAttackable: 1
+  attackType: 1
+  distanceType: 1
   darkness: {fileID: 1358565304135728, guid: cee90609974c74ed38fd3f783d0e3536, type: 3}

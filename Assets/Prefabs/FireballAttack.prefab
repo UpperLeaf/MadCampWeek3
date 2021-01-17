@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolTime: 3
   isAttackable: 1
+  attackType: 1
   fireball: {fileID: 164495355076290800, guid: 2a0e6b93783d4fb478ac043c3e9b12d8, type: 3}

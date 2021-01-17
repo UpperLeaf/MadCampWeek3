@@ -143,18 +143,7 @@ public class MainCharacterAnim : MonoBehaviour
 
     public void AttackEvent()
     {
-        switch (nowKey)
-        {
-            case KeyCode.X:
-                _attackManager.AttackByInputX();
-                break;
-            case KeyCode.A:
-                _attackManager.AttackByInputA();
-                break;
-            case KeyCode.S:
-                _attackManager.AttackByInputS();
-                break;
-        }
+        _attackManager.AttackByInput(nowKey);
     }
 
     public void AttackFinish()

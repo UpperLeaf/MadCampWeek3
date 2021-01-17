@@ -26,6 +26,7 @@ public class AttackManager : MonoBehaviour
     [SerializeField]
     private GameObject darknessAttack;
 
+
     private Player _player;
 
     void Awake()
@@ -67,22 +68,42 @@ public class AttackManager : MonoBehaviour
         return isAttackable;
     }
 
-    public void AttackByInputX()
+
+    public void AttackByInput(KeyCode key)
     {
-        xAttack.GetComponent<AbstractAttack>().Attack(_player.attackDamage, attackPos.transform, _playerState);
+        GameObject attack = null;
+        switch (key)
+        {
+            case KeyCode.X:
+                attack = xAttack;
+                break;
+            case KeyCode.A:
+                attack = aAttack;
+                break;
+            case KeyCode.S:
+                attack = sAttack;
+                break;
+        }
+
+        AbstractAttack.AttackType attackType = attack.GetComponent<AbstractAttack>().attackType;
+        AbstractAttack.DistanceType distanceType = attack.GetComponent<AbstractAttack>().distanceType;
+
+        int damage;
+        Transform distance;
+        
+        if (attackType.Equals(AbstractAttack.AttackType.ATTACK))
+            damage = _player.attackDamage;
+        else
+            damage = _player.magicDamage;
+
+
+        if (distanceType.Equals(AbstractAttack.DistanceType.NEAR))
+            distance = attackPos.transform;
+        else
+            distance = distanceAttackPos.transform;
+
+        attack.GetComponent<AbstractAttack>().Attack(damage, distance, _playerState);
     }
-
-
-    public void AttackByInputA()
-    {
-        aAttack.GetComponent<AbstractAttack>().Attack(_player.magicDamage, attackPos.transform, _playerState);
-    }
-
-    public void AttackByInputS()
-    {
-        sAttack.GetComponent<AbstractAttack>().Attack(_player.magicDamage / 2, distanceAttackPos.transform, _playerState);
-    }
-
 
     private void AttachFireballAttack(ref GameObject attach)
     {
