@@ -158,8 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d3de2bd51f862469ac606ef0dcaf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  dashSpeed: 7
   walkAcceleration: 75
   airAcceleration: 20
   airDeceleration: 30
@@ -251,14 +249,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7916d7068e34c2b4a8b23d1fae20e538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHp: 100
   _hp: 100
-  _hitTime: 0
+  _hitTime: 1
   _isDied: 0
-  hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
+  startingHitPoints: 100
+  attackDamage: 10
+  magicDamage: 10
+  isDashNoneDamaged: 0
+  isDashNoneDamagedTime: 0
+  speed: 4
+  dashSpeed: 6
+  jumpHeight: 5
   healthBarPrefab: {fileID: 273159066472720565, guid: 2162f252baa5f1b4a853326f4edb11b3,
     type: 3}
+  hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
   maxHitPoints: 100
-  startingHitPoints: 100
 --- !u!1001 &4889721118170433350
 PrefabInstance:
   m_ObjectHideFlags: 0

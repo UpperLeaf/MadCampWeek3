@@ -5,16 +5,32 @@ using UnityEngine;
 public class Player : AbstractDamagable
 {
     private PlayerState playerState;
+    
+    public float startingHitPoints;
 
-    // 체력바
-    public HitPoints hitPoints;
+    public int attackDamage;
+
+    public int magicDamage;
+
+    public bool isDashNoneDamaged;
+
+    public int isDashNoneDamagedTime;
+
+    public int speed;
+
+    public int dashSpeed;
+
+    public int jumpHeight;
+
+    [SerializeField]
     public HealthBar healthBarPrefab;
+
+    private HealthBar healthBar;
+
+    public HitPoints hitPoints;
+    
     public float maxHitPoints;
     
-    [SerializeField]
-    private float startingHitPoints;
-    
-    HealthBar healthBar;
 
 
     private void Awake()

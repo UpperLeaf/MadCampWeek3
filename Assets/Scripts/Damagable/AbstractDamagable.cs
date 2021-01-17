@@ -6,6 +6,9 @@ using UnityEngine;
 public abstract class AbstractDamagable : MonoBehaviour
 {
     [SerializeField]
+    protected float _maxHp;
+
+    [SerializeField]
     protected float _hp;
 
     [SerializeField]

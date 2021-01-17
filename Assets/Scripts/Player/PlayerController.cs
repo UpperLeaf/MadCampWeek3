@@ -3,12 +3,6 @@
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 4;
-
-    [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float dashSpeed = 6;
-
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
 
@@ -21,9 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
     float groundDeceleration = 70;
 
-    [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-    float jumpHeight = 3;
-
+    private Player player;
 
     private PlayerState _playerState;
 
@@ -40,20 +32,17 @@ public class PlayerController : MonoBehaviour
     private float acceleration;
     private float deceleration;
 
-    private void Awake()
+    private void Start()
     {
+        player = GetComponent<Player>();
         boxCollider = GetComponent<BoxCollider2D>();
         _playerState = GetComponent<PlayerState>();
         attackManager = GetComponent<AttackManager>();
+        attackManager.gameObject.SetActive(true);
 
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
 
-        attackManager.gameObject.SetActive(true);
-    }
-
-    private void Start()
-    {
         floor = LayerMask.NameToLayer("Floor");
     }
     private void Update()
@@ -73,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private void MoveHorizontal()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
-        float _speed = _playerState.isDashing ? dashSpeed : speed;
+        float _speed = _playerState.isDashing ? player.dashSpeed : player.speed;
 
         if (_playerState.isDamaged || _playerState.isCast)
             moveInput = 0;
@@ -147,7 +136,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0;
             if (Input.GetButton("Jump"))
             {
-                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                velocity.y = Mathf.Sqrt(2 * player.jumpHeight * Mathf.Abs(Physics2D.gravity.y));
                 _playerState.isJumping = true;
             }
         }
@@ -170,11 +159,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.X))
         {
-            attackManager.AttackByInputX(10);
+            attackManager.AttackByInputX(player.attackDamage);
         }
         else if (!_playerState.isDamaged && Input.GetKeyDown(KeyCode.A))
         {
-            attackManager.AttackByInputA(10);
+            attackManager.AttackByInputA(player.magicDamage);
         }
     }
 
