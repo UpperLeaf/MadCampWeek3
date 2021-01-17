@@ -6,11 +6,16 @@ public class MainCharacterAnim : MonoBehaviour
 {
 
     private AttackManager _attackManager;
+
     private Animator _animator;
     private PlayerState _playerState;
 
     [SerializeField]
+    private GameObject _dash;
+    
+    [SerializeField]
     private GameObject dashEffect;
+
     private Transform _dashPos;
 
     private GameObject _instanceDashEffect;
@@ -31,7 +36,7 @@ public class MainCharacterAnim : MonoBehaviour
         _playerState = GetComponent<PlayerState>();
         _animator = GetComponent<Animator>();
         _attackManager = GetComponent<AttackManager>();
-
+        _dash = Instantiate(_dash, gameObject.transform);    
         Transform[] transforms = GetComponentsInChildren<Transform>();
         foreach (Transform pos in transforms)
         {
@@ -57,11 +62,6 @@ public class MainCharacterAnim : MonoBehaviour
         if (_playerState.isDied && !_died)
         {
             Died();
-        }
-
-        if (_playerState.isDashing && !_dashed)
-        {
-            Dash();
         }
     }
 
@@ -147,14 +147,26 @@ public class MainCharacterAnim : MonoBehaviour
 
     public void Dash()
     {
-        _dashed = true;
-        _animator.SetTrigger("Dash");
-        _instanceDashEffect = Instantiate(dashEffect, _dashPos);
+        Dash script = _dash.GetComponent<Dash>();
+        bool isDashAble = script.IsDashAble();
+
+        if (isDashAble)
+        {
+            _playerState.isDashing = true;
+            
+            if(script.IsNoneDamaged())
+                gameObject.tag = "NoneDamage";
+            script.ExecuteDash();
+            _animator.SetTrigger("Dash");
+            _instanceDashEffect = Instantiate(dashEffect, _dashPos);
+        }
     }
 
     public void DashFinish()
     {
-        _dashed = false;
+        Dash script = _dash.GetComponent<Dash>();
+        if (script.IsNoneDamaged())
+            gameObject.tag = "Player";
         _playerState.isDashing = false;
         Destroy(_instanceDashEffect);
     }

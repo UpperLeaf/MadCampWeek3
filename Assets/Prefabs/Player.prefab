@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6eb1a00b725d34439162c7b5de8a846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dash: {fileID: 8984559479888994677, guid: 530a25349230d3649b9b0325af445ff6, type: 3}
   dashEffect: {fileID: 6366156831202668588, guid: eafbacb634f006444a20268afd7b7e8a,
     type: 3}
   _damaged: 0

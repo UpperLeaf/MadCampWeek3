@@ -136,7 +136,7 @@ public class MonsterController : MonoBehaviour
                 continue;
             
             // 플레이어와의 충돌을 제외
-            if (hit.gameObject.tag == "Player")
+            if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "NoneDamage")
                 continue;
 
             if (hit.gameObject.tag == "Skill")

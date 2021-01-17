@@ -61,7 +61,7 @@ public class Player : AbstractDamagable
 
     public override void TakeDamage(int damage, GameObject attacker)
     {
-        if (!playerState.isDamaged)
+        if (!playerState.isDamaged && gameObject.tag == "Player")
         {
             setHp(damage);
             StartCoroutine("HitCoroutine", attacker);

@@ -8,7 +8,7 @@ public class AttackManager : MonoBehaviour
     private GameObject aAttack;
     [SerializeField]
     private GameObject sAttack;
-
+  
     private PlayerState _playerState;
 
     [SerializeField]

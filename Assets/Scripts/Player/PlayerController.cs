@@ -134,9 +134,9 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && _playerState.isWalking && !_playerState.isAttacking && !_playerState.isJumping)
+        if (Input.GetKeyDown(KeyCode.Z) && checkDashable())
         {
-            _playerState.isDashing = true;
+            mainCharacterAnim.Dash();
         }
     }
 
@@ -148,19 +148,28 @@ public class PlayerController : MonoBehaviour
     public void Attack()
     {
         bool isAttackable = checkAttackable();
-        if (Input.GetKeyDown(KeyCode.X))
+        if (isAttackable)
         {
-            mainCharacterAnim.Attack(KeyCode.X);
-        }
-        else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.A))
-        {
-            mainCharacterAnim.Attack(KeyCode.A);
-        }
-        else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.S))
-        {
-            mainCharacterAnim.Attack(KeyCode.S);
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                mainCharacterAnim.Attack(KeyCode.X);
+            }
+            else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.A))
+            {
+                mainCharacterAnim.Attack(KeyCode.A);
+            }
+            else if (!_playerState.isJumping && Input.GetKeyDown(KeyCode.S))
+            {
+                mainCharacterAnim.Attack(KeyCode.S);
+            }
         }
     }
+    
+    private bool checkDashable()
+    {
+        return _playerState.isWalking && !(_playerState.isAttacking || _playerState.isCast || _playerState.isJumping || _playerState.isDashing);
+    }
+
     private bool checkAttackable()
     {
         return !(_playerState.isDamaged || _playerState.isAttacking || _playerState.isCast);

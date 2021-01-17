@@ -31,12 +31,13 @@ public abstract class AbstractAttack : MonoBehaviour
     public enum AttackType
     {
         ATTACK,
-        CAST
+        CAST,
+        DASH
     }
 
     public enum DistanceType
     {
         NEAR,
-        FAR
+        FAR,
     }
 }
