@@ -51,6 +51,7 @@ public class MonsterController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         _attackStrategy = GetComponent<DefaultMonsterAttack>();
+        
         speed = maxSpeed;
         movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
@@ -86,15 +87,10 @@ public class MonsterController : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    private void StopToFall()
+    public void DeathEvent()
     {
-        velocity.y = 0;
-        transform.Translate(velocity * Time.deltaTime);
-    }
-    private void Fall()
-    {
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
-        transform.Translate(velocity * Time.deltaTime);
+        Debug.Log("Death!");
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -123,42 +119,6 @@ public class MonsterController : MonoBehaviour
         else if (!anim.GetBool("isRightMoving"))
         {
             GoLeft();
-        }
-
-        if (grounded) StopToFall(); else Fall();
-
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
-
-        foreach (Collider2D hit in hits)
-        {
-            // 자기 스스로와의 충돌을 제외
-            if (hit == boxCollider)
-                continue;
-
-            // 몬스터와의 충돌을 제외
-            if (hit.gameObject.tag == "Monster")
-                continue;
-            
-            // 플레이어와의 충돌을 제외
-            if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "NoneDamage")
-                continue;
-
-            if (hit.gameObject.tag == "Skill")
-                continue;
-           
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            if (colliderDistance.isOverlapped)
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-
-            // 땅과 닿아있지 있는지 체크
-            if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-            {
-                grounded = true;
-            }
-            else grounded = false;
-
         }
 
         Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
