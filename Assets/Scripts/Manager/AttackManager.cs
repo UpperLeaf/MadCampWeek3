@@ -8,7 +8,9 @@ public class AttackManager : MonoBehaviour
     private GameObject aAttack;
     [SerializeField]
     private GameObject sAttack;
-  
+    [SerializeField]
+    private GameObject dAttack;
+
     private PlayerState _playerState;
 
     [SerializeField]
@@ -26,6 +28,9 @@ public class AttackManager : MonoBehaviour
     [SerializeField]
     private GameObject darknessAttack;
 
+    [SerializeField]
+    private GameObject swordAttack;
+
     private Player _player;
     
     private void Start()
@@ -33,6 +38,8 @@ public class AttackManager : MonoBehaviour
         AttachSlashAttack(ref xAttack);
         AttachFireballAttack(ref aAttack);
         AttachDarknessAttack(ref sAttack);
+        AttachSwordAttack(ref dAttack);
+
         _player = GetComponent<Player>();
         _playerState = GetComponent<PlayerState>();
     }
@@ -64,6 +71,9 @@ public class AttackManager : MonoBehaviour
                 break;
             case KeyCode.S:
                 attack = sAttack;
+                break;
+            case KeyCode.D:
+                attack = dAttack;
                 break;
         }
         return attack;
@@ -106,5 +116,10 @@ public class AttackManager : MonoBehaviour
     private void AttachDarknessAttack(ref GameObject attach)
     {
         attach = Instantiate(darknessAttack, gameObject.transform, true);
+    }
+
+    private void AttachSwordAttack(ref GameObject attach)
+    {
+        attach = Instantiate(swordAttack, gameObject.transform, true);
     }
 }

@@ -162,6 +162,10 @@ public class PlayerController : MonoBehaviour
             {
                 mainCharacterAnim.Attack(KeyCode.S);
             }
+            else if(!_playerState.isJumping && Input.GetKeyDown(KeyCode.D))
+            {
+                mainCharacterAnim.Attack(KeyCode.D);
+            }
         }
     }
     

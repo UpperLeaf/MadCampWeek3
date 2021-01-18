@@ -28,7 +28,8 @@ public class SlashAttack : AbstractAttack
         {
             enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
             Transform enemies = enemiesToDamage[i].GetComponent<Transform>();
-            slashEffect.transform.position = enemies.position;
+            Vector3 slashEffectPos = new Vector3(enemies.position.x, enemies.position.y, enemies.position.z + 1);
+            slashEffect.transform.position = slashEffectPos;
             GameObject effect = Instantiate(slashEffect);
             Destroy(effect, effect.GetComponent<ParticleSystem>().main.duration + 1f);
         }

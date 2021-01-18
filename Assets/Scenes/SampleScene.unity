@@ -160,9 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e419a517dea2f6489fda24c9c172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerState: {fileID: 1476548799630383470, guid: 6fd64e02791ce3b43bc7da2922b86ce2,
-    type: 3}
-  player: {fileID: 747946100}
+  playerObject: {fileID: 0}
+  _player: {fileID: 747946100}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -424,6 +423,12 @@ PrefabInstance:
       propertyPath: slashAttack
       value: 
       objectReference: {fileID: 5980087110975862130, guid: 327c0888a85a0334da8f25908793a3e2,
+        type: 3}
+    - target: {fileID: 5588414393091431520, guid: 0c8520c9ee49155449fb61ae54166c62,
+        type: 3}
+      propertyPath: swordAttack
+      value: 
+      objectReference: {fileID: 2190835273846644948, guid: 5fc9bdbbd175aa14cb1748405e9fa560,
         type: 3}
     - target: {fileID: 5588414393091431520, guid: 0c8520c9ee49155449fb61ae54166c62,
         type: 3}
