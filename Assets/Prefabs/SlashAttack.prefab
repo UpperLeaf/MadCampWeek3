@@ -74,7 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5848fe4962ddd745957c46a1a4d4498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolTime: 0.8
+  coolTime: 0.6
   isAttackable: 1
+  attackType: 0
+  distanceType: 0
   slashEffect: {fileID: 1000011108809118, guid: 04bc9946d4ea04c5bb67886256ad4d91,
     type: 3}

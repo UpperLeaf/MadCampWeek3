@@ -1,7 +1,6 @@
 ﻿using NodeSpace;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class MapManager : MonoBehaviour
 
     private Node[][] maps;
 
-    private Node now;
+    public Node now;
 
     private void Awake()
     {
@@ -55,7 +54,6 @@ public class MapManager : MonoBehaviour
 
     public void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -80,5 +78,6 @@ public class MapManager : MonoBehaviour
     {
         now = nextNode;
         _playerObject.transform.position = new Vector3(nextNode._position_x, nextNode._position_y, -2);
+        SceneManager.LoadScene("GameScene");
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterDamagable : AbstractDamagable
 {
     private Transform _player;
+    
     private void Start()
     {
         _isDied = false;

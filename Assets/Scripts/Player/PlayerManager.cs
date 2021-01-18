@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject playerObject;
 
+    [SerializeField]
     private GameObject _player;
 
     private void Awake()
@@ -16,7 +17,8 @@ public class PlayerManager : MonoBehaviour
         if (null == instance)
         {
             instance = this;
-            _player = Instantiate(playerObject);
+            _player = Instantiate(playerObject, gameObject.transform, true);
+            _player.SetActive(false);
             DontDestroyOnLoad(gameObject);
         }
         else

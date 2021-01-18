@@ -8,14 +8,16 @@ public class SlashAttack : AbstractAttack
     private GameObject slashEffect;
 
     private LayerMask enemies;
+    
+    [SerializeField]
     private float attackRange;
    
     protected void Awake()
     {
-        attackRange = 0.6f;
+        attackRange = 0.7f;
         enemies = LayerMask.NameToLayer("Enemy");
         isAttackable = true;
-        coolTime = 0.8f;
+        coolTime = 0.6f;
     }
 
     public override void Attack(int damage, Transform attackPosition, PlayerState playerState)

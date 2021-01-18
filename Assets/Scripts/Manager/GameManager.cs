@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance = null;
 
-    private void Awake()
-    {
-        if (null == instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    public NodeSpace.Node.NodeType nodeType;
 
-    public static GameManager Instance
+    [SerializeField]
+    private GameObject[] mapsObject;
+
+    public void Start()
     {
-        get
-        {
-            return instance;
-        }
+        nodeType = MapManager.Instance.now.GetNodeType();
+        int randomMap = Random.Range(0, mapsObject.Length);
+        GameObject map = Instantiate(mapsObject[randomMap]);
+
+        GameObject _player = PlayerManager.Instance.getPlayer();
+        _player.SetActive(true);
+        _player.transform.position = map.GetComponent<MapController>().startPosition;
+
     }
 }
