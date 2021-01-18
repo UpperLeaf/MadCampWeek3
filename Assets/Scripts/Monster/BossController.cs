@@ -33,7 +33,7 @@ public class BossController : MonsterController
     }
     public override void DeathEvent()
     {
-        Debug.Log("Death!");
+        Debug.Log("게임 클리어!");
         Destroy(gameObject);
     }
 
