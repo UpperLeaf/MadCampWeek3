@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4590765483765602}
   - component: {fileID: 198240846251937660}
   - component: {fileID: 199656289670743102}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4713,7 +4713,7 @@ GameObject:
   - component: {fileID: 199642659858687442}
   - component: {fileID: 8193549986318918067}
   - component: {fileID: 7309046935073880724}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Darkness_4
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -4728,7 +4728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358565304135728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.92962, y: -7.256715, z: 0}
+  m_LocalPosition: {x: -9.45, y: -7.2375464, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 4590765483765602}
@@ -9503,7 +9503,7 @@ GameObject:
   - component: {fileID: 4834451524152034}
   - component: {fileID: 198336393155372850}
   - component: {fileID: 199327087392969934}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Glitter_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14216,7 +14216,7 @@ GameObject:
   - component: {fileID: 4818371877313032}
   - component: {fileID: 198493203868636504}
   - component: {fileID: 199525508693649568}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18880,7 +18880,7 @@ GameObject:
   - component: {fileID: 4033828355757794}
   - component: {fileID: 198647537028793716}
   - component: {fileID: 199827069952538974}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23530,7 +23530,7 @@ GameObject:
   - component: {fileID: 4297531562490176}
   - component: {fileID: 198412065254199040}
   - component: {fileID: 199506464106278938}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28368,7 +28368,7 @@ GameObject:
   - component: {fileID: 4881352090045754}
   - component: {fileID: 198963028685059740}
   - component: {fileID: 199421718945927526}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Glitter_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33018,7 +33018,7 @@ GameObject:
   - component: {fileID: 4240010498548354}
   - component: {fileID: 198696120034264978}
   - component: {fileID: 199326112787623160}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37740,7 +37740,7 @@ GameObject:
   - component: {fileID: 4460499619137852}
   - component: {fileID: 198090319134548798}
   - component: {fileID: 199520932785645986}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ring_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42480,7 +42480,7 @@ GameObject:
   - component: {fileID: 4154314657802634}
   - component: {fileID: 198838182108401500}
   - component: {fileID: 199851454005500456}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Glitter_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
