@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class MonsterController : MonoBehaviour
+
+
+
+public class BossController : MonoBehaviour
 {
 
     [SerializeField, Tooltip("땅에서의 가속도 (왜 필요한거지?)")]
@@ -14,7 +17,7 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private bool grounded;
 
-    Animator anim;
+    public Animator anim;
 
     // 이동 방향
     bool movingRight;
@@ -34,9 +37,6 @@ public class MonsterController : MonoBehaviour
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
 
-
-    [SerializeField, Tooltip("높이 (땅 위에 있는지 체크할 때 사용)")]
-    float height;
 
 
     private AbstractMonsterAttack _attackStrategy;
@@ -64,6 +64,11 @@ public class MonsterController : MonoBehaviour
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    public void ActionMove(float move)
+    {
+
     }
 
     private void GoRight()
@@ -100,7 +105,7 @@ public class MonsterController : MonoBehaviour
     private void Update()
     {
         Vector2 position = transform.position;
-        Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right * 3 : Vector2.left* 3;
+        Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
         bool isStop = anim.GetBool("isStop");
         bool isDied = anim.GetBool("isDied");
         bool isHit = anim.GetBool("isHit");
@@ -161,8 +166,7 @@ public class MonsterController : MonoBehaviour
 
         }
 
-        Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
-        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, new Vector2(0, -4));
+        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector3.down);
 
         if (rayHitGround.collider == null)
         {

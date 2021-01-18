@@ -32,6 +32,25 @@ public class PlayerController : MonoBehaviour
     private float acceleration;
     private float deceleration;
 
+    // 다른 오브젝트에서 플레이어 관련 정보에 접근할 수 있게 하기
+    public static GameObject GetGameObject()
+    {
+        return GameObject.FindGameObjectWithTag("Player");
+    }
+    public static Transform GetTranform()
+    {
+        return GameObject.FindGameObjectWithTag("Player").transform;
+    }
+    public static PlayerController GetController()
+    {
+        return GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+    public static Animator GetAnimator()
+    {
+        return GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+    }
+
+
     private void Start()
     {
         player = GetComponent<Player>();
