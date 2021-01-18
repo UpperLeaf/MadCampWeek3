@@ -1,31 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class BossController : MonsterController
 {
     [SerializeField]
-    BossStats bossStats;
+    MonsterStats bossStats;
 
     BossMonsterAttack _bossAttackStrategy;
+    public Slider healthBar;
 
-    protected override void Start()
+    protected override void GetAttackStrategy()
     {
-        anim = GetComponent<Animator>();
         _bossAttackStrategy = GetComponent<BossMonsterAttack>();
-        playerLayerMask = LayerMask.NameToLayer("Player");
-        maxSpeed = bossStats.maxSpeed;
-        speed = bossStats.speed;
-        sight = bossStats.sight;
-        attackField = bossStats.attackField;
-        anim.SetBool("isStop", false);
+    }
 
+    protected override void Update()
+    {
+        base.Update();
+        healthBar.value = bossStats.hp;
     }
 
     protected override void SeekAndAttack(bool isHit)
     {
         if (!isHit)
         {
-            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, monsterStats.attackField, 1 << playerLayerMask);
             if (attackHits.Length > 0 && attackHits[0] != null)
                 _bossAttackStrategy.Attack();
         }
@@ -36,7 +36,6 @@ public class BossController : MonsterController
         Debug.Log("게임 클리어!");
         Destroy(gameObject);
     }
-
 
 
 }

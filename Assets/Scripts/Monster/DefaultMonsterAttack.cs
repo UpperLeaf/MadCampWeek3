@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DefaultMonsterAttack : AbstractMonsterAttack
 {
+
     private Animator _anim;
 
     private void Start()
     {
-        idleTime = 1f;
-        cooltime = 3f;
-        damage = 10;
         enemies = LayerMask.NameToLayer("Player");
         _anim = GetComponent<Animator>();
         isAttackable = true;
@@ -25,7 +23,7 @@ public class DefaultMonsterAttack : AbstractMonsterAttack
             _anim.SetTrigger("Attack");
             _anim.SetBool("isStop", true);
             for (int i = 0; i < enemiesToDamage.Length; i++)
-                enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(damage, gameObject);
+                enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(monsterStats.damage, gameObject);
             StartCoroutine("CoolTime");
             StartCoroutine("IdleTime");
         }
@@ -33,13 +31,13 @@ public class DefaultMonsterAttack : AbstractMonsterAttack
 
     IEnumerator IdleTime()
     {
-        yield return new WaitForSeconds(idleTime);
+        yield return new WaitForSeconds(monsterStats.idleTime);
         _anim.SetBool("isStop", false);
     }
 
     IEnumerator CoolTime()
     {
-        yield return new WaitForSeconds(cooltime);
+        yield return new WaitForSeconds(monsterStats.coolTime);
         isAttackable = true;
     }
 }

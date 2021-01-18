@@ -5,16 +5,13 @@ using UnityEngine;
 public class MonsterDamagable : AbstractDamagable
 {
     [SerializeField]
-    BossStats bossStats;
+    MonsterStats monsterStats;
 
     private Transform _player;
     private void Start()
     {
         _isDied = false;
         _anim = GetComponent<Animator>();
-        _hitTime = bossStats.hitTime;
-        _hp = bossStats.hp;
-        _maxHp = bossStats.maxHp;
         _player = PlayerManager.Instance.getPlayer().transform;
     }
 
@@ -59,11 +56,11 @@ public class MonsterDamagable : AbstractDamagable
 
     public virtual void SetHp(int damage)
     {
-        if (_hp - damage > 0)
-            _hp -= damage;
+        if (monsterStats.hp - damage > 0)
+            monsterStats.hp -= damage;
         else
         {
-            _hp = 0;
+            monsterStats.hp = 0;
             _isDied = true;
             _anim.SetBool("isDied", _isDied);
         }
@@ -71,7 +68,7 @@ public class MonsterDamagable : AbstractDamagable
 
     IEnumerator StartHitTime()
     {
-        yield return new WaitForSeconds(_hitTime);
+        yield return new WaitForSeconds(monsterStats.hitTime);
         _anim.SetBool("isStop", false);
     }
 }

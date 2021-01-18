@@ -3,8 +3,10 @@
 [RequireComponent(typeof(BoxCollider2D))]
 public class MonsterController : MonoBehaviour
 {
+    [SerializeField]
+    protected MonsterStats monsterStats;
 
-    [SerializeField, Tooltip("땅에서의 가속도 (왜 필요한거지?)")]
+
     float walkAcceleration = 10f;
 
     private BoxCollider2D boxCollider;
@@ -18,18 +20,6 @@ public class MonsterController : MonoBehaviour
 
     // 이동 방향
     bool movingRight;
-
-    [SerializeField, Tooltip("최대 속도")]
-    protected float maxSpeed = 2f;
-
-    [SerializeField, Tooltip("현재 속도")]
-    protected float speed;
-
-    [SerializeField, Tooltip("시야")]
-    protected float sight;
-
-    [SerializeField, Tooltip("공격 범위")]
-    protected float attackField;
 
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
@@ -50,18 +40,25 @@ public class MonsterController : MonoBehaviour
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
-        _attackStrategy = GetComponent<DefaultMonsterAttack>();
-        
-        speed = maxSpeed;
+        GetAttackStrategy();
+
+        if (monsterStats == null) Debug.Log("monsterStats가 null");
+
+        monsterStats.speed = monsterStats.maxSpeed;
+        monsterStats.hp = monsterStats.maxHp;
         movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
-        sight = 3.0f;
-        attackField = 0.5f;
         isFollowingPlayer = false;
         grounded = false;
         anim.SetBool("isStop", false);
+    }
+
+    protected virtual void GetAttackStrategy()
+    {
+        _attackStrategy = GetComponent<DefaultMonsterAttack>();
 
     }
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -69,14 +66,14 @@ public class MonsterController : MonoBehaviour
 
     private void GoRight()
     {
-        velocity.x = Mathf.MoveTowards(velocity.x, speed, walkAcceleration * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, monsterStats.speed, walkAcceleration * Time.deltaTime);
         anim.SetBool("isRightMoving", true);
         transform.Translate(velocity * Time.deltaTime);
     }
 
     private void GoLeft()
     {
-        velocity.x = Mathf.MoveTowards(velocity.x, (-1) * speed, walkAcceleration * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, (-1) * monsterStats.speed, walkAcceleration * Time.deltaTime);
         anim.SetBool("isRightMoving", false);
         transform.Translate(velocity * Time.deltaTime);
     }
@@ -93,7 +90,7 @@ public class MonsterController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Update()
+    virtual protected void Update()
     {
         Vector2 position = transform.position;
         Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right * 3 : Vector2.left* 3;
@@ -122,8 +119,9 @@ public class MonsterController : MonoBehaviour
         }
 
         Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
-        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, new Vector2(0, -4));
-
+        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector2.down);
+        RaycastHit2D rayHitGroundFront = Physics2D.Raycast(position + frontVec, Vector2.right);
+        
         if (rayHitGround.collider == null)
         {
             movingRight = !movingRight;
@@ -136,7 +134,7 @@ public class MonsterController : MonoBehaviour
 
     protected void SeekPlayer()
     {
-        Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
+        Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, monsterStats.sight, 1 << playerLayerMask);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
             isFollowingPlayer = true;
@@ -149,7 +147,7 @@ public class MonsterController : MonoBehaviour
     {
         if (!isHit)
         {
-            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, monsterStats.attackField, 1 << playerLayerMask);
             if (attackHits.Length > 0 && attackHits[0] != null)
                 _attackStrategy.Attack();
         }
