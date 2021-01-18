@@ -59,7 +59,8 @@ public class Fireball : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapCapsuleAll(_collider2D.transform.position, _collider2D.size, _collider2D.direction, 0, 1 << _enemies); 
             foreach(Collider2D hit in enemiesToDamage)
             {
-                hit.GetComponent<AbstractDamagable>().TakeDamage(_damage, gameObject);
+                Debug.Log(hit.name);
+                hit.GetComponent<AbstractDamagable>()?.TakeDamage(_damage, gameObject);
                 Transform enemy = hit.GetComponent<Transform>();
 
                 hitEffect.transform.position = enemy.position;
