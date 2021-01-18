@@ -37,17 +37,28 @@ public class MapGenerator : MonoBehaviour
     private static int WIDTH = 8;
     private static int HEIGHT= 4;
 
-    
-    private void Start()
+    public Node getNodeByVector2(Vector2 pos)
+    {
+        int x = (int)pos.x + WIDTH;
+        int y = (int)pos.y + HEIGHT;
+        return maps[y][x];
+    }
+
+    public Node getStartNode()
+    {
+        return maps[HEIGHT][0];
+    }
+
+    public Node[][] createMap()
     {
         mapNode = new GameObject[HEIGHT * 2 + 1][];
-        for(int i = 0; i < HEIGHT * 2 + 1 ; i++)
+        for (int i = 0; i < HEIGHT * 2 + 1; i++)
             mapNode[i] = new GameObject[WIDTH * 2 + 1];
         maps = MakeDAG();
-        
-        for(int i = 0; i < HEIGHT * 2 + 1; i++)
-        {          
-            for(int j = 0; j < WIDTH * 2 + 1; j++)
+
+        for (int i = 0; i < HEIGHT * 2 + 1; i++)
+        {
+            for (int j = 0; j < WIDTH * 2 + 1; j++)
             {
                 Node.NodeType nodeType = maps[i][j].GetNodeType();
                 if (maps[i][j].IsVisited() && !nodeType.Equals(Node.NodeType.NONE))
@@ -82,14 +93,14 @@ public class MapGenerator : MonoBehaviour
         Node startNode = maps[HEIGHT][0];
         Queue<Node> nodes = new Queue<Node>();
         nodes.Enqueue(startNode);
-        while(nodes.Count > 0)
+        while (nodes.Count > 0)
         {
             Node node = nodes.Dequeue();
             if (node.isLineDrawed)
                 continue;
             node.isLineDrawed = true;
             List<Node> nextNodes = node.GetNextNodes();
-            foreach(Node nextNode in nextNodes)
+            foreach (Node nextNode in nextNodes)
             {
                 GameObject lineInstance = Instantiate(line, lines.transform, true);
                 LineRenderer lineRenderer = lineInstance.GetComponent<LineRenderer>();
@@ -102,7 +113,9 @@ public class MapGenerator : MonoBehaviour
                 nodes.Enqueue(nextNode);
             }
         }
+        return maps;
     }
+
 
     private Node[][] MakeDAG()
     {

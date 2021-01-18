@@ -7,6 +7,7 @@ TagManager:
   - Monster
   - Skill
   - NoneDamage
+  - Node
   layers:
   - Default
   - TransparentFX
