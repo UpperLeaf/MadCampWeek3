@@ -206,6 +206,7 @@ MonoBehaviour:
   xAttack: {fileID: 0}
   aAttack: {fileID: 0}
   sAttack: {fileID: 0}
+  dAttack: {fileID: 0}
   attackPos: {fileID: 465541617589356691}
   distanceAttackPos: {fileID: 5099206211045380577}
   slashAttack: {fileID: 5980087110975862130, guid: 327c0888a85a0334da8f25908793a3e2,
@@ -213,6 +214,8 @@ MonoBehaviour:
   fireballAttack: {fileID: 908792285884946487, guid: 9f55cf7b5e273a94faf8b8de3b1aeecc,
     type: 3}
   darknessAttack: {fileID: 7406716784818076526, guid: 605df9a22c21d684bacc1970aa216b89,
+    type: 3}
+  swordAttack: {fileID: 2190835273846644948, guid: 5fc9bdbbd175aa14cb1748405e9fa560,
     type: 3}
 --- !u!114 &5588414393091431521
 MonoBehaviour:
