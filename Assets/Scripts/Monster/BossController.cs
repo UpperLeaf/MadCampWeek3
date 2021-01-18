@@ -1,23 +1,20 @@
-﻿using UnityEngine;
-
-[RequireComponent(typeof(BoxCollider2D))]
-
-
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-
     [SerializeField, Tooltip("땅에서의 가속도 (왜 필요한거지?)")]
     float walkAcceleration = 10f;
 
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D groundCheckCollider;
 
     private Vector2 velocity;
 
     [SerializeField]
     private bool grounded;
 
-    public Animator anim;
+    Animator anim;
 
     // 이동 방향
     bool movingRight;
@@ -38,159 +35,280 @@ public class BossController : MonoBehaviour
     bool isFollowingPlayer;
 
 
+    [SerializeField, Tooltip("높이 (땅 위에 있는지 체크할 때 사용)")]
+    float height;
+
 
     private AbstractMonsterAttack _attackStrategy;
 
- 
-    [SerializeField] LayerMask playerLayerMask;
+    [System.NonSerialized] public float dir = 1.0f;
+    [System.NonSerialized] public float basScaleX = 1.0f;
 
+    [SerializeField] LayerMask playerLayerMask;
+    protected float speedVx = 0.0f;
+
+    private LayerMask floor;
 
     Vector2 playerPosition;
 
+    Transform bossSprite;
+    Transform bossGroundCollider;
+    Transform bossHitCollider;
+
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        bossSprite = gameObject.transform.Find("BossSprite");
+        bossGroundCollider = gameObject.transform.Find("BossGroundCollider");
+        bossHitCollider = gameObject.transform.Find("BossHitCollider");
+
+
+
+        floor = LayerMask.NameToLayer("Floor");
+        
+        anim = bossSprite.GetComponent<Animator>();
+        groundCheckCollider = bossGroundCollider.GetComponent<BoxCollider2D>();
+
+
+
         _attackStrategy = GetComponent<DefaultMonsterAttack>();
         speed = maxSpeed;
-        movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
         sight = 3.0f;
         attackField = 0.5f;
         isFollowingPlayer = false;
         grounded = false;
-        anim.SetBool("isStop", false);
-
     }
+
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-    public void ActionMove(float move)
-    {
 
     }
-
-    private void GoRight()
+    private void CollisionCheck()
     {
-        velocity.x = Mathf.MoveTowards(velocity.x, speed, walkAcceleration * Time.deltaTime);
-        anim.SetBool("isRightMoving", true);
-        transform.Translate(velocity * Time.deltaTime);
-    }
+        grounded = false;
+        //Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckCollider.transform.position, groundCheckCollider.size, 0);
 
-    private void GoLeft()
-    {
-        velocity.x = Mathf.MoveTowards(velocity.x, (-1) * speed, walkAcceleration * Time.deltaTime);
-        anim.SetBool("isRightMoving", false);
-        transform.Translate(velocity * Time.deltaTime);
-    }
+        Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckCollider.transform.position, groundCheckCollider.size, 0, 1 << floor);
+        //Debug.Log("hits length: " + hits.Length);
 
-    private void Stop()
-    {
-        velocity.x = 0;
-        transform.Translate(velocity * Time.deltaTime);
-    }
+        //grounded = (hits.Length > 0);
 
-    private void StopToFall()
-    {
-        velocity.y = 0;
-        transform.Translate(velocity * Time.deltaTime);
-    }
-    private void Fall()
-    {
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
-        transform.Translate(velocity * Time.deltaTime);
-    }
+        //Debug.DrawRay(groundCheckCollider.transform.position, Vector2.down * height, new Color(255, 255, 0));
+        //RaycastHit2D rayHitGround = Physics2D.Raycast(groundCheckCollider.transform.position, Vector2.up);
 
-    private void Update()
-    {
-        Vector2 position = transform.position;
-        Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
-        bool isStop = anim.GetBool("isStop");
-        bool isDied = anim.GetBool("isDied");
-        bool isHit = anim.GetBool("isHit");
-       
-        if (isStop || isDied)
-        {
-            Stop();
-        }
-        else if (isFollowingPlayer)
-        {
-            if (playerPosition.x < position.x)
-                GoLeft();
-            else GoRight();
+        ////grounded = !(rayHitGround.collider == null);
 
-        }
-        else if (anim.GetBool("isRightMoving"))
-        {
-            GoRight();       
-        }
-        else if (!anim.GetBool("isRightMoving"))
-        {
-            GoLeft();
-        }
+        //if (rayHitGround.collider == null || rayHitGround.collider == groundCheckCollider || rayHitGround.collider.tag == "Monster")
+        //{
+        //    grounded = false;
+        //    //dir *= (-1);
+        //}
+        //else
+        //{
+        //    Debug.Log("rayHit " + rayHitGround.collider.name);
 
-        if (grounded) StopToFall(); else Fall();
+        //    grounded = true;
+        //}
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
         foreach (Collider2D hit in hits)
         {
-            // 자기 스스로와의 충돌을 제외
-            if (hit == boxCollider)
-                continue;
-
-            // 몬스터와의 충돌을 제외
-            if (hit.gameObject.tag == "Monster")
-                continue;
-            
-            // 플레이어와의 충돌을 제외
-            if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "NoneDamage")
-                continue;
-
-            if (hit.gameObject.tag == "Skill")
-                continue;
-           
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            if (colliderDistance.isOverlapped)
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-
-            // 땅과 닿아있지 있는지 체크
-            if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-            {
-                grounded = true;
-            }
-            else grounded = false;
+            Debug.Log(hit.name);
+            grounded = true;
 
         }
 
-        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector3.down);
+            //if (velocity.y < float.Epsilon)
+            //{
+            //    ColliderDistance2D colliderDistance = hit.Distance(groundCheckCollider);
 
-        if (rayHitGround.collider == null)
+            //    if (colliderDistance.isOverlapped)
+            //    {
+            //        transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+            //        if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 60 && velocity.y < 0)
+            //        {
+            //            grounded = true;
+            //        }
+            //    }
+            //}
+
+
+
+            //}
+        }
+
+    public void Gravity()
+    {
+        if (grounded) velocity.y = 0;
+        else velocity.y += Physics2D.gravity.y * Time.deltaTime;
+    }
+
+
+    private void Move()
+    {
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        float _speed = 6f;
+        float acceleration = 75;
+        float deceleration = 75;
+
+        //if (_playerState.isDamaged || _playerState.isCast)
+        //    moveInput = 0;
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+
+        if (moveInput != 0 && !stateInfo.IsTag("Attack"))
         {
-            movingRight = !movingRight;
-            anim.SetBool("isRightMoving", movingRight);
+            transform.localScale = new Vector3(1 * moveInput, 1, 1);
+            velocity.x = Mathf.MoveTowards(velocity.x, _speed * moveInput, acceleration * Time.deltaTime);
+            anim.SetTrigger("Run");
         }
-
-
-        if (!isHit)
+        else if (moveInput != 0 && (stateInfo.IsTag("Attack")))
         {
-            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-            if (attackHits.Length > 0 && attackHits[0] != null)
-                _attackStrategy.Attack();
+            velocity.x = Mathf.MoveTowards(velocity.x, _speed * moveInput, acceleration * Time.deltaTime);
+            anim.SetTrigger("Run");
         }
-
-
-        Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
-        if (sightHits.Length > 0 && sightHits[0] != null)
+        else
         {
-            isFollowingPlayer = true;
-            playerPosition = sightHits[0].transform.position;
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+            anim.SetTrigger("Idle");
         }
-        else isFollowingPlayer = false;
+
+        transform.Translate(velocity * Time.deltaTime);
+    }
+
+
+  
+
+    private void Update()
+    {
+
+        // 애니메이션 전환 디버깅
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            anim.SetTrigger("Hit");
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            anim.SetTrigger("Idle");
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            anim.SetTrigger("Dead");
+        }
+
+        // 방향 전환
+        //transform.localScale = new Vector3(basScaleX * dir, transform.localScale.y, transform.localScale.z);
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        Vector2 position = transform.position;
+        Vector2 frontVec = (dir > 0) ? Vector2.right * 3 : Vector2.left * 3;
+
+        if (!stateInfo.IsTag("Dead"))
+            Move();
+        Gravity();
+        CollisionCheck();
+
+
+        //float height = 3.0f;
+
+        //Debug.DrawRay(position, Vector2.down * height, new Color(255, 255, 0));
+        //RaycastHit2D rayHitGround = Physics2D.Raycast(position, Vector2.down, height);
+
+        ////grounded = !(rayHitGround.collider == null);
+
+        //if (rayHitGround.collider == null || rayHitGround.collider == groundCheckCollider)
+        //{
+        //    grounded = false;
+        //    //dir *= (-1);
+        //}
+        //else
+        //{
+        //    Debug.Log(rayHitGround.collider.name);
+
+        //    grounded = true;
+        //}
+
+
+        //Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
+        //RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, new Vector2(0, -4), 1.0f);
+
+        //if (rayHitGround.collider == null)
+        //{
+        //    //dir *= (-1);
+        //}
+        //else Debug.Log(rayHitGround.collider.name);
+
+
+        //if (!stateInfo.IsTag("Hit"))
+        //{
+        //    Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+        //    if (attackHits.Length > 0 && attackHits[0] != null)
+        //        _attackStrategy.Attack();
+        //}
+
+
+        //Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
+        //if (sightHits.Length > 0 && sightHits[0] != null)
+        //{
+        //    isFollowingPlayer = true;s
+        //    playerPosition = sightHits[0].transform.position;
+        //}
+        //else isFollowingPlayer = false;
 
     }
 
+
+    public bool ActionLookup(GameObject go, float near)
+    {
+        if (Vector3.Distance(transform.position, go.transform.position) > near)
+        {
+            dir = (transform.position.x < go.transform.position.x) ? +1 : -1;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ActionMoveToNear(GameObject go, float near)
+    {
+        if (Vector3.Distance(transform.position, go.transform.position) > near)
+        {
+            ActionMove((transform.position.x < go.transform.position.x) ? +1.0f : -1.0f);
+            return true;
+        }
+        return false;
+    }
+
+    public bool ActionMoveToFar(GameObject go, float far)
+    {
+        if (Vector3.Distance(transform.position, go.transform.position) < far)
+        {
+            ActionMove((transform.position.x > go.transform.position.x) ? +1.0f : -1.0f);
+            return true;
+        }
+        return false;
+    }
+
+    public virtual void ActionMove(float n)
+    {
+        if (n != 0.0f)
+        {
+            dir = Mathf.Sign(n);
+            speedVx = speed * n;
+            anim.SetTrigger("Run");
+        }
+        else
+        {
+            speedVx = 0;
+            anim.SetTrigger("Idle");
+        }
+    }
 }
