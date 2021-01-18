@@ -14,39 +14,44 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private bool grounded;
 
-    Animator anim;
+    protected Animator anim;
 
     // 이동 방향
     bool movingRight;
 
     [SerializeField, Tooltip("최대 속도")]
-    float maxSpeed = 2f;
+    protected float maxSpeed = 2f;
 
     [SerializeField, Tooltip("현재 속도")]
-    float speed;
+    protected float speed;
 
     [SerializeField, Tooltip("시야")]
-    float sight;
+    protected float sight;
 
     [SerializeField, Tooltip("공격 범위")]
-    float attackField;
+    protected float attackField;
 
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
 
 
-    private AbstractMonsterAttack _attackStrategy;
+    [SerializeField, Tooltip("높이 (땅 위에 있는지 체크할 때 사용)")]
+    protected float height;
+
+
+    protected AbstractMonsterAttack _attackStrategy;
 
  
-    [SerializeField] LayerMask playerLayerMask;
+    protected LayerMask playerLayerMask;
 
 
     Vector2 playerPosition;
 
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         _attackStrategy = GetComponent<DefaultMonsterAttack>();
+        
         speed = maxSpeed;
         movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
@@ -82,21 +87,16 @@ public class MonsterController : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    private void StopToFall()
+    virtual public void DeathEvent()
     {
-        velocity.y = 0;
-        transform.Translate(velocity * Time.deltaTime);
-    }
-    private void Fall()
-    {
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
-        transform.Translate(velocity * Time.deltaTime);
+        Debug.Log("Death!");
+        Destroy(gameObject);
     }
 
     private void Update()
     {
         Vector2 position = transform.position;
-        Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right : Vector2.left;
+        Vector2 frontVec = anim.GetBool("isRightMoving") ? Vector2.right * 3 : Vector2.left* 3;
         bool isStop = anim.GetBool("isStop");
         bool isDied = anim.GetBool("isDied");
         bool isHit = anim.GetBool("isHit");
@@ -121,47 +121,8 @@ public class MonsterController : MonoBehaviour
             GoLeft();
         }
 
-        if (grounded) StopToFall(); else Fall();
-
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
-
-        foreach (Collider2D hit in hits)
-        {
-            // 자기 스스로와의 충돌을 제외
-            if (hit == boxCollider)
-                continue;
-
-            // 몬스터와의 충돌을 제외
-            if (hit.gameObject.tag == "Monster")
-                continue;
-            
-            // 플레이어와의 충돌을 제외
-            if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "NoneDamage")
-                continue;
-
-            if (hit.gameObject.tag == "Skill")
-                continue;
-
-            if (hit.gameObject.tag == "Camera" || hit.gameObject.tag == "Portal")
-                continue;
-
-
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            if (colliderDistance.isOverlapped)
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-
-            // 땅과 닿아있지 있는지 체크
-            if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-            {
-                grounded = true;
-            }
-            else grounded = false;
-
-        }
-
-        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector3.down);
+        Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
+        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, new Vector2(0, -4));
 
         if (rayHitGround.collider == null)
         {
@@ -169,15 +130,12 @@ public class MonsterController : MonoBehaviour
             anim.SetBool("isRightMoving", movingRight);
         }
 
+        SeekAndAttack(isHit);
+        SeekPlayer();
+    }
 
-        if (!isHit)
-        {
-            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-            if (attackHits.Length > 0 && attackHits[0] != null)
-                _attackStrategy.Attack();
-        }
-
-
+    protected void SeekPlayer()
+    {
         Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
@@ -185,6 +143,16 @@ public class MonsterController : MonoBehaviour
             playerPosition = sightHits[0].transform.position;
         }
         else isFollowingPlayer = false;
+    }
+
+    virtual protected void SeekAndAttack(bool isHit)
+    {
+        if (!isHit)
+        {
+            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+            if (attackHits.Length > 0 && attackHits[0] != null)
+                _attackStrategy.Attack();
+        }
 
     }
 
