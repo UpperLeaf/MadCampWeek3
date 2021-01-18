@@ -4,11 +4,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BoxCollider2D))]
 public class BossController : MonsterController
 {
-    [SerializeField]
-    MonsterStats bossStats;
 
     BossMonsterAttack _bossAttackStrategy;
-    public Slider healthBar;
+
+    [SerializeField]
+    private Slider healthBar;
 
     protected override void GetAttackStrategy()
     {
@@ -18,7 +18,8 @@ public class BossController : MonsterController
     protected override void Update()
     {
         base.Update();
-        healthBar.value = bossStats.hp;
+        Debug.Log("healthBar: " + healthBar.value);
+        healthBar.value = monsterStats.hp / monsterStats.maxHp;
     }
 
     protected override void SeekAndAttack(bool isHit)

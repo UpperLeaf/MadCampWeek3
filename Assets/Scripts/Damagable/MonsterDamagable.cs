@@ -58,12 +58,16 @@ public class MonsterDamagable : AbstractDamagable
     {
         if (monsterStats.hp - damage > 0)
             monsterStats.hp -= damage;
+
         else
         {
             monsterStats.hp = 0;
             _isDied = true;
             _anim.SetBool("isDied", _isDied);
         }
+
+        Debug.Log(monsterStats.hp);
+
     }
 
     IEnumerator StartHitTime()
