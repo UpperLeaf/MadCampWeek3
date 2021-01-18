@@ -4,7 +4,8 @@
 AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Right_Run
   serializedVersion: 6
   m_Legacy: 0
@@ -20,7 +21,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.114285715
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -37,8 +38,6 @@ AnimationClip:
     script: {fileID: 0}
   m_PPtrCurves:
   - curve:
-    - time: 0
-      value: {fileID: 21300000, guid: 3a036174fc0abfe409fafad6fb0097a2, type: 3}
     - time: 0.028571429
       value: {fileID: 21300000, guid: bffb9d06a6f650a4b9959ff288826436, type: 3}
     - time: 0.057142857
@@ -46,7 +45,7 @@ AnimationClip:
     - time: 0.08571429
       value: {fileID: 21300000, guid: 5eb37ac142b75364fba135d9880bdd6c, type: 3}
     - time: 0.114285715
-      value: {fileID: 21300000, guid: 8164471d0707a9e4095e0afcaf0f29d1, type: 3}
+      value: {fileID: 21300000, guid: 3a036174fc0abfe409fafad6fb0097a2, type: 3}
     - time: 0.14285715
       value: {fileID: 21300000, guid: 26ada440731416341b1a07b481fe1d3a, type: 3}
     - time: 0.17142858
@@ -103,11 +102,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 3a036174fc0abfe409fafad6fb0097a2, type: 3}
     - {fileID: 21300000, guid: bffb9d06a6f650a4b9959ff288826436, type: 3}
     - {fileID: 21300000, guid: 49f4c59799691dc48919b9fb3e86dce3, type: 3}
     - {fileID: 21300000, guid: 5eb37ac142b75364fba135d9880bdd6c, type: 3}
-    - {fileID: 21300000, guid: 8164471d0707a9e4095e0afcaf0f29d1, type: 3}
+    - {fileID: 21300000, guid: 3a036174fc0abfe409fafad6fb0097a2, type: 3}
     - {fileID: 21300000, guid: 26ada440731416341b1a07b481fe1d3a, type: 3}
     - {fileID: 21300000, guid: 32108c8db368ef14096a9e7a8ac1683f, type: 3}
     - {fileID: 21300000, guid: 6f245da3ab90f0d459db38b228067340, type: 3}
@@ -148,7 +146,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.114285715
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -166,5 +164,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_GenerateMotionCurves: 0
   m_Events: []

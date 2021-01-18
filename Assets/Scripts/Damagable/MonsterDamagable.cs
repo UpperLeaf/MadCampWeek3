@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class MonsterDamagable : AbstractDamagable
 {
+    [SerializeField]
+    BossStats bossStats;
+
     private Transform _player;
     private void Start()
     {
         _isDied = false;
         _anim = GetComponent<Animator>();
-        _hitTime = 1;
+        _hitTime = bossStats.hitTime;
+        _hp = bossStats.hp;
+        _maxHp = bossStats.maxHp;
         _player = PlayerManager.Instance.getPlayer().transform;
     }
 
@@ -33,10 +38,7 @@ public class MonsterDamagable : AbstractDamagable
         }
     }
 
-    public void DeathEvent()
-    {
-        Destroy(gameObject);
-    }
+
 
     public void HitStart(GameObject attacker)
     {
