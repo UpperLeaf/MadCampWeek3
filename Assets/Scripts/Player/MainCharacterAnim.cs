@@ -121,6 +121,7 @@ public class MainCharacterAnim : MonoBehaviour
                     break;
                 case AbstractAttack.AttackType.CAST:
                     _animator.SetTrigger("Cast");
+                    Invoke("CastFinish", 0.7f);
                     _playerState.isCast = true;
                     break;
             }
@@ -157,6 +158,7 @@ public class MainCharacterAnim : MonoBehaviour
             if(script.IsNoneDamaged())
                 gameObject.tag = "NoneDamage";
             script.ExecuteDash();
+            Invoke("DashFinish", 0.5f);
             _animator.SetTrigger("Dash");
             _instanceDashEffect = Instantiate(dashEffect, _dashPos);
         }

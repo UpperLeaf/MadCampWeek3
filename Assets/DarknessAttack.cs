@@ -18,7 +18,7 @@ public class DarknessAttack : AbstractAttack
         playerState.attackDirection = (int)transform.localScale.x;
         darkness.transform.position = attackPosition.position;
         GameObject darknessInstance = Instantiate(darkness);
-        darknessInstance.GetComponent<Darkness>().SetDamage(damage / 5);
+        darknessInstance.GetComponent<Darkness>().SetDamage(damage);
         StartCoroutine("CoolTime");
     }
 

@@ -9,6 +9,7 @@ TagManager:
   - NoneDamage
   - Node
   - Camera
+  - Portal
   layers:
   - Default
   - TransparentFX

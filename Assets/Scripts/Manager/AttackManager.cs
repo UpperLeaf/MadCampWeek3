@@ -48,8 +48,7 @@ public class AttackManager : MonoBehaviour
     {
         GameObject attack = findAttackByKeyCode(key);
         bool isAttackable = attack.GetComponent<AbstractAttack>().IsAttackable();
-        if (isAttackable)
-            attack.GetComponent<AbstractAttack>().SetAttackable(false);
+
         return isAttackable;
     }
 
@@ -99,7 +98,7 @@ public class AttackManager : MonoBehaviour
             distance = attackPos.transform;
         else
             distance = distanceAttackPos.transform;
-
+        attack.GetComponent<AbstractAttack>().SetAttackable(false);
         attack.GetComponent<AbstractAttack>().Attack(damage, distance, _playerState);
     }
 

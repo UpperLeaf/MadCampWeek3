@@ -30,7 +30,6 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hitPoints.HP);
         StartCoroutine("HpBarUpdate");
     }
 

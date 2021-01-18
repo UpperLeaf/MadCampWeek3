@@ -20,7 +20,6 @@ public class MonsterDamagable : AbstractDamagable
         {
             SetHp(damage);
             HitStart(attacker);
-            Debug.Log(damage);
             bool isRight = _anim.GetBool("isRightMoving");
 
             if (isRight)

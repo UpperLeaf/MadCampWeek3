@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
 
     private GameObject _playerObject;
 
-    private MapGenerator mapGenerator;
+    public MapGenerator mapGenerator;
 
     private static MapManager instance = null;
 
@@ -40,7 +40,7 @@ public class MapManager : MonoBehaviour
         if (_playerObject != null)
             Destroy(_playerObject);
         playerSpriteObject.transform.position = new Vector3(now._position_x, now._position_y, -2);
-        _playerObject = Instantiate(playerSpriteObject);
+        _playerObject = Instantiate(playerSpriteObject, mapGenerator.gameObject.transform, true);
     }
 
     public static MapManager Instance
@@ -78,6 +78,7 @@ public class MapManager : MonoBehaviour
     {
         now = nextNode;
         _playerObject.transform.position = new Vector3(nextNode._position_x, nextNode._position_y, -2);
+        mapGenerator.gameObject.SetActive(false);
         SceneManager.LoadScene("GameScene");
     }
 }

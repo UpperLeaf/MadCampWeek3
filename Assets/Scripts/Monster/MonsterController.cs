@@ -142,7 +142,7 @@ public class MonsterController : MonoBehaviour
             if (hit.gameObject.tag == "Skill")
                 continue;
 
-            if (hit.gameObject.tag == "Camera")
+            if (hit.gameObject.tag == "Camera" || hit.gameObject.tag == "Portal")
                 continue;
 
 
