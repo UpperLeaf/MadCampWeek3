@@ -7,21 +7,21 @@ public class PlayerManager : MonoBehaviour
     private static PlayerManager instance = null;
 
     [SerializeField]
-    private PlayerState playerState;
+    private GameObject playerObject;
 
-    [SerializeField]
-    private GameObject player;
+    private GameObject _player;
 
     private void Awake()
     {
         if (null == instance)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            _player = Instantiate(playerObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -36,6 +36,6 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject getPlayer()
     {
-        return player;
+        return _player;
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Skill
   - NoneDamage
   - Node
+  - Camera
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Floor
   - CameraBoundary
-  - 
+  - Background
   - 
   - 
   - 

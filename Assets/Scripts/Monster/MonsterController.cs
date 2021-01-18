@@ -141,7 +141,11 @@ public class MonsterController : MonoBehaviour
 
             if (hit.gameObject.tag == "Skill")
                 continue;
-           
+
+            if (hit.gameObject.tag == "Camera")
+                continue;
+
+
             ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
