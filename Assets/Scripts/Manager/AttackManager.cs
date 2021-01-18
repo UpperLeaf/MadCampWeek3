@@ -26,15 +26,8 @@ public class AttackManager : MonoBehaviour
     [SerializeField]
     private GameObject darknessAttack;
 
-
     private Player _player;
-
-    void Awake()
-    {
-        xAttack = new GameObject("AttackByKeyCodeX");
-        aAttack = new GameObject("AttackByKeyCodeA");
-        sAttack = new GameObject("AttackByKeyCodeS");
-    }
+    
     private void Start()
     {
         AttachSlashAttack(ref xAttack);
