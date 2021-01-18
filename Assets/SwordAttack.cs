@@ -15,10 +15,10 @@ public class SwordAttack : AbstractAttack
     private float attackOffset;
     protected void Awake()
     {
-        attackRange = 2.5f;
+        attackRange = 2f;
         enemies = LayerMask.NameToLayer("Enemy");
         isAttackable = true;
-        coolTime = 1f;
+        coolTime = 5f;
         attackOffset = 2f;
     }
 
