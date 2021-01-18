@@ -14,40 +14,40 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private bool grounded;
 
-    Animator anim;
+    protected Animator anim;
 
     // 이동 방향
     bool movingRight;
 
     [SerializeField, Tooltip("최대 속도")]
-    float maxSpeed = 2f;
+    protected float maxSpeed = 2f;
 
     [SerializeField, Tooltip("현재 속도")]
-    float speed;
+    protected float speed;
 
     [SerializeField, Tooltip("시야")]
-    float sight;
+    protected float sight;
 
     [SerializeField, Tooltip("공격 범위")]
-    float attackField;
+    protected float attackField;
 
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
 
 
     [SerializeField, Tooltip("높이 (땅 위에 있는지 체크할 때 사용)")]
-    float height;
+    protected float height;
 
 
-    private AbstractMonsterAttack _attackStrategy;
+    protected AbstractMonsterAttack _attackStrategy;
 
  
-    [SerializeField] LayerMask playerLayerMask;
+    protected LayerMask playerLayerMask;
 
 
     Vector2 playerPosition;
 
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         _attackStrategy = GetComponent<DefaultMonsterAttack>();
@@ -87,7 +87,7 @@ public class MonsterController : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    public void DeathEvent()
+    virtual public void DeathEvent()
     {
         Debug.Log("Death!");
         Destroy(gameObject);
@@ -130,15 +130,12 @@ public class MonsterController : MonoBehaviour
             anim.SetBool("isRightMoving", movingRight);
         }
 
+        SeekAndAttack(isHit);
+        SeekPlayer();
+    }
 
-        if (!isHit)
-        {
-            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
-            if (attackHits.Length > 0 && attackHits[0] != null)
-                _attackStrategy.Attack();
-        }
-
-
+    protected void SeekPlayer()
+    {
         Collider2D[] sightHits = Physics2D.OverlapCircleAll(transform.position, sight, 1 << playerLayerMask);
         if (sightHits.Length > 0 && sightHits[0] != null)
         {
@@ -146,6 +143,16 @@ public class MonsterController : MonoBehaviour
             playerPosition = sightHits[0].transform.position;
         }
         else isFollowingPlayer = false;
+    }
+
+    virtual protected void SeekAndAttack(bool isHit)
+    {
+        if (!isHit)
+        {
+            Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, attackField, 1 << playerLayerMask);
+            if (attackHits.Length > 0 && attackHits[0] != null)
+                _attackStrategy.Attack();
+        }
 
     }
 
