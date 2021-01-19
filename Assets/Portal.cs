@@ -10,6 +10,21 @@ public class Portal : MonoBehaviour
         StartCoroutine("MoveNextStage");
     }
 
+    bool IsStageCleared()
+    {
+        foreach(Transform child in GameManager.Instance.map.transform)
+        {
+            if (child.name.Equals("Monster"))
+            {
+                if (child.transform.childCount == 0)
+                    return true;
+            }
+
+        }
+        // 맵에 몬스터 태그를 가진 물체가 하나도 없으면 return true
+        return false;
+    }
+
 
     IEnumerator MoveNextStage()
     {
@@ -21,7 +36,7 @@ public class Portal : MonoBehaviour
             {
                 if(hit.tag == "Player")
                 {
-                    if (Input.GetKeyDown(KeyCode.UpArrow) && hits.Length > 0 && GameManager.Instance.CheckNoneMonster())
+                    if (Input.GetKeyDown(KeyCode.UpArrow) && hits.Length > 0 && IsStageCleared())
                     {
                         switch (MapManager.Instance.now.GetNodeType())
                         {
