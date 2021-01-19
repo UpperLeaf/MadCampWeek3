@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Monster
+  - Skill
+  - NoneDamage
+  - Node
+  - Camera
+  - Portal
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -13,14 +20,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Floor
+  - CameraBoundary
+  - Background
+  - Skill
+  - InvisibleWall
+  - RealWall
   - 
   - 
   - 

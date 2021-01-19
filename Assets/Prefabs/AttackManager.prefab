@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8460966863980257399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517123418210410543}
+  - component: {fileID: 6995992847141400928}
+  m_Layer: 0
+  m_Name: AttackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &517123418210410543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460966863980257399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.52395207, y: 0.24014585, z: -5.634495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6995992847141400928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460966863980257399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d1ab676dc4bba4a9cc5d161450b7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xAttack: {fileID: 0}
+  aAttack: {fileID: 0}
+  sAttack: {fileID: 0}
+  dAttack: {fileID: 0}
+  attackPos: {fileID: 8575466576615794049, guid: f4d1830c9225a244286c8120ebea4cc7,
+    type: 3}
+  distanceAttackPos: {fileID: 1885101192201808483, guid: 591e0441fcc8a1447a2bdb8e9c1131c3,
+    type: 3}
+  slashAttack: {fileID: 5980087110975862130, guid: 327c0888a85a0334da8f25908793a3e2,
+    type: 3}
+  fireballAttack: {fileID: 908792285884946487, guid: 9f55cf7b5e273a94faf8b8de3b1aeecc,
+    type: 3}
+  darknessAttack: {fileID: 7406716784818076526, guid: 605df9a22c21d684bacc1970aa216b89,
+    type: 3}
+  swordAttack: {fileID: 2190835273846644948, guid: 5fc9bdbbd175aa14cb1748405e9fa560,
+    type: 3}
