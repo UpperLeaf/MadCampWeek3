@@ -49,15 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349e91145c426094eb94772f33e9997b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAcceleration: 10
+  monsterStats: {fileID: 11400000, guid: d486da502b865ba409f1a6d8ff0859c1, type: 2}
   grounded: 0
-  maxSpeed: 2
-  speed: 0
-  sight: 3
-  attackField: 4
   isFollowingPlayer: 1
   height: 4
-  bossStats: {fileID: 11400000, guid: 94065a9deed89ad45a4e3caa5ab5af74, type: 2}
+  healthBar: {fileID: 0}
 --- !u!50 &4239104477705659143
 Rigidbody2D:
   serializedVersion: 4
@@ -190,7 +186,7 @@ MonoBehaviour:
   _hp: 200
   _hitTime: 0
   _isDied: 0
-  bossStats: {fileID: 11400000, guid: 94065a9deed89ad45a4e3caa5ab5af74, type: 2}
+  monsterStats: {fileID: 11400000, guid: d486da502b865ba409f1a6d8ff0859c1, type: 2}
 --- !u!114 &1381342127290931103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,4 +199,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e2c905851a4a546b4ce474f7a85d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossStats: {fileID: 11400000, guid: 94065a9deed89ad45a4e3caa5ab5af74, type: 2}
+  bossStats: {fileID: 11400000, guid: d486da502b865ba409f1a6d8ff0859c1, type: 2}

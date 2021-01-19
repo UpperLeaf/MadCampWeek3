@@ -22,15 +22,18 @@ public class BossController : MonsterController
         healthBar.value = monsterStats.hp / monsterStats.maxHp;
     }
 
-    protected override void SeekAndAttack(bool isHit)
+    protected override bool SeekAndAttack(bool isHit)
     {
         if (!isHit)
         {
             Collider2D[] attackHits = Physics2D.OverlapCircleAll(transform.position, monsterStats.attackField, 1 << playerLayerMask);
             if (attackHits.Length > 0 && attackHits[0] != null)
+            {
                 _bossAttackStrategy.Attack();
+                return true;
+            }
         }
-
+        return false;
     }
     public override void DeathEvent()
     {
