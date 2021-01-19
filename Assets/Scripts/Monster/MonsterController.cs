@@ -9,7 +9,7 @@ public class MonsterController : MonoBehaviour
 
     float walkAcceleration = 10f;
 
-    private BoxCollider2D boxCollider;
+    protected BoxCollider2D boxCollider;
 
     private Vector2 velocity;
 

@@ -19,14 +19,23 @@ public class DefaultMonsterAttack : AbstractMonsterAttack
         if (isAttackable)
         {
             isAttackable = false;
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, 1f, 1 << enemies);
+            
             _anim.SetTrigger("Attack");
             _anim.SetBool("isStop", true);
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-                enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(monsterStats.damage, gameObject);
+
+
+            Invoke("AttackCollision", 0.2f);
+
             StartCoroutine("CoolTime");
             StartCoroutine("IdleTime");
         }
+    }
+
+    public void AttackCollision()
+    {
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, 1f, 1 << enemies);
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+            enemiesToDamage[i].GetComponent<AbstractDamagable>().TakeDamage(monsterStats.damage, gameObject);
     }
 
     IEnumerator IdleTime()
