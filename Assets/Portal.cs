@@ -26,11 +26,11 @@ public class Portal : MonoBehaviour
                         switch (MapManager.Instance.now.GetNodeType())
                         {
                             case NodeSpace.Node.NodeType.ELIETE:
-                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 3;
+                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 5;
                                 break;
 
                             case NodeSpace.Node.NodeType.NORAML:
-                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 1;
+                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 3;
                                 break;
                         }
 
