@@ -6,15 +6,24 @@ using TMPro;
 public class PlayerSkillManager : MonoBehaviour
 {
     private PlayerSkills playerSkills;
-    public int skillPoint;
-    
+
+    [SerializeField]
+    public int skillPoints;
+
+    public bool canUseDash;
+    public bool isDashInvincible;
+
+    [SerializeField]
+    public List<PlayerSkills.SkillType> unlockedSkillTypeList; // 플레이어가 사용 가능한 스킬의 목록
+
     public Player _player; // 공격력, 마력, 체력, 이동속도
     public AttackManager attackManager; // 스킬 사용 가능 여부
 
     private void Awake()
     {
-        playerSkills = new PlayerSkills();
+        playerSkills = new PlayerSkills(this);
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
+        canUseDash = false;
     }
 
 
@@ -52,6 +61,13 @@ public class PlayerSkillManager : MonoBehaviour
             case PlayerSkills.SkillType.Sword:
                 attackManager.AttachSwordAttack();
                 break;
+            case PlayerSkills.SkillType.Dash_1:
+                canUseDash = true;
+                break;
+            case PlayerSkills.SkillType.Dash_2:
+                isDashInvincible = true;
+                break;
+
         }
     }
     

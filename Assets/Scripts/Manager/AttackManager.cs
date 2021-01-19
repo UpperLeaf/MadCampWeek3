@@ -100,6 +100,7 @@ public class AttackManager : MonoBehaviour
 
     public void AttachFireballAttack()
     {
+        Debug.Log("AttachFireballAttack");
         if (aAttack != null)
             Destroy(aAttack);
         aAttack = Instantiate(fireballAttack, gameObject.transform, true);
@@ -107,6 +108,8 @@ public class AttackManager : MonoBehaviour
 
     public void AttachSlashAttack()
     {
+        Debug.Log("AttachSlashAttack");
+
         if (xAttack != null)
             Destroy(xAttack);
         xAttack = Instantiate(slashAttack, gameObject.transform, true);
@@ -114,6 +117,8 @@ public class AttackManager : MonoBehaviour
 
     public void AttachDarknessAttack()
     {
+        Debug.Log("AttachDarknessAttack");
+
         if (sAttack != null)
             Destroy(sAttack);
         sAttack = Instantiate(darknessAttack, gameObject.transform, true);
@@ -121,6 +126,8 @@ public class AttackManager : MonoBehaviour
 
     public void AttachSwordAttack()
     {
+        Debug.Log("AttachSwordAttack");
+
         if (dAttack != null)
             Destroy(dAttack);
         dAttack = Instantiate(swordAttack, gameObject.transform, true);

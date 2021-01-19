@@ -6,16 +6,25 @@ using UnityEngine.UI;
 public class SkillPointText : MonoBehaviour
 {
     Text skillPointText;
+    private PlayerSkills playerSkills;
+    private PlayerSkillManager skillManager;
+
     // Start is called before the first frame update
     void Start()
     {
         skillPointText = transform.Find("SkillPointText").GetComponent<Text>();
-        skillPointText.text = "hello wrold";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPlayerSkills(PlayerSkills playerSkills)
     {
-        
+        this.playerSkills = playerSkills;
+        skillManager = playerSkills.skillManager;
+        UpdateVisuals();
     }
+
+    public void UpdateVisuals()
+    {
+        skillPointText.text = skillManager.skillPoints.ToString();
+    }
+
 }

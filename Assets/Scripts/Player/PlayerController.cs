@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity;
 
+    private PlayerSkillManager skillManager;
+
     private bool grounded;
 
     private float acceleration;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         _playerState = GetComponent<PlayerState>();
         mainCharacterAnim = GetComponent<MainCharacterAnim>();
-
+        skillManager = GetComponent<PlayerSkillManager>();
         acceleration = grounded ? walkAcceleration : airAcceleration;
         deceleration = grounded ? groundDeceleration : airDeceleration;
 
@@ -153,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && checkDashable())
+        if (Input.GetKeyDown(KeyCode.Z) && checkDashable() && skillManager.canUseDash)
         {
             mainCharacterAnim.Dash();
         }

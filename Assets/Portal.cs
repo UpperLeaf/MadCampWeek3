@@ -23,6 +23,17 @@ public class Portal : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.UpArrow) && hits.Length > 0 && GameManager.Instance.CheckNoneMonster())
                     {
+                        switch (MapManager.Instance.now.GetNodeType())
+                        {
+                            case NodeSpace.Node.NodeType.ELIETE:
+                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 3;
+                                break;
+
+                            case NodeSpace.Node.NodeType.NORAML:
+                                PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 1;
+                                break;
+                        }
+
                         PlayerManager.Instance.getPlayer().SetActive(false);
                         MapManager.Instance.mapGenerator.gameObject.SetActive(true);
                         SceneManager.LoadScene("NodeScene");

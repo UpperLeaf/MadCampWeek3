@@ -13,6 +13,8 @@ public class PlayerSkills {
         public SkillType skillType;
     }
 
+    public PlayerSkillManager skillManager;
+
     public class SkillInfo
     {
         String name;
@@ -78,34 +80,21 @@ public class PlayerSkills {
         HEART
     }
 
-    private List<SkillType> unlockedSkillTypeList;
-    private int skillPoints;
-
-    public PlayerSkills() {
-        unlockedSkillTypeList = new List<SkillType>();
-        skillPoints = 100;
-    }
-
-    public void AddSkillPoint() {
-        skillPoints++;
-        OnSkillPointsChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public int GetSkillPoints() {
-        return skillPoints;
+    public PlayerSkills(PlayerSkillManager skillManager) {
+        this.skillManager = skillManager;
     }
 
     private void UnlockSkill(SkillType skillType)
     {
         if (!IsSkillUnlocked(skillType))
         {
-            unlockedSkillTypeList.Add(skillType);
+            skillManager.unlockedSkillTypeList.Add(skillType);
             OnSkillUnlocked?.Invoke(this, new OnSkillUnlockedEventArgs { skillType = skillType });
         }
     }
 
     public bool IsSkillUnlocked(SkillType skillType) {
-        return unlockedSkillTypeList.Contains(skillType);
+        return skillManager.unlockedSkillTypeList.Contains(skillType);
     }
 
     public bool CanUnlock(SkillType skillType) { // 선수 스킬을 모두 배웠는지 
@@ -134,8 +123,8 @@ public class PlayerSkills {
         int skillCost = (skillInfo != null) ? skillInfo.getCost() : 1;
 
         if (CanUnlock(skillType)) {
-            if (skillPoints > skillCost) {
-                skillPoints -= skillCost;
+            if (skillManager.skillPoints >= skillCost) {
+                skillManager.skillPoints -= skillCost;
                 OnSkillPointsChanged?.Invoke(this, EventArgs.Empty);
                 UnlockSkill(skillType);
                 return true;

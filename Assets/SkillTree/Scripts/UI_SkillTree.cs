@@ -14,6 +14,8 @@ public class UI_SkillTree : MonoBehaviour {
 
     private PlayerSkills playerSkills;
     private List<SkillButton> skillButtonList;
+    Text skillPointText;
+
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
@@ -33,8 +35,7 @@ public class UI_SkillTree : MonoBehaviour {
 
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
 
-
-        Debug.Log(skillButtonList);
+        skillPointText = transform.Find("SkillPointText").GetComponent<Text>();
         UpdateVisuals();
     }
 
@@ -45,6 +46,9 @@ public class UI_SkillTree : MonoBehaviour {
 
     private void UpdateVisuals()
     {
+        if (skillPointText.IsActive())
+            skillPointText.text = playerSkills.skillManager.skillPoints.ToString();
+
         foreach (SkillButton skillButton in skillButtonList)
         {
             skillButton.UpdateVisual();
