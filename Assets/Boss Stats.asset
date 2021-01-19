@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177760f1bb5d0a140808571d9a0fdc3c, type: 3}
   m_Name: Boss Stats
   m_EditorClassIdentifier: 
-  maxHp: 10
-  hp: 10
-  hitTime: 0
-  maxSpeed: 0
-  speed: 0
-  coolTime: 3
+  maxHp: 200
+  hp: 200
+  hitTime: 1
+  maxSpeed: 5
+  speed: 5
+  coolTime: 2
   idleTime: 1
-  damage: 30
-  attackField: 4
-  sight: 6
+  damage: 15
+  attackField: 3
+  sight: 7

@@ -4,19 +4,55 @@ using UnityEngine;
 
 public class SpikeController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    protected AbstractMonsterAttack _attackStrategy;
+    Vector2 velocity;
+
+    [SerializeField]
+    public float speed;
+
+    BoxCollider2D boxCollider;
+
+    public int direction; // 1: right, -1: left
+
     void Start()
     {
-        
+        boxCollider = transform.GetComponent<BoxCollider2D>();
+        _attackStrategy = GetComponent<SpikeAttack>();
+
     }
-
-    // TODO 중력의 영향을 받음
-    // TODO 굴러감
-    // TODO 플레이어에게 피해를 줄 수 있음 
-
-    // Update is called once per frame
-    void Update()
+    public void SetVelocity(Vector2 frontVector)
     {
-        
+        velocity = frontVector * speed;
+
+        direction = (frontVector.x > 0) ? -1 : 1;
+
+        Debug.Log("SetVelocity: " + frontVector);
     }
+
+
+    private void Update()
+    {
+
+        if (DetectWall()) Destroy(gameObject);
+        transform.Translate(velocity * Time.deltaTime);
+        _attackStrategy.Attack();
+       
+
+    }
+
+    bool DetectWall()
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+        foreach (Collider2D hit in hits)
+        {
+
+            if (hit.gameObject.tag == "PopWall")
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }

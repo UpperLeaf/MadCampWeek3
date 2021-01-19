@@ -96,9 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efca4d6d542eb048a1ff7bba2fb461f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooltime: 0
-  idleTime: 0
-  damage: 0
+  monsterStats: {fileID: 11400000, guid: a4b6743bf08dc9d4a9e9fd3afb9d40c7, type: 2}
 --- !u!114 &5321478814901154361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,17 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8903f8b81016d8b458fce24c9915773e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAcceleration: 10
+  monsterStats: {fileID: 11400000, guid: a4b6743bf08dc9d4a9e9fd3afb9d40c7, type: 2}
   grounded: 0
-  maxSpeed: 1.6
-  speed: 1.6
-  sight: 5
-  attackField: 2
   isFollowingPlayer: 0
   height: 0
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!95 &5321478814901154343
 Animator:
   serializedVersion: 3
@@ -207,3 +198,4 @@ MonoBehaviour:
   _hp: 50
   _hitTime: 0
   _isDied: 0
+  monsterStats: {fileID: 11400000, guid: a4b6743bf08dc9d4a9e9fd3afb9d40c7, type: 2}
