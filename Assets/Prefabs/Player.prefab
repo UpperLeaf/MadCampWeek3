@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8337919845254370282}
   - component: {fileID: 5588414393091431520}
   - component: {fileID: 5588414393091431521}
+  - component: {fileID: 8583448534750869096}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -233,7 +234,6 @@ MonoBehaviour:
   _hp: 100
   _hitTime: 1
   _isDied: 0
-  startingHitPoints: 100
   attackDamage: 10
   magicDamage: 10
   isDashNoneDamaged: 0
@@ -245,6 +245,21 @@ MonoBehaviour:
     type: 3}
   hitPoints: {fileID: 11400000, guid: 33f68861a96cfe0429c12612a46c96cf, type: 2}
   maxHitPoints: 100
+--- !u!114 &8583448534750869096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8544981188965931692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe4091e5490f5c48b616fef025a4fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPoint: 0
+  _player: {fileID: 5588414393091431521}
+  attackManager: {fileID: 5588414393091431520}
 --- !u!1001 &2089391953198463029
 PrefabInstance:
   m_ObjectHideFlags: 0

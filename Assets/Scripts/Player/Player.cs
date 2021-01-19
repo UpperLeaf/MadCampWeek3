@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,6 @@ public class Player : AbstractDamagable
 {
     private PlayerState playerState;
     
-    public float startingHitPoints;
-
     public int attackDamage;
 
     public int magicDamage;
@@ -39,9 +38,31 @@ public class Player : AbstractDamagable
     private void Start()
     {
         healthBar = Instantiate(healthBarPrefab);
-        hitPoints.HP = startingHitPoints;
-        _hp = startingHitPoints;
+        hitPoints.HP = maxHitPoints;
+        _hp = maxHitPoints;
         healthBar.player = this;
+    }
+
+    public void plusAttackDamage()
+    {
+        Debug.Log("plusAttackDamage Skill을 샀다!");
+        attackDamage += 5;
+    }
+
+    public void plusMagicDamage()
+    {
+        magicDamage += 5;
+    }
+
+    public void plusMaxHp()
+    {
+        maxHitPoints += 10;
+        healthBar.maxHitPoints = maxHitPoints;
+    }
+
+    public void plusMoveSpeed()
+    {
+        speed += 1;
     }
 
     private void setHp(int damaged)

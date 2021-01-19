@@ -12,7 +12,7 @@ public class MainCharacterAnim : MonoBehaviour
 
     [SerializeField]
     private GameObject _dash;
-    
+
     [SerializeField]
     private GameObject dashEffect;
 
@@ -30,13 +30,14 @@ public class MainCharacterAnim : MonoBehaviour
     private bool _cast;
 
     private KeyCode nowKey;
+    private PlayerSkillManager skillManager;
 
     private void Start()
     {
         _playerState = GetComponent<PlayerState>();
         _animator = GetComponent<Animator>();
         _attackManager = GetComponent<AttackManager>();
-        _dash = Instantiate(_dash, gameObject.transform);    
+        _dash = Instantiate(_dash, gameObject.transform);
         Transform[] transforms = GetComponentsInChildren<Transform>();
         foreach (Transform pos in transforms)
         {
@@ -46,16 +47,17 @@ public class MainCharacterAnim : MonoBehaviour
                 break;
             }
         }
+        skillManager = GetComponent<PlayerSkillManager>();
 
     }
 
     void Update()
     {
         _animator.SetBool("isWalking", _playerState.isWalking);
-        _animator.SetBool("isIdling", _playerState.isIdling);        
+        _animator.SetBool("isIdling", _playerState.isIdling);
         _animator.SetBool("isJumping", _playerState.isJumping);
-        
-    
+
+
         if (_playerState.isDamaged && !_damaged)
             Damaged();
 
@@ -143,9 +145,10 @@ public class MainCharacterAnim : MonoBehaviour
         if (isDashAble)
         {
             _playerState.isDashing = true;
-            
-            if(script.IsNoneDamaged())
+
+            if (isDashInvincible(script))
                 gameObject.tag = "NoneDamage";
+
             script.ExecuteDash();
             Invoke("DashFinish", 0.5f);
             _animator.SetTrigger("Dash");
@@ -156,9 +159,15 @@ public class MainCharacterAnim : MonoBehaviour
     public void DashFinish()
     {
         Dash script = _dash.GetComponent<Dash>();
-        if (script.IsNoneDamaged())
+        if (isDashInvincible(script))
             gameObject.tag = "Player";
         _playerState.isDashing = false;
         Destroy(_instanceDashEffect);
+    }
+
+
+    private bool isDashInvincible(Dash script)
+    {
+        return script.IsNoneDamaged() && skillManager.isDashInvincible;
     }
 }

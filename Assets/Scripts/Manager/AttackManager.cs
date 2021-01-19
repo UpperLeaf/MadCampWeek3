@@ -35,11 +35,7 @@ public class AttackManager : MonoBehaviour
     
     private void Start()
     {
-        AttachSlashAttack(ref xAttack);
-        AttachFireballAttack(ref aAttack);
-        AttachDarknessAttack(ref sAttack);
-        AttachSwordAttack(ref dAttack);
-
+        AttachSlashAttack();        
         _player = GetComponent<Player>();
         _playerState = GetComponent<PlayerState>();
     }
@@ -102,23 +98,38 @@ public class AttackManager : MonoBehaviour
         attack.GetComponent<AbstractAttack>().Attack(damage, distance, _playerState);
     }
 
-    private void AttachFireballAttack(ref GameObject attach)
+    public void AttachFireballAttack()
     {
-        attach = Instantiate(fireballAttack, gameObject.transform, true);
+        Debug.Log("AttachFireballAttack");
+        if (aAttack != null)
+            Destroy(aAttack);
+        aAttack = Instantiate(fireballAttack, gameObject.transform, true);
     }
 
-    private void AttachSlashAttack(ref GameObject attach)
+    public void AttachSlashAttack()
     {
-        attach = Instantiate(slashAttack, gameObject.transform, true);
+        Debug.Log("AttachSlashAttack");
+
+        if (xAttack != null)
+            Destroy(xAttack);
+        xAttack = Instantiate(slashAttack, gameObject.transform, true);
     }
 
-    private void AttachDarknessAttack(ref GameObject attach)
+    public void AttachDarknessAttack()
     {
-        attach = Instantiate(darknessAttack, gameObject.transform, true);
+        Debug.Log("AttachDarknessAttack");
+
+        if (sAttack != null)
+            Destroy(sAttack);
+        sAttack = Instantiate(darknessAttack, gameObject.transform, true);
     }
 
-    private void AttachSwordAttack(ref GameObject attach)
+    public void AttachSwordAttack()
     {
-        attach = Instantiate(swordAttack, gameObject.transform, true);
+        Debug.Log("AttachSwordAttack");
+
+        if (dAttack != null)
+            Destroy(dAttack);
+        dAttack = Instantiate(swordAttack, gameObject.transform, true);
     }
 }

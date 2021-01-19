@@ -60,7 +60,6 @@ public class Tooltip_SkillStats : MonoBehaviour
         descriptionText.text = skillDescription;
         costText.text = cost.ToString() + " SP";
         hotKeyText.text = hotKey;
-
         Update();
     }
 

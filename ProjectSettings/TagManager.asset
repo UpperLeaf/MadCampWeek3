@@ -7,11 +7,9 @@ TagManager:
   - Monster
   - Skill
   - NoneDamage
-  - PopWall
+  - Node
   - Camera
   - Portal
-  - Node
-  - Platform
   layers:
   - Default
   - TransparentFX
@@ -25,11 +23,11 @@ TagManager:
   - Player
   - Floor
   - CameraBoundary
+  - Background
   - Skill
-  - MonsterSkill
-  - Portal
-  - InvisibleWall
-  - RealWall
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -14,50 +14,41 @@ public class UI_SkillTree : MonoBehaviour {
 
     private PlayerSkills playerSkills;
     private List<SkillButton> skillButtonList;
+    Text skillPointText;
 
-    private void Awake() {
-
-    }
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
         this.playerSkills = playerSkills;
 
         skillButtonList = new List<SkillButton>();
-        skillButtonList.Add(new SkillButton(transform.Find("Fireball"), playerSkills, PlayerSkills.SkillType.Fireball));
-        skillButtonList.Add(new SkillButton(transform.Find("Ultimate"), playerSkills, PlayerSkills.SkillType.Ultimate));
-        skillButtonList.Add(new SkillButton(transform.Find("Explosion"), playerSkills, PlayerSkills.SkillType.Explosion));
-
+ 
         skillButtonList.Add(new SkillButton(transform.Find("Dash_1"), playerSkills, PlayerSkills.SkillType.Dash_1));
         skillButtonList.Add(new SkillButton(transform.Find("Dash_2"), playerSkills, PlayerSkills.SkillType.Dash_2));
-        skillButtonList.Add(new SkillButton(transform.Find("Speed_1"), playerSkills, PlayerSkills.SkillType.Speed_1));
-        skillButtonList.Add(new SkillButton(transform.Find("Speed_2"), playerSkills, PlayerSkills.SkillType.Speed_2));
-        skillButtonList.Add(new SkillButton(transform.Find("Heart_1"), playerSkills, PlayerSkills.SkillType.Heart_1));
-        skillButtonList.Add(new SkillButton(transform.Find("Heart_2"), playerSkills, PlayerSkills.SkillType.Heart_2));
+        skillButtonList.Add(new SkillButton(transform.Find("Heart_1"), playerSkills, PlayerSkills.SkillType.HEART));
+        skillButtonList.Add(new SkillButton(transform.Find("SlashAttack"), playerSkills, PlayerSkills.SkillType.Slash));
+        skillButtonList.Add(new SkillButton(transform.Find("AttackDamage"), playerSkills, PlayerSkills.SkillType.AttackDamage));
+        skillButtonList.Add(new SkillButton(transform.Find("MoveSpeed"), playerSkills, PlayerSkills.SkillType.MoveSpeed));
+        skillButtonList.Add(new SkillButton(transform.Find("CastDamage"), playerSkills, PlayerSkills.SkillType.CastDamage));
+        skillButtonList.Add(new SkillButton(transform.Find("Fireball"), playerSkills, PlayerSkills.SkillType.Fireball));
+        skillButtonList.Add(new SkillButton(transform.Find("Darkness"), playerSkills, PlayerSkills.SkillType.Darkness));
 
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
+
+        skillPointText = transform.Find("SkillPointText").GetComponent<Text>();
         UpdateVisuals();
-
     }
-
-    //    UpdateSkillPoints();
-    //}
-
-    //private void PlayerSkills_OnSkillPointsChanged(object sender, System.EventArgs e) {
-    //    UpdateSkillPoints();
-    //}
 
     private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
     {
         UpdateVisuals();
     }
 
-    //private void UpdateSkillPoints() {
-    //    skillPointsText.SetText(playerSkills.GetSkillPoints().ToString());
-    //}
-
     private void UpdateVisuals()
     {
+        if (skillPointText.IsActive())
+            skillPointText.text = playerSkills.skillManager.skillPoints.ToString();
+
         foreach (SkillButton skillButton in skillButtonList)
         {
             skillButton.UpdateVisual();
@@ -108,30 +99,14 @@ public class UI_SkillTree : MonoBehaviour {
             this.playerSkills = playerSkills;
             this.skillType = skillType;
 
-            image = transform.Find("image").GetComponent<Image>();
+
+            if (transform.Find("image") != null)
+            {
+                image = transform.Find("image").GetComponent<Image>();
+            }
             backgroundImage = transform.Find("background").GetComponent<Image>();
-            cost = transform.Find("skillPointsText").GetComponent<TMPro.TextMeshProUGUI>();
 
             PlayerSkills.SkillInfo skillInfo = playerSkills.SkillDictionary[skillType];
-
-            cost.text = skillInfo.getCost().ToString();
-
-            //transform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
-            //{
-            //    Tooltip_SkillStats.ShowTooltip_Static(skillInfo.getName(), skillInfo.getDesc(), skillInfo.getCost(), skillInfo.getHotKey());
-            //};
-
-
-            //transform.GetComponent<Button_UI>().MouseOverPerSecFunc = () =>
-            //{
-            //    Tooltip_SkillStats.HideTooltip_Static();
-            //};
-
-            //Tooltip_SkillStats.ShowTooltip_Static()
-
-            //Vector3 tmpPosition = transform.position;
-            //tmpPosition.z = 100;
-            //transform.position = tmpPosition;
 
             Tooltip_SkillStats.AddTooltip(transform, skillInfo.getName(), skillInfo.getDesc(), skillInfo.getCost(), skillInfo.getHotKey());
 
@@ -158,42 +133,41 @@ public class UI_SkillTree : MonoBehaviour {
             };
         }
 
-        public IEnumerator ShowSkillTooltip()
-        {
-            while (true)
-            {
-
-            }
-        }
-
         public void UpdateVisual()
         {
             // TODO material 수정
             if (playerSkills.IsSkillUnlocked(skillType))
             {
-                Color tmpColor = image.color;
-                tmpColor.a = 1f;
-                image.color = tmpColor;
-                image.material = null;
+                if (image != null)
+                {
+                    Color tmpColor = image.color;
+                    tmpColor.a = 1f;
+                    image.color = tmpColor;
+                    image.material = null;
+                }
                 backgroundImage.material = null;
             }
             else
             {
                 if (playerSkills.CanUnlock(skillType))
                 {
-                    Color tmpColor = image.color;
-                    tmpColor.a = 0.3f;
-                    image.color = tmpColor;
+                    if (image != null)
+                    {
+                        Color tmpColor = image.color;
+                        tmpColor.a = 0.3f;
+                        image.color = tmpColor;
+                    }
                     backgroundImage.color = UtilsClass.GetColorFromString("694320");
-                    //transform.GetComponent<Button_UI>().enabled = true;
                 }
                 else
                 {
-                    Color tmpColor = image.color;
-                    tmpColor.a = 0.1f;
-                    image.color = tmpColor;
+                    if (image != null)
+                    {
+                        Color tmpColor = image.color;
+                        tmpColor.a = 0.1f;
+                        image.color = tmpColor;
+                    }
                     backgroundImage.color = new Color(.3f, .3f, .3f);
-                    //transform.GetComponent<Button_UI>().enabled = false;
                 }
             }
         }
