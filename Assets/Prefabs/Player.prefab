@@ -234,7 +234,6 @@ MonoBehaviour:
   _hp: 100
   _hitTime: 1
   _isDied: 0
-  startingHitPoints: 100
   attackDamage: 10
   magicDamage: 10
   isDashNoneDamaged: 0
@@ -258,6 +257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe4091e5490f5c48b616fef025a4fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillPoint: 0
+  _player: {fileID: 5588414393091431521}
+  attackManager: {fileID: 5588414393091431520}
 --- !u!1001 &2089391953198463029
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,21 +38,10 @@ public class UI_SkillTree : MonoBehaviour {
         UpdateVisuals();
     }
 
-    //    UpdateSkillPoints();
-    //}
-
-    //private void PlayerSkills_OnSkillPointsChanged(object sender, System.EventArgs e) {
-    //    UpdateSkillPoints();
-    //}
-
     private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
     {
         UpdateVisuals();
     }
-
-    //private void UpdateSkillPoints() {
-    //    skillPointsText.SetText(playerSkills.GetSkillPoints().ToString());
-    //}
 
     private void UpdateVisuals()
     {
@@ -138,14 +127,6 @@ public class UI_SkillTree : MonoBehaviour {
                 else Debug.Log(skillType + "은 이미 배운 스킬입니다");
 
             };
-        }
-
-        public IEnumerator ShowSkillTooltip()
-        {
-            while (true)
-            {
-
-            }
         }
 
         public void UpdateVisual()

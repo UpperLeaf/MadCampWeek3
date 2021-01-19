@@ -12,6 +12,6 @@ public class SkillManager : MonoBehaviour
     private void Start()
     {
         _player = PlayerManager.Instance.getPlayer();
-        uiSkillTree.SetPlayerSkills(_player.GetComponent<PlayerWithSkill>().GetPlayerSkills());
+        uiSkillTree.SetPlayerSkills(_player.GetComponent<PlayerSkillManager>().GetPlayerSkills());
     }
 }

@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 230}
+  m_AnchoredPosition: {x: 11.285, y: 278}
   m_SizeDelta: {x: 76.74211, y: 24.375526}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1689205072
@@ -1969,10 +1969,10 @@ RectTransform:
   m_Father: {fileID: 5421203108347929888}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.00000047684}
+  m_SizeDelta: {x: 22.472412, y: 22.472412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &826536792676123440
 CanvasRenderer:
@@ -2260,6 +2260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AttackDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109212598723450894, guid: d4c7109720ea3c84fab871a914330779,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c7109720ea3c84fab871a914330779, type: 3}
@@ -3161,6 +3166,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013028253175842857, guid: d4c7109720ea3c84fab871a914330779,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109212598723450894, guid: d4c7109720ea3c84fab871a914330779,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c7109720ea3c84fab871a914330779, type: 3}

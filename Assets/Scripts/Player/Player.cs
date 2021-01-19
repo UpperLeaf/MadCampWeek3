@@ -45,6 +45,7 @@ public class Player : AbstractDamagable
 
     public void plusAttackDamage()
     {
+        Debug.Log("plusAttackDamage Skill을 샀다!");
         attackDamage += 5;
     }
 
