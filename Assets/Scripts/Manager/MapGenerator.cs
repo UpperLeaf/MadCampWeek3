@@ -146,15 +146,15 @@ public class MapGenerator : MonoBehaviour
                     int randomNodeType = Random.Range(0, 12);
                     if (randomNodeType <= 6)
                     {
-                        map[i][j].SetNodeType(Node.NodeType.NORAML);
+                        map[i][j].SetNodeType(Node.NodeType.NONE); // ELITE
                     }
                     else if (randomNodeType <= 8)
                     {
-                        map[i][j].SetNodeType(Node.NodeType.ELIETE);
+                        map[i][j].SetNodeType(Node.NodeType.NONE); // NORMAL
                     }
                     else if (randomNodeType <= 11)
                     {
-                        map[i][j].SetNodeType(Node.NodeType.STORE);
+                        map[i][j].SetNodeType(Node.NodeType.NONE); // STORE
                     }
                 }
             }

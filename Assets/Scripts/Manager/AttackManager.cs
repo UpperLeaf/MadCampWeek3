@@ -43,6 +43,8 @@ public class AttackManager : MonoBehaviour
     public bool isAttackAble(KeyCode key)
     {
         GameObject attack = findAttackByKeyCode(key);
+        if (attack == null)
+            return false;
         bool isAttackable = attack.GetComponent<AbstractAttack>().IsAttackable();
 
         return isAttackable;
@@ -77,6 +79,9 @@ public class AttackManager : MonoBehaviour
     public void AttackByInput(KeyCode key)
     {
         GameObject attack = findAttackByKeyCode(key);
+
+        if (attack == null)
+            return;
       
         AbstractAttack.AttackType attackType = attack.GetComponent<AbstractAttack>().attackType;
         AbstractAttack.DistanceType distanceType = attack.GetComponent<AbstractAttack>().distanceType;
@@ -100,7 +105,6 @@ public class AttackManager : MonoBehaviour
 
     public void AttachFireballAttack()
     {
-        Debug.Log("AttachFireballAttack");
         if (aAttack != null)
             Destroy(aAttack);
         aAttack = Instantiate(fireballAttack, gameObject.transform, true);
@@ -108,8 +112,6 @@ public class AttackManager : MonoBehaviour
 
     public void AttachSlashAttack()
     {
-        Debug.Log("AttachSlashAttack");
-
         if (xAttack != null)
             Destroy(xAttack);
         xAttack = Instantiate(slashAttack, gameObject.transform, true);
@@ -117,8 +119,6 @@ public class AttackManager : MonoBehaviour
 
     public void AttachDarknessAttack()
     {
-        Debug.Log("AttachDarknessAttack");
-
         if (sAttack != null)
             Destroy(sAttack);
         sAttack = Instantiate(darknessAttack, gameObject.transform, true);
@@ -126,8 +126,6 @@ public class AttackManager : MonoBehaviour
 
     public void AttachSwordAttack()
     {
-        Debug.Log("AttachSwordAttack");
-
         if (dAttack != null)
             Destroy(dAttack);
         dAttack = Instantiate(swordAttack, gameObject.transform, true);
