@@ -140,13 +140,13 @@ public class MapGenerator : MonoBehaviour
         {
             for (int j = 1; j < map[i].Length - 1; j++)
             {
-                int isCreateNode = Random.Range(0, 30);
+                int isCreateNode = Random.Range(0, 4);
                 if (isCreateNode == 2)
                 {
                     int randomNodeType = Random.Range(0, 12);
                     if (randomNodeType <= 6)
                     {
-                        map[i][j].SetNodeType(Node.NodeType.STORE);
+                        map[i][j].SetNodeType(Node.NodeType.NORAML);
                     }
                     else if (randomNodeType <= 8)
                     {
