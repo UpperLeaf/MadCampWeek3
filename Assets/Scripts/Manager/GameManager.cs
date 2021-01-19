@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public NodeSpace.Node.NodeType nodeType;
     
-    private GameObject map;
+    public GameObject map;
 
     [SerializeField]
     private GameObject[] mapsObject;
