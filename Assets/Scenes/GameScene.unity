@@ -347,6 +347,7 @@ MonoBehaviour:
   mapsObject:
   - {fileID: 7607250012686684753, guid: ffe93f0c071c18241af4d68433f63dfb, type: 3}
   - {fileID: 5060490536271434913, guid: 7a6757885a8cd6649959c8e9b629c4e8, type: 3}
+  - {fileID: 2093108473392732311, guid: c1c82fb92168616488f650c4f9fe4b86, type: 3}
 --- !u!4 &1320800516
 Transform:
   m_ObjectHideFlags: 0

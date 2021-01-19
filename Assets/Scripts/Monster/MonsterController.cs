@@ -24,18 +24,13 @@ public class MonsterController : MonoBehaviour
     [SerializeField, Tooltip("플레이어를 따라가고 있는지 여부")]
     bool isFollowingPlayer;
 
-
     [SerializeField, Tooltip("높이 (땅 위에 있는지 체크할 때 사용)")]
     protected float height;
 
-
     protected AbstractMonsterAttack _attackStrategy;
-
  
     protected LayerMask playerLayerMask;
     protected LayerMask wallLayerMask;
-
-
 
     Vector2 playerPosition;
 
