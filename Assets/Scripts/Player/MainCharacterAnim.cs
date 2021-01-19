@@ -85,22 +85,10 @@ public class MainCharacterAnim : MonoBehaviour
         _playerState.isIdling = true;
         _playerState.isJumping = false;
         _animator.SetTrigger("Damaged");
+        Invoke("DamagedFinish", 0.5f);
     }
 
-    public void DamagedStart()
-    {
-        float direction = transform.localScale.x;
-        StartCoroutine("HitCoroutine", direction * -1);
-    }
 
-    IEnumerator HitCoroutine(float direction)
-    {
-        for (int i = 0; i < 30; i++)
-        {
-            transform.Translate(new Vector2(direction / 30, 0));
-            yield return null;
-        }
-    }
 
     public void DamagedFinish()
     {
@@ -117,6 +105,7 @@ public class MainCharacterAnim : MonoBehaviour
             {
                 case AbstractAttack.AttackType.ATTACK:
                     _animator.SetTrigger("Attack");
+                    Invoke("AttackFinish", 0.4f);
                     _playerState.isAttacking = true;
                     break;
                 case AbstractAttack.AttackType.CAST:
