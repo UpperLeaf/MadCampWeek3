@@ -648,6 +648,16 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510138509350662794, guid: 96334fdda92a3e1429d1fb7e23ad4a1b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -71.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510138509350662794, guid: 96334fdda92a3e1429d1fb7e23ad4a1b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 75.202
+      objectReference: {fileID: 0}
     - target: {fileID: 4592794683225860427, guid: 96334fdda92a3e1429d1fb7e23ad4a1b,
         type: 3}
       propertyPath: uiCamera

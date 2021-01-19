@@ -79,6 +79,11 @@ public class MapManager : MonoBehaviour
         now = nextNode;
         _playerObject.transform.position = new Vector3(nextNode._position_x, nextNode._position_y, -2);
         mapGenerator.gameObject.SetActive(false);
-        SceneManager.LoadScene("GameScene");
+
+        if (now.GetNodeType().Equals(Node.NodeType.STORE))
+            SceneManager.LoadScene("StoreScene");
+        else
+            SceneManager.LoadScene("GameScene");
     }
 }
+
