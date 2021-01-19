@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "BossStats")]
-public class BossStats : ScriptableObject
+[CreateAssetMenu(menuName = "MonsterStats")]
+public class MonsterStats : ScriptableObject
 {
     public float maxHp;
     public float hp;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossMonsterAttack : MonoBehaviour
 {
     [SerializeField]
-    BossStats bossStats;
+    MonsterStats bossStats;
 
     private Animator _anim;
     private bool isAttackable;
