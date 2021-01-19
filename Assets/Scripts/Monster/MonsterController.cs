@@ -137,7 +137,6 @@ public class MonsterController : MonoBehaviour
         Collider2D[] wallHits = Physics2D.OverlapPointAll(transform.position + frontVector, 1 << wallLayerMask);
         if (wallHits.Length > 0 && wallHits[0] != null)
         {
-            Debug.Log(transform.name + " detected wall!");
             return true;
         }
         return false;

@@ -39,8 +39,8 @@ public class MapGenerator : MonoBehaviour
 
     public Node getNodeByVector2(Vector2 pos)
     {
-        int x = (int)pos.x + WIDTH;
-        int y = (int)pos.y + HEIGHT;
+        int x = (int)Mathf.Ceil(pos.x) + WIDTH;
+        int y = (int)Mathf.Ceil(pos.y) + HEIGHT;
         return maps[y][x];
     }
 
@@ -140,7 +140,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int j = 1; j < map[i].Length - 1; j++)
             {
-                int isCreateNode = Random.Range(0, 4);
+                int isCreateNode = Random.Range(0, 30);
                 if (isCreateNode == 2)
                 {
                     int randomNodeType = Random.Range(0, 12);
@@ -159,7 +159,6 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-
         map[HEIGHT][WIDTH * 2].SetNodeType(Node.NodeType.BOSS);
         map[HEIGHT][WIDTH * 2].SetVisited(true);        
         MakeGraphEdge(map);
@@ -185,7 +184,7 @@ public class MapGenerator : MonoBehaviour
                     Node nextNode = maps[HEIGHT][WIDTH * 2];
                     nextNode.SetVisited(true);
                     node.addNextNode(nextNode);
-                    continue;
+                    break;
                 }
 
                 if (node._y > 0 && !maps[node._y - 1][i].GetNodeType().Equals(Node.NodeType.NONE))

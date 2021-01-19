@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] elieteMap;
 
+    [SerializeField]
+    private GameObject bossMap;
+
 
     public void Awake()
     {
@@ -40,11 +43,13 @@ public class GameManager : MonoBehaviour
             int randomMap = Random.Range(0, mapsObject.Length);
             map = Instantiate(mapsObject[randomMap]);
         }
-        else
+        else if (nodeType.Equals(NodeSpace.Node.NodeType.ELIETE))
         {
             int randomMap = Random.Range(0, elieteMap.Length);
             map = Instantiate(elieteMap[randomMap]);
         }
+        else if (nodeType.Equals(NodeSpace.Node.NodeType.BOSS))
+            map = Instantiate(bossMap);
 
         GameObject _player = PlayerManager.Instance.getPlayer();
         _player.SetActive(true);

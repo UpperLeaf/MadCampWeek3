@@ -64,7 +64,7 @@ public class MapManager : MonoBehaviour
                 Vector3 clickPos3D = hit.collider.transform.position;
                 Vector2 clickPos2D = new Vector2(clickPos3D.x, clickPos3D.y);
                 Node node = mapGenerator.getNodeByVector2(clickPos2D);
-
+                Debug.Log(clickPos2D);
                 if (now.GetNextNodes().Contains(node))
                 {
                     ChangeScene(node);
@@ -79,7 +79,7 @@ public class MapManager : MonoBehaviour
         now = nextNode;
         _playerObject.transform.position = new Vector3(nextNode._position_x, nextNode._position_y, -2);
         mapGenerator.gameObject.SetActive(false);
-
+        Debug.Log("1234");
         if (now.GetNodeType().Equals(Node.NodeType.STORE))
             SceneManager.LoadScene("StoreScene");
         else
