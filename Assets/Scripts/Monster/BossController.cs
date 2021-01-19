@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -69,6 +70,7 @@ public class BossController : MonsterController
     {
         Debug.Log("게임 클리어!");
         Destroy(gameObject);
+        SceneManager.LoadScene("InfoScene");
     }
 
 

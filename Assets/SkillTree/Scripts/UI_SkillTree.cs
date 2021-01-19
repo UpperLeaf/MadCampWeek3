@@ -46,8 +46,7 @@ public class UI_SkillTree : MonoBehaviour {
 
     private void UpdateVisuals()
     {
-        if (skillPointText.IsActive())
-            skillPointText.text = playerSkills.skillManager.skillPoints.ToString();
+        transform.Find("SkillPointText").GetComponent<Text>().text = playerSkills.skillManager.skillPoints.ToString();
 
         foreach (SkillButton skillButton in skillButtonList)
         {

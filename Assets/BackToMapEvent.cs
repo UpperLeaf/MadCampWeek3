@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class BackToMapEvent : MonoBehaviour
 {
-    int nodeSceneBuildIndex = 0;
-
     public void OnClickBackButton()
     {
         SceneManager.LoadScene("NodeScene");

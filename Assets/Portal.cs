@@ -42,10 +42,12 @@ public class Portal : MonoBehaviour
                         {
                             case NodeSpace.Node.NodeType.ELIETE:
                                 PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 5;
+                                PlayerManager.Instance.getPlayer().GetComponent<Player>().hitPoints.HP += 10;
                                 break;
 
                             case NodeSpace.Node.NodeType.NORAML:
                                 PlayerManager.Instance.getPlayer().GetComponent<PlayerSkillManager>().skillPoints += 3;
+                                PlayerManager.Instance.getPlayer().GetComponent<Player>().hitPoints.HP += 10;
                                 break;
                         }
 
