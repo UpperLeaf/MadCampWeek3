@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] mapsObject;
 
+    [SerializeField]
+    private GameObject[] elieteMap;
+
 
     public void Awake()
     {
@@ -31,8 +34,17 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         nodeType = MapManager.Instance.now.GetNodeType();
-        int randomMap = Random.Range(0, mapsObject.Length);
-        map = Instantiate(mapsObject[randomMap]);
+
+        if (nodeType.Equals(NodeSpace.Node.NodeType.NORAML))
+        {
+            int randomMap = Random.Range(0, mapsObject.Length);
+            map = Instantiate(mapsObject[randomMap]);
+        }
+        else
+        {
+            int randomMap = Random.Range(0, elieteMap.Length);
+            map = Instantiate(elieteMap[randomMap]);
+        }
 
         GameObject _player = PlayerManager.Instance.getPlayer();
         _player.SetActive(true);

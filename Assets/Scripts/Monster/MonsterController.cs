@@ -45,7 +45,7 @@ public class MonsterController : MonoBehaviour
         monsterStats.hp = monsterStats.maxHp;
         movingRight = anim.GetBool("isRightMoving");
         playerLayerMask = LayerMask.NameToLayer("Player");
-        wallLayerMask = LayerMask.NameToLayer("Floor");
+        wallLayerMask = LayerMask.NameToLayer("InvisibleWall");
         isFollowingPlayer = false;
         grounded = false;
         anim.SetBool("isStop", false);
@@ -116,19 +116,13 @@ public class MonsterController : MonoBehaviour
             GoLeft();
         }
 
-        Debug.DrawRay(position + frontVec, new Vector2(0, -4), new Color(255, 255, 0));
-        RaycastHit2D rayHitGround = Physics2D.Raycast(position + frontVec, Vector2.down);
+        if (SeekAndAttack(isHit))
+        {
+            //Ignored
+        }
+        else if (!SeekPlayer() && DetectWall(frontVec)) 
+            TurnAround();
 
-
-        if (DetectFall(frontVec)) TurnAround();
-        else if (!SeekAndAttack(isHit) && !SeekPlayer() && DetectWall(frontVec)) TurnAround();
-
-    }
-
-    protected bool DetectFall(Vector3 frontVector)
-    {
-        RaycastHit2D rayHitGround = Physics2D.Raycast(transform.position + frontVector, Vector2.down);
-        return rayHitGround.collider == null;
     }
 
     protected void TurnAround()

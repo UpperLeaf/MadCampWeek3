@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private MainCharacterAnim mainCharacterAnim;
 
     private LayerMask floor;
+    private LayerMask wall;
 
     private Vector2 velocity;
 
@@ -62,12 +63,14 @@ public class PlayerController : MonoBehaviour
         deceleration = grounded ? groundDeceleration : airDeceleration;
 
         floor = LayerMask.NameToLayer("Floor");
+        wall = LayerMask.NameToLayer("RealWall");
     }
     private void Update()
     {
         if(!_playerState.isDied)
             MoveHorizontal();
         CollisionCheck();
+        CollisionRealWall();
         if (!_playerState.isDamaged && !_playerState.isDied)
         {
             Jump();
@@ -105,25 +108,13 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(velocity * Time.deltaTime);
     }
-    private void CollisionCheck()
+
+    private void CollisionRealWall()
     {
-        grounded = false;
-
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0, 1 << floor);
-
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0, (1 << wall));
         foreach (Collider2D hit in hits)
         {
-            if (hit.Equals(boxCollider))
-                continue;
-
-            if (hit.gameObject.tag == "Monster")
-            {
-                continue;
-            }
-
-            if (velocity.y < float.Epsilon)
-            {
-                ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
+            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
 
             if (colliderDistance.isOverlapped)
             {
@@ -134,6 +125,32 @@ public class PlayerController : MonoBehaviour
                     _playerState.isJumping = false;
                 }
             }
+        }
+    }
+
+    private void CollisionCheck()
+    {
+        grounded = false;
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0, (1 << floor) | (1 << wall));
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Platform") && hit.transform.position.y > transform.position.y - 1.03f)
+            {
+                continue;
+            }
+
+            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
+
+            if (colliderDistance.isOverlapped)
+            {
+                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 60 && velocity.y < 0)
+                {
+                    grounded = true;
+                    _playerState.isJumping = false;
+                }
             }
         }
     }
