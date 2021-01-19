@@ -1986,6 +1986,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RealWall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2383496102781453574, guid: b42d7b3d1612917418153289f37376a6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4430618818863806613, guid: b42d7b3d1612917418153289f37376a6,
         type: 3}
       propertyPath: m_RootOrder

@@ -10,6 +10,7 @@ TagManager:
   - Node
   - Camera
   - Portal
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - CameraBoundary
   - Background
   - Skill
-  - 
-  - 
+  - InvisibleWall
+  - RealWall
   - 
   - 
   - 

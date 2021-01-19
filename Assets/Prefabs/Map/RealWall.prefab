@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4430618818863806613}
   - component: {fileID: -8811478294339657984}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: RealWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

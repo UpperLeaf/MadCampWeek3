@@ -37,7 +37,7 @@ public class Player : AbstractDamagable
 
     private void Start()
     {
-        healthBar = Instantiate(healthBarPrefab);
+        healthBar = Instantiate(healthBarPrefab, gameObject.transform);
         hitPoints.HP = maxHitPoints;
         _hp = maxHitPoints;
         healthBar.player = this;
