@@ -52,29 +52,30 @@ public class PlayerSkills {
 
     public Dictionary<SkillType, SkillInfo> SkillDictionary = new Dictionary<SkillType, SkillInfo>()
         {
-            {SkillType.Fireball, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Dash_1, new SkillInfo("Dash1", "빠르게 이동하며 1초간 데미지를 받지 않습니다", "V", 3) },
-            {SkillType.Dash_2, new SkillInfo("Dash2", "빠르게 이동하며 3초간 데미지를 받지 않습니다.", "V", 3) },
-
-            {SkillType.Speed_1, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Speed_2, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Heart_1, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Heart_2, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Explosion, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
-            {SkillType.Ultimate, new SkillInfo("Fireball", "강력한 파이어볼을 발사합니다.", "C", 3) },
+            {SkillType.Slash, new SkillInfo("Slash Attack", "기본 공격", "X", 0)},
+            {SkillType.Dash_1, new SkillInfo("Dash", "대시", "Z", 2)},
+            {SkillType.Dash_2, new SkillInfo("Dash None Damage", "무적 대시", "Z", 4)},
+            {SkillType.Fireball, new SkillInfo("Fireball", "파이어볼", "A", 3)},
+            {SkillType.Darkness, new SkillInfo("Darkness", "어둠구체", "S", 5)},
+            {SkillType.Sword, new SkillInfo("Sword", "슬래시", "D", 4)},
+            {SkillType.MoveSpeed, new SkillInfo("Move Speed", "이동속도", null , 2)},
+            {SkillType.CastDamage, new SkillInfo("Cast Damage", "마법 공격력", null , 3)},
+            {SkillType.AttackDamage, new SkillInfo("Attack Damage", "물리 공격력", null , 3)},
+            {SkillType.HEART, new SkillInfo("Max Hp", "최대 체력", null , 3)},
         };
 
     public enum SkillType {
         None,
+        Slash,
         Dash_1,
         Dash_2,
         Fireball,
-        Speed_1,
-        Speed_2,
-        Heart_1,
-        Heart_2,
-        Explosion,
-        Ultimate,
+        Darkness,
+        Sword,
+        MoveSpeed,
+        CastDamage,
+        AttackDamage,
+        HEART
     }
 
     private List<SkillType> unlockedSkillTypeList;
@@ -123,8 +124,6 @@ public class PlayerSkills {
 
     public SkillType GetSkillRequirement(SkillType skillType) {
         switch (skillType) {
-            case SkillType.Heart_2:     return SkillType.Heart_1;
-            case SkillType.Speed_2:     return SkillType.Speed_1;
             case SkillType.Dash_2:    return SkillType.Dash_1;
         }
         return SkillType.None;

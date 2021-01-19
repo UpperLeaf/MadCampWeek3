@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
     public Image meterImage;
 
     [SerializeField]
-    float maxHitPoints;
+    public float maxHitPoints;
 
     // Start is called before the first frame update
     void Start()
